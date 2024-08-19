@@ -44,11 +44,14 @@
 
 .btn-historic {
     font-family: "Poppins", sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #fff;
     background-color:#002200;
     border: none;
     border-radius: 2rem;
     padding: 0.5rem 1rem;
+}
+.text-profile h2 {
+    font-size: 1rem;
 }
