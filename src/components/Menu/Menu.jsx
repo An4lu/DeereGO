@@ -8,19 +8,19 @@ export function Menu() {
         <nav className="menu">
             <div className="icone">
                 <House size={32}></House>
-                <a><Link to={`/home`}>Home</Link></a>
+                <a><Link to={`/`}>Home</Link></a>
             </div>
             <div className="icone">
                 <User size={32}></User>
-                <a>Perfil</a>
+                <a><Link to={`/perfil`}>Perfil</Link></a>
             </div>
             <div className="icone">
                 <Package size={32}></Package>
-                <a>Entregas</a>
+                <a><Link to={`/entregas`}>Entregas</Link></a>
             </div>
             <div className="icone">
                 <Gear size={32}></Gear>
-                <a>Ajustes</a>
+                <Link to={`/ajustes`}>Ajustes</Link>
             </div>
         </nav>
     );
