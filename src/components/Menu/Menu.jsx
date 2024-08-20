@@ -1,4 +1,5 @@
 import { Gear, House, Package, User } from "@phosphor-icons/react";
+import { Outlet, Link } from "react-router-dom";
 import React from "react";
 import './styles.css';
 
@@ -7,7 +8,7 @@ export function Menu() {
         <nav className="menu">
             <div className="icone">
                 <House size={32}></House>
-                <a>Home</a>
+                <a><Link to={`/home`}>Home</Link></a>
             </div>
             <div className="icone">
                 <User size={32}></User>
