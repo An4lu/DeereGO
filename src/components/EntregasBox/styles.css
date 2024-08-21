@@ -4,4 +4,7 @@
     padding: 1rem;
     border-radius: 25px;
     width: 100%;
+    gap: 1rem;
+    background-color: #fff;
+    margin: 1rem 0 1rem 0;
 }

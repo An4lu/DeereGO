@@ -1,0 +1,33 @@
+.card-entrega {
+    background-color: #FDFFFC;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 25px;
+    border: 1px solid #188A10;
+}
+.head-card{
+    color: #188A10;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.left{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.title-card p {
+    font-size: 0.6rem;
+    color: #98B38D;
+    font-weight: 500;
+}
+.title-card h2 {
+    font-size: 0.8rem;
+}
+.linha {
+    border-color: #ABACA6;
+}
