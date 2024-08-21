@@ -5,7 +5,6 @@ import App from './routes/App';
 import { Perfil } from './routes/Perfil';
 import './index.css';
 import { Entregas } from './routes/Entregas';
-import { Ajustes } from './routes/Ajustes';
 
 const router = createBrowserRouter([
   {
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
   {
     path:"/Entregas",
     element: <Entregas/>,
-  },
-  {
-    path:"/Ajustes",
-    element: <Ajustes/>,
   },
 ])
 

@@ -1,4 +1,4 @@
-import { ArrowDown } from '@phosphor-icons/react';
+import { CaretDown } from '@phosphor-icons/react';
 import './styles.css'
 import React from 'react'
 
@@ -9,7 +9,7 @@ export function Record(){
             <div className="head-info">
                 <h3>Informações</h3>
                 <div className="icone-profile">
-                    <ArrowDown size={32} weight='bold'/>
+                    <CaretDown size={32} weight='bold'/>
                 </div>
             </div>
             <div className="info">

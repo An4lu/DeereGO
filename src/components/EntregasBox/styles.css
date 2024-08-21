@@ -1,0 +1,7 @@
+.entregas-container{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 25px;
+    width: 100%;
+}

@@ -18,10 +18,6 @@ export function Menu() {
                 <Package size={32}></Package>
                 <a><Link to={`/entregas`}>Entregas</Link></a>
             </div>
-            <div className="icone">
-                <Gear size={32}></Gear>
-                <Link to={`/ajustes`}>Ajustes</Link>
-            </div>
         </nav>
     );
 }
