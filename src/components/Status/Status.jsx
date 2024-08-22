@@ -11,7 +11,7 @@ export function Status(){
                     <p>Carrinhos: 002, 023, 033 <Question size={16}/></p>
                 </div>
                 <div className="btn-box">
-                    <button>Finalizar<Check weight='bold' size={24}/></button>
+                    <button>Finalizar<Check weight='bold' size={16}/></button>
                     <p>00h:13m:23s</p>
                 </div>
             </div>
