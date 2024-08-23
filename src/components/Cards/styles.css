@@ -18,7 +18,11 @@
     width: 100%;
 }
 .card h3 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-align: center;
+}
+
+.card p {
+    font-size: 0.7rem;
 }
