@@ -3,6 +3,8 @@ import './styles.css';
 import { CardEntrega } from "../CardEntrega/CardEntrega";
 
 export function EntregasBox(){
+    
+
     const [carros, setCarros] = useState([]);
 
     useEffect(() => {
@@ -17,7 +19,7 @@ export function EntregasBox(){
     console.log(carros)
     return(
         <div className="entregas-container">
-            {carros.map(carro => (
+            {carros.map(carro=> (
                 <CardEntrega
                     idCart={carro.id}
                     opStatus={`${carro.OpStatus}`}

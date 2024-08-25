@@ -31,3 +31,15 @@
 .linha {
     border-color: #ABACA6;
 }
+.body-card{
+    height: 0;
+    overflow: hidden;
+    transition: all 1s cubic-bezier(0,1,0,1);
+}
+.body-card-show{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.45rem;
+    transition: all 1s cubic-bezier(0,1,0,1);
+}
