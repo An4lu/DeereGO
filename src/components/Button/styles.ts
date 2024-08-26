@@ -18,7 +18,6 @@ export const ContButton = styled('button', {
     transition: 'all 0.3s ease-out',
     '&:hover': {
         transform: 'scale(1.01)',
-        borderRadius: '4.5px',
     },
 })
 
