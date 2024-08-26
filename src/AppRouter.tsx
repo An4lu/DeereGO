@@ -2,6 +2,8 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { DashboardAdm } from './pages/Admin/DashboardAdm'
 import { Login } from './pages/Login'
 import { Dashboard } from './pages/Rebocador/Dashboard'
+import { Entregas } from './pages/Rebocador/Entregas'
+import { Perfil } from './pages/Rebocador/Perfil'
 import { globalStyles } from './styles'
 
 globalStyles()
@@ -11,9 +13,16 @@ export const AppRouter = () => {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/rebocador" element={<Dashboard />} />
         <Route path="/admin" element={<DashboardAdm />} />
+
+        <Route path='rebocador/*' element={
+          <Routes>
+            <Route path="" element={<Dashboard />} />
+            <Route path="entregas" element={<Entregas />} />
+            <Route path="perfil" element={<Perfil />} />
+          </Routes>
+        } />
       </Routes>
-    </HashRouter>
+    </HashRouter >
   )
 }

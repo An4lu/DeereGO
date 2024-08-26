@@ -13,6 +13,10 @@ export const {
     theme: {
         colors: {
             green: '#016600',
+            maingreen: '#028001',
+            darkGreen: '#014201',
+            lightGreen: '#98B38D',
+            gray: '#ABACA6',
             fontgreen: '#BEDBC4',
             titlegray: '#2F2E41',
             cardgray: '#737373',
