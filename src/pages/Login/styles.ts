@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { styled } from "../../styles/global"
 
 export const Fundo = styled('div', {
@@ -45,10 +46,16 @@ export const Image = styled('img', {
 
 export const Title = styled('h1', {
     position: 'absolute',
-    top: '-24px',          // Ajusta a posição do texto em relação à div pai
+    top: '-24px',
     left: '185px',
-    color: 'white',       // Cor do texto
+    color: 'white',
     fontSize: '44px',
-    fontWeight: '600',    // Tamanho do texto
+    fontWeight: '600',
     zIndex: 1,
 })
+
+export const Redirect = styled(Link, {
+    textDecoration: 'none',
+    width: '100%',
+})
+

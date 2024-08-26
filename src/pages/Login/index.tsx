@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
-import { Centro, DivButton, Fundo, Image, Inputs, Title } from "./styles"
-import icon from '/public/logotipo.png'
+import { Centro, DivButton, Fundo, Image, Inputs, Redirect, Title } from "./styles"
+import icon from '/logotipo.png'
 
 export const Login = () => {
 
@@ -64,7 +64,9 @@ export const Login = () => {
           />
         </Inputs>
         <DivButton>
-          <Button type="submit"><Image src={icon} alt="" /></Button>
+          <Redirect to="/rebocador">
+            <Button type="submit"><Image src={icon} alt="" /></Button>
+          </Redirect>
         </DivButton>
       </Centro>
     </Fundo>
