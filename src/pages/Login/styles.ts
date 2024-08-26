@@ -10,7 +10,8 @@ export const Fundo = styled('div', {
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '1rem',
 })
 
 export const Centro = styled('div', {
@@ -47,7 +48,6 @@ export const Image = styled('img', {
 export const Title = styled('h1', {
     position: 'absolute',
     top: '-24px',
-    left: '185px',
     color: 'white',
     fontSize: '44px',
     fontWeight: '600',
