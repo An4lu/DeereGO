@@ -17,7 +17,7 @@ export const ContButton = styled('button', {
     letterSpacing: '0',
     transition: 'all 0.3s ease-out',
     '&:hover': {
-        transform: 'scale(1.01)',
+        transform: 'scale(1.02)',
     },
 })
 
