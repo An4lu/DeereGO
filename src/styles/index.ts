@@ -5,7 +5,7 @@ export const globalStyles = globalCss({
         margin: '0px',
         padding: '0rem',
         boxSizing: 'border-box',
-        fontFamily: 'Inter',
+        fontFamily: '$poppins',
         '&::-webkit-scrollbar': {
             width: '5px',
             height: '8px',
