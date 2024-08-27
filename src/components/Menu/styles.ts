@@ -19,10 +19,12 @@ export const Icon = styled('div', {
     width: '40px',
     height: '40px',
     color: '$darkGreen',
+    cursor: 'pointer',
 });
 
 export const IconActive = styled(Icon, {
     color: '#fff',
+    cursor: 'pointer',
 });
 
 export const MenuLink = styled(Link, {
