@@ -19,7 +19,7 @@ export const AppRouter = () => {
         <Route path='rebocador/*' element={
           <LayoutRebocador>
             <Routes>
-              <Route path="" element={<Dashboard />} />
+              <Route path="home" element={<Dashboard />} />
               <Route path="entregas" element={<Entregas />} />
               <Route path="perfil" element={<Perfil />} />
             </Routes>

@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { styled } from '../../styles/global';
 
 export const MenuContainer = styled('nav', {
@@ -12,27 +12,23 @@ export const MenuContainer = styled('nav', {
     height: '65px',
 });
 
-export const Icon = styled('div', {
+export const Option = styled(NavLink, {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '40px',
     height: '40px',
     color: '$darkGreen',
-    cursor: 'pointer',
-});
-
-export const IconActive = styled(Icon, {
-    color: '#fff',
-    cursor: 'pointer',
-});
-
-export const MenuLink = styled(Link, {
-    textDecoration: 'none',
-    color: '$darkGreen',
     fontSize: '12px',
-
-    [`${IconActive} &`]: {
-        color: '#fff',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    transition: 'color 0.3s ease',
+    '&.active': {
+        color: '$white',
+        border: 'none',
+    },
+    '&:hover': {
+        color: '$white',
     },
 });
+
