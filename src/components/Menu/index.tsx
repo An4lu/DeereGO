@@ -1,5 +1,4 @@
 import { House, Package, User } from '@phosphor-icons/react';
-import React from 'react';
 import { Icon, IconActive, MenuContainer, MenuLink } from './styles';
 
 export function Menu() {

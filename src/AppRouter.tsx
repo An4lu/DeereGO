@@ -5,6 +5,7 @@ import { Dashboard } from './pages/Rebocador/Dashboard'
 import { Entregas } from './pages/Rebocador/Entregas'
 import { Perfil } from './pages/Rebocador/Perfil'
 import { globalStyles } from './styles'
+import { LayoutRebocador } from './layouts/LayoutRebocador'
 
 globalStyles()
 
@@ -16,12 +17,13 @@ export const AppRouter = () => {
         <Route path="/admin" element={<DashboardAdm />} />
 
         <Route path='rebocador/*' element={
-
-          <Routes>
-            <Route path="" element={<Dashboard />} />
-            <Route path="entregas" element={<Entregas />} />
-            <Route path="perfil" element={<Perfil />} />
-          </Routes>
+          <LayoutRebocador>
+            <Routes>
+              <Route path="" element={<Dashboard />} />
+              <Route path="entregas" element={<Entregas />} />
+              <Route path="perfil" element={<Perfil />} />
+            </Routes>
+          </LayoutRebocador>
         } />
       </Routes>
     </HashRouter >

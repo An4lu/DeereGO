@@ -1,7 +1,5 @@
 import { ShoppingCartSimple, Trophy } from '@phosphor-icons/react';
-import React from 'react';
 import { Button, ButtonContainer } from './styles';
-import './styles.css';
 
 export function Buttons() {
     return (
