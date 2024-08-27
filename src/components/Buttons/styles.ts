@@ -20,4 +20,5 @@ export const Button = styled('button', {
     justifyContent: 'center',
     fontSize: '0.6rem',
     gap: '0.5rem',
+    cursor: 'pointer',
 });

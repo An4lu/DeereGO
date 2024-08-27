@@ -47,6 +47,7 @@ export const Button = styled('button', {
     fontSize: '0.8rem',
     borderRadius: '2rem',
     padding: '0.5rem 1rem',
+    cursor: 'pointer',
 });
 
 export const Bottom = styled('div', {

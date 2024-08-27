@@ -22,12 +22,28 @@ export const HeadInfo = styled('div', {
 });
 
 export const IconeProfile = styled('div', {
-    backgroundColor: '$maingreen',
     color: '#fff',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'transform 0.6s ease',
+
+    variants: {
+        rotated: {
+            true: {
+                transform: 'rotate(0deg)',
+            },
+            false: {
+                transform: 'rotate(180deg)',
+            },
+        },
+    },
 });
 
 export const BodyCard = styled('div', {
     display: 'none',
+    transition: 'height 0.5s ease, opacity 0.5s ease',
 });
 
 export const BodyCardShow = styled('div', {

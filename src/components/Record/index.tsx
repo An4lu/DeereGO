@@ -11,29 +11,25 @@ import {
 } from './styles';
 
 export function Record() {
-  const [selected, setSelected] = useState<number | null>(null);
-  const i = 0;
+    const [selected, setSelected] = useState<boolean>(false);
 
-  const toggle = (i: number) => {
-    if (selected === i) {
-      return setSelected(null);
-    }
-    setSelected(i);
-  };
+    const toggle = () => {
+      setSelected(prev => !prev);
+    };
 
   return (
     <ContainerInfo>
-      <HeadInfo onClick={() => toggle(i)}>
+      <HeadInfo onClick= {toggle}>
         <h3>Informações</h3>
-        <IconeProfile>
-          {selected === i ? (
+        <IconeProfile rotated={selected}>
+          {selected ? (
             <CaretCircleUp size={32} weight="fill" />
           ) : (
             <CaretCircleDown size={32} weight="fill" />
           )}
         </IconeProfile>
       </HeadInfo>
-      {selected === i ? (
+      {selected ? (
         <BodyCardShow>
           <Info>
             <p>Status</p>
