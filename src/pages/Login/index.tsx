@@ -64,7 +64,7 @@ export const Login = () => {
           />
         </Inputs>
         <DivButton>
-          <Redirect to="/rebocador">
+          <Redirect to="/rebocador/home">
             <Button type="submit"><Image src={icon} alt="" /></Button>
           </Redirect>
         </DivButton>
