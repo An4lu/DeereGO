@@ -1,0 +1,75 @@
+body {
+    margin-left: 48px;
+    margin-top: 0px;
+    width: 296px;
+    height: 100%;
+}
+
+.conteudo-sidebar {
+    align-content: center;
+}
+
+.home-sidebar {
+    margin-top: 32px;
+    font-size: 18px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: #333333;
+}
+
+.home-sidebar a{
+    color: #333333;
+}
+
+.home-sidebar:hover, .home-sidebar a:hover {
+    color: #028001;
+}
+
+.mapa-sidebar {
+    margin-top: 32px;
+    font-size: 18px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.mapa-sidebar a{
+    color: #333333;
+}
+
+.mapa-sidebar:hover, .mapa-sidebar a:hover {
+    color: #028001;
+}
+
+.carrokits-sidebar {
+    margin-top: 32px;
+    font-size: 18px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.carrokits-sidebar a{
+    color: #333333;
+}
+
+.carrokits-sidebar:hover, .carrokits-sidebar a:hover {
+    color: #028001;
+}
+
+.perfil-sidebar {
+    margin-top: 32px;
+    font-size: 18px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.perfil-sidebar a{
+    color: #333333;
+}
+
+.perfil-sidebar:hover, .perfil-sidebar a:hover {
+    color: #028001;
+}
