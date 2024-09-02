@@ -1,11 +1,12 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { DashboardAdm } from './pages/Admin/DashboardAdm'
+import { LayoutAdmin } from './layouts/LayoutAdmin'
+import { LayoutRebocador } from './layouts/LayoutRebocador'
+import { DashboardAdmin } from './pages/Admin/DashboardAdmin'
 import { Login } from './pages/Login'
 import { Dashboard } from './pages/Rebocador/Dashboard'
 import { Entregas } from './pages/Rebocador/Entregas'
 import { Perfil } from './pages/Rebocador/Perfil'
 import { globalStyles } from './styles'
-import { LayoutRebocador } from './layouts/LayoutRebocador'
 
 globalStyles()
 
@@ -14,7 +15,14 @@ export const AppRouter = () => {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/admin" element={<DashboardAdm />} />
+
+        <Route path="adm/*" element={
+          <LayoutAdmin>
+            <Routes>
+              <Route path='home' element={<DashboardAdmin />} />
+            </Routes>
+          </LayoutAdmin>
+        } />
 
         <Route path='rebocador/*' element={
           <LayoutRebocador>
