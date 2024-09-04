@@ -1,11 +1,12 @@
 import { HouseSimple, MapTrifold, Toolbox, UserCircle } from '@phosphor-icons/react';
 import { ContentContainer, LogoContainer, SidebarContainer, SidebarItem, TextLink } from './styles';
+import logoimg from '/logofull.svg'
 
 export function Sidebar() {
     return (
         <SidebarContainer>
             <LogoContainer>
-                <img src='Logo-DeereGo.svg' alt='Logo' />
+                <img src={logoimg} alt='Logo' />
             </LogoContainer>
             <ContentContainer>
                 <SidebarItem to='/adm/home'>

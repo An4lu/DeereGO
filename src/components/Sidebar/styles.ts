@@ -12,6 +12,7 @@ export const LogoContainer = styled('div', {
     padding: '16px',
     display: 'flex',
     justifyContent: 'center',
+    width: '50%',
 });
 
 export const ContentContainer = styled('div', {
@@ -30,7 +31,7 @@ export const SidebarItem = styled(NavLink, {
     color: '#333333',
     cursor: 'pointer',
     textDecoration: 'none',
-
+    transition: 'color 0.4s ease',
     '&:hover': {
         color: '$maingreen',
     },
