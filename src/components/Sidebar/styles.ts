@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { styled } from "../../styles/global";
 
 export const SidebarContainer = styled('div', {
@@ -21,20 +22,27 @@ export const ContentContainer = styled('div', {
     paddingTop: '16px',
 });
 
-export const SidebarItem = styled('div', {
+export const SidebarItem = styled(NavLink, {
     fontSize: '18px',
     display: 'flex',
     gap: '16px',
     alignItems: 'center',
     color: '#333333',
     cursor: 'pointer',
+    textDecoration: 'none',
 
-    '& a': {
-        color: '#333333',
-        textDecoration: 'none',
+    '&:hover': {
+        color: '$maingreen',
     },
 
-    '&:hover, & a:hover': {
-        color: '#028001',
+    '&.active': {
+        backgroundColor: '$litepurple',
+        color: '$maingreen',
+        border: 'none',
+        borderRadius: '8px',
     },
 });
+
+export const TextLink = styled('span', {
+
+})

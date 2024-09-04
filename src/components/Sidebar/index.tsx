@@ -1,5 +1,5 @@
 import { HouseSimple, MapTrifold, Toolbox, UserCircle } from '@phosphor-icons/react';
-import { ContentContainer, LogoContainer, SidebarContainer, SidebarItem } from './styles';
+import { ContentContainer, LogoContainer, SidebarContainer, SidebarItem, TextLink } from './styles';
 
 export function Sidebar() {
     return (
@@ -8,21 +8,21 @@ export function Sidebar() {
                 <img src='Logo-DeereGo.svg' alt='Logo' />
             </LogoContainer>
             <ContentContainer>
-                <SidebarItem>
+                <SidebarItem to='/adm/home'>
                     <HouseSimple size={30} weight='fill' />
-                    <a href='#'>VISÃO GERAL</a>
+                    <TextLink>VISÃO GERAL</TextLink>
                 </SidebarItem>
-                <SidebarItem>
+                <SidebarItem to='/'>
                     <MapTrifold size={30} weight='fill' />
-                    <a href='#'>MAPA</a>
+                    <TextLink>MAPA</TextLink>
                 </SidebarItem>
-                <SidebarItem>
+                <SidebarItem to='/'>
                     <Toolbox size={30} weight='fill' />
-                    <a href='#'>CARRO-KITS</a>
+                    <TextLink>CARRO-KITS</TextLink>
                 </SidebarItem>
-                <SidebarItem>
+                <SidebarItem to='/'>
                     <UserCircle size={30} weight='fill' />
-                    <a href='#'>PERFIL</a>
+                    <TextLink>PERFIL</TextLink>
                 </SidebarItem>
             </ContentContainer>
         </SidebarContainer>
