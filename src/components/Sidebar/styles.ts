@@ -2,29 +2,29 @@ import { NavLink } from "react-router-dom";
 import { styled } from "../../styles/global";
 
 export const SidebarContainer = styled('div', {
-    marginLeft: '48px',
-    marginTop: '0px',
-    width: '296px',
+    width: '300px',
     height: '100%',
 });
 
 export const LogoContainer = styled('div', {
-    padding: '16px',
     display: 'flex',
     justifyContent: 'center',
-    width: '50%',
+    alignItems: 'center',
+    padding: '32px',
 });
 
 export const ContentContainer = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    justifyItems: 'center',
+    alignItems: 'flex-start',
+    marginTop: '15px',
+    marginLeft: '30px',
     gap: '32px',
-    paddingTop: '16px',
 });
 
 export const SidebarItem = styled(NavLink, {
-    fontSize: '18px',
+    fontSize: '15px',
     display: 'flex',
     gap: '16px',
     alignItems: 'center',
