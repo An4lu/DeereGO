@@ -1,40 +1,49 @@
+import { NavLink } from "react-router-dom";
 import { styled } from "../../styles/global";
 
 export const SidebarContainer = styled('div', {
-    marginLeft: '48px',
-    marginTop: '0px',
-    width: '296px',
+    width: '300px',
     height: '100%',
 });
 
 export const LogoContainer = styled('div', {
-    padding: '16px',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: '32px',
 });
 
 export const ContentContainer = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    justifyItems: 'center',
+    alignItems: 'flex-start',
+    marginTop: '15px',
+    marginLeft: '30px',
     gap: '32px',
-    paddingTop: '16px',
 });
 
-export const SidebarItem = styled('div', {
-    fontSize: '18px',
+export const SidebarItem = styled(NavLink, {
+    fontSize: '15px',
     display: 'flex',
     gap: '16px',
     alignItems: 'center',
     color: '#333333',
     cursor: 'pointer',
-
-    '& a': {
-        color: '#333333',
-        textDecoration: 'none',
+    textDecoration: 'none',
+    transition: 'color 0.4s ease',
+    '&:hover': {
+        color: '$maingreen',
     },
 
-    '&:hover, & a:hover': {
-        color: '#028001',
+    '&.active': {
+        backgroundColor: '$litepurple',
+        color: '$maingreen',
+        border: 'none',
+        borderRadius: '8px',
     },
 });
+
+export const TextLink = styled('span', {
+
+})

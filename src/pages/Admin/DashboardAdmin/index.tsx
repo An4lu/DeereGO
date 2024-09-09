@@ -1,7 +1,9 @@
+import { Container } from "./styles"
+
 export const DashboardAdmin = () => {
     return (
-        <div>
-            a
-        </div>
+        <Container>
+        
+        </Container>
     )
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardText, CardTitle, Container } from './styles';
 
 export function Cards() {
