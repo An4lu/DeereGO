@@ -5,6 +5,7 @@ import { Input } from "../../components/Input";
 import { Centro, DivButton, Fundo, Image, Inputs, Title } from "./styles";
 import icon from '/logotipo.png';
 import { Loading } from "../../components/Loading";
+import { User } from "../../types/User";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -29,17 +30,13 @@ export const Login = () => {
           body: JSON.stringify({ Email: email, Senha: senha }),
         });
 
-        console.log('Response status:', response.status);
-
         if (response.ok) {
-          const data = await response.json();
-          const { token, role } = data;
+          const userData: User = await response.json();
+          localStorage.setItem('userData', JSON.stringify(userData));
 
-          localStorage.setItem('authToken', token);
-
-          if (role === 'admin') {
+          if (userData.Role === 'admin' || userData.role === 'admin') {
             navigate('/adm/home');
-          } else if (role === 'rebocador') {
+          } else if (userData.Role === 'rebocador' || userData.role === 'rebocador') {
             navigate('/rebocador/home');
           } else {
             setErrorMessage('Função desconhecida');
