@@ -34,6 +34,12 @@ export const Column01 = styled('div', {
 })
 
 export const Column02 = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItens: 'center',
+    justifyItems: 'center',
+    justifyContent: 'space-between',
+    padding: '6%',
     backgroundColor: '$white',
     width: '100%',
     height: '175px',
@@ -42,10 +48,14 @@ export const Column02 = styled('div', {
 
 export const Row01 = styled('div', {
     display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '$white',
+    flexDirection: 'column',
+    alignItens: 'center',
+    justifyItems: 'center',
+    justifyContent: 'space-between',
+    padding: '3%',
     width: '30%',
     height: '150px',
+    backgroundColor: '$white',
     borderRadius: '20px',
 })
 
