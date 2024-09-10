@@ -1,9 +1,11 @@
 import { styled } from "../../../styles/global";
 
 
-export const Background = styled('div', {
-    height: '100%',
+export const Backgrond = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
     margin: '60px',
+    justifyContent: 'center',
 })
 
 export const DivContainer = styled('div', {
