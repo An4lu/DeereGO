@@ -1,5 +1,5 @@
 import { Container } from './styles'
-import trator from '../../../public/logotipoverde.png'
+import trator from '/loggif.gif'
 
 export function Loading() {
   return (

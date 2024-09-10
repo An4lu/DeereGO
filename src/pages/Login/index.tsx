@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Centro, DivButton, Fundo, Image, Inputs, Title } from "./styles";
 import icon from '/logotipo.png';
+import { Loading } from "../../components/Loading";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -82,11 +83,12 @@ export const Login = () => {
         </Inputs>
         <DivButton>
           <Button type="submit" onClick={handleLoginClick} disabled={isLoading}>
-            {isLoading ? 'Carregando...' : <Image src={icon} alt="" />}
+            {isLoading ? <Loading /> : <Image src={icon} alt="" />}
           </Button>
         </DivButton>
         {errorMessage && <span>{errorMessage}</span>}
       </Centro>
+
     </Fundo>
   );
 };
