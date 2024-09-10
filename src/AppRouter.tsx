@@ -7,33 +7,33 @@ import { Dashboard } from './pages/Rebocador/Dashboard'
 import { Entregas } from './pages/Rebocador/Entregas'
 import { Perfil } from './pages/Rebocador/Perfil'
 import { globalStyles } from './styles'
+import { PrivateRoute } from './components/PrivateRoute'
+import { AuthProvider } from './contexts/AuthContext'
 
 globalStyles()
 
 export const AppRouter = () => {
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
 
-        <Route path="adm/*" element={
-          <LayoutAdmin>
-            <Routes>
-              <Route path='home' element={<DashboardAdmin />} />
-            </Routes>
-          </LayoutAdmin>
-        } />
+          <Route element={<PrivateRoute />}>
+            <Route element={<LayoutAdmin />}>
+              <Route path="adm/home" element={<DashboardAdmin />} />
+            </Route>
+          </Route>
 
-        <Route path='rebocador/*' element={
-          <LayoutRebocador>
-            <Routes>
-              <Route path="home" element={<Dashboard />} />
-              <Route path="entregas" element={<Entregas />} />
-              <Route path="perfil" element={<Perfil />} />
-            </Routes>
-          </LayoutRebocador>
-        } />
-      </Routes>
-    </HashRouter >
+          <Route element={<PrivateRoute />}>
+            <Route element={<LayoutRebocador />}>
+              <Route path="rebocador/home" element={<Dashboard />} />
+              <Route path="rebocador/entregas" element={<Entregas />} />
+              <Route path="rebocador/perfil" element={<Perfil />} />
+            </Route>
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </HashRouter>
   )
 }

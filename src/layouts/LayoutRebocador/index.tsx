@@ -1,10 +1,11 @@
+import { Outlet } from "react-router"
 import { Menu } from "../../components/Menu"
 import { Container } from "./styles"
 
-export function LayoutRebocador({ children }: { children: React.ReactNode }) {
+export function LayoutRebocador() {
     return (
         <Container>
-            {children}
+            <Outlet />
             <Menu />
         </Container>
     )

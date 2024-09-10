@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
-import { Centro, DivButton, Fundo, Image, Inputs, Title } from "./styles";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Centro, DivButton, Fundo, Image, Inputs, Title } from './styles';
 import icon from '/logotipo.png';
-import { Loading } from "../../components/Loading";
-import { User } from "../../types/User";
+import { useAuth } from '../../contexts/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from "react-toastify";
+import { Loading } from '../../components/Loading';
+import { User } from '../../types/User';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -15,12 +16,11 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLoginClick = async () => {
     setIsLoading(true);
-    setErrorMessage('');
 
     if (email && senha) {
       try {
@@ -34,8 +34,7 @@ export const Login = () => {
 
         if (response.ok) {
           const userData: User = await response.json();
-          localStorage.setItem('userData', JSON.stringify(userData));
-
+          login(userData);
           if (userData.role === 'admin') {
             navigate('/adm/home');
           } else if (userData.role === 'rebocador') {
@@ -45,11 +44,9 @@ export const Login = () => {
           }
         } else {
           const errorData = await response.json();
-          console.log('Erro no login:', errorData.message);
           toast.error(errorData.message || 'Erro no login');
         }
       } catch (error) {
-        console.error('Erro na requisição:', error);
         toast.error('Erro ao tentar fazer login');
       }
     } else {
@@ -86,7 +83,6 @@ export const Login = () => {
               {isLoading ? <Loading /> : <Image src={icon} alt="" />}
             </Button>
           </DivButton>
-          {errorMessage && <span>{errorMessage}</span>}
         </Centro>
       </Fundo>
     </>

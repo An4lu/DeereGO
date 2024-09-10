@@ -1,18 +1,10 @@
 import { HouseSimple, MapTrifold, Power, Toolbox, UserCircle } from '@phosphor-icons/react';
 import { ContentContainer, Div, LogoContainer, SidebarButton, SidebarContainer, SidebarItem, TextLink } from './styles';
 import logoimg from '/logofull.svg'
-import { useNavigate } from 'react-router';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function Sidebar() {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('userData');
-        localStorage.removeItem('authToken');
-
-        navigate('/');
-    };
-
+    const { logout } = useAuth();
 
     return (
         <SidebarContainer>
@@ -38,7 +30,7 @@ export function Sidebar() {
                         <TextLink>AJUSTES</TextLink>
                     </SidebarItem>
                 </ContentContainer>
-                <SidebarButton onClick={handleLogout}>
+                <SidebarButton onClick={logout}>
                     <Power size={30} weight='fill' />
                     <TextLink>SAIR</TextLink>
                 </SidebarButton>

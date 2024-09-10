@@ -1,11 +1,12 @@
+import { Outlet } from "react-router"
 import { Sidebar } from "../../components/Sidebar"
 import { Container } from "./styles"
 
-export function LayoutAdmin({ children }: { children: React.ReactNode }) {
+export function LayoutAdmin() {
     return (
         <Container>
             <Sidebar />
-            {children}
+            <Outlet />
         </Container>
     )
 }
