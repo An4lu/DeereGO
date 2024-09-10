@@ -1,12 +1,14 @@
 import { Outlet } from "react-router"
 import { Sidebar } from "../../components/Sidebar"
-import { Container } from "./styles"
+import { Container, Fundo } from "./styles"
 
 export function LayoutAdmin() {
     return (
         <Container>
             <Sidebar />
-            <Outlet />
+            <Fundo>
+                <Outlet />
+            </Fundo>
         </Container>
     )
 }

@@ -1,7 +1,14 @@
-import { Container } from "./styles"
+import { Heading } from "../../../components/Heading"
+import { Background, Div } from "./styles"
 
-export const Ajustes = () => {
+
+export const Carrinhos = () => {
     return (
-        <Container>Ajustes</Container>
+        <Background>
+            <Heading css={{ marginBottom: '20px' }}>Ajustes</Heading>
+            <Div>
+
+            </Div>
+        </Background>
     )
 }

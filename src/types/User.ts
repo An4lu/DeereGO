@@ -1,10 +1,10 @@
 export type User = {
-    _id?: string;
-    Nome: string;
+    _id: string;
+    nome: string;
     Senha?: string;
     Email: string;
     role: string;
-    Fabrica?: string;
-    Telefone?: number;
-    Status?: boolean;
+    fabrica?: string;
+    telefone?: string;
+    status?: boolean;
 };

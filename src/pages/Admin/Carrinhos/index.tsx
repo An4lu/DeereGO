@@ -1,8 +1,14 @@
-import { Container } from "./styles"
+import { Heading } from "../../../components/Heading"
+import { Background, Div } from "./styles"
+
 
 export const Carrinhos = () => {
     return (
-        <Container>
-        </Container>
+        <Background>
+            <Heading css={{ marginBottom: '20px' }}>Carros-Kit</Heading>
+            <Div>
+
+            </Div>
+        </Background>
     )
 }

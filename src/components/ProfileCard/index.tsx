@@ -11,8 +11,12 @@ import {
     Text,
     TextProfile
 } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function ProfileCard() {
+    const { user } = useAuth();
+    console.log(user)
+
     return (
         <ProfileContainer>
             <Head>
@@ -23,8 +27,8 @@ export function ProfileCard() {
                             alt="Homem"
                         />
                         <TextProfile>
-                            <h2>Gerson Anderson</h2>
-                            <p>ID: 2384784</p>
+                            <h2>{user?.nome}</h2>
+                            <p>ID: {user?._id}</p>
                         </TextProfile>
                     </ImgText>
                     <IconeProfile>

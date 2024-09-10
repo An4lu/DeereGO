@@ -1,7 +1,14 @@
-import { Container } from "./styles"
+import { Heading } from "../../../components/Heading"
+import { Background, Div } from "./styles"
+
 
 export const Maps = () => {
     return (
-        <Container>Maps</Container>
+        <Background>
+            <Heading css={{ marginBottom: '20px' }}>Mapa</Heading>
+            <Div>
+
+            </Div>
+        </Background>
     )
 }

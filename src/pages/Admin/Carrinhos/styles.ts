@@ -1,9 +1,13 @@
 import { styled } from "../../../styles/global";
 
 
-export const Container = styled('div', {
-    width: '100%',
-    height: '100vh',
-    margin: '0 auto',
-    backgroundColor: '$darkGreen',
+export const Background = styled('div', {
+    height: '100%',
+    margin: '60px',
+})
+
+export const Div = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '30px',
 })
