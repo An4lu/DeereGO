@@ -36,9 +36,9 @@ export const Login = () => {
           const userData: User = await response.json();
           localStorage.setItem('userData', JSON.stringify(userData));
 
-          if (userData.Role === 'admin' || userData.role === 'admin') {
+          if (userData.role === 'admin') {
             navigate('/adm/home');
-          } else if (userData.Role === 'rebocador' || userData.role === 'rebocador') {
+          } else if (userData.role === 'rebocador') {
             navigate('/rebocador/home');
           } else {
             toast.error('Função desconhecida');
