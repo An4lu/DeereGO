@@ -16,9 +16,12 @@ import {
 interface CardEntregaProps {
     idCart: string;
     opStatus: string;
+    Partida: string;
+    Destino: string;
+    DataHora: string;
 }
 
-export function CardEntrega({ idCart, opStatus }: CardEntregaProps) {
+export function CardEntrega({ idCart, opStatus, Partida, Destino, DataHora }: CardEntregaProps) {
     const [selected, setSelected] = useState<number | null>(null);
     const i = 0;
 
@@ -48,15 +51,23 @@ export function CardEntrega({ idCart, opStatus }: CardEntregaProps) {
             {selected === i ? (
                 <BodyCardShow>
                     <Info>
-                        <StatusText>Status</StatusText>
+                        <StatusText>Partida</StatusText>
+                        <InfoText>{Partida}</InfoText>
                         <Linha />
-                        <InfoText>20</InfoText>
+                        
                     </Info>
 
                     <Info>
-                        <StatusText>Status</StatusText>
+                        <StatusText>Destino</StatusText>
+                        <InfoText>{Destino}</InfoText>
                         <Linha />
-                        <InfoText>20</InfoText>
+                        
+                    </Info>
+                    <Info>
+                        <StatusText>Horário</StatusText>
+                        <InfoText>{DataHora}</InfoText>
+                        <Linha />
+                        
                     </Info>
                 </BodyCardShow>
             ) : (

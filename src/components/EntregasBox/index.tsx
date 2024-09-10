@@ -3,27 +3,31 @@ import { CardEntrega } from '../CardEntrega';
 import { EntregasContainer } from './styles';
 
 interface Carro {
-    id: string;
-    OpStatus: string;
+    _id: string;
+    Status: string;
+    Partida: string;
+    Destino: string;
+    DataHora: string;
+
 }
 
 export function EntregasBox() {
-    const [carros, setCarros] = useState<Carro[]>([]);
+    const [entregas, setEntregas] = useState<Carro[]>([]);
 
     useEffect(() => {
-        fetch('https://jdu-data-api.onrender.com/rebocador')
+        fetch('https://deerego-back.onrender.com/rebocador/entrega')
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    setCarros(data);
+                    setEntregas(data);
                 }
             });
     }, []);
 
     return (
         <EntregasContainer>
-            {carros.map(carro => (
-                <CardEntrega key={carro.id} idCart={carro.id} opStatus={`${carro.OpStatus}`} />
+            {entregas.map(entrega => (
+                <CardEntrega key={entrega._id} idCart={entrega._id} opStatus={`${entrega.Status}`} Partida={entrega.Partida} Destino={entrega.Destino} DataHora={entrega.DataHora} />
             ))}
         </EntregasContainer>
     );
