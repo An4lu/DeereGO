@@ -33,8 +33,8 @@ export const TitleCard = styled('div', {
 
 export const Linha = styled('div', {
     height: '1px',
-    backgroundColor: '$gray',
-    margin: '0.5rem 0',
+    border: '1px solid $green',
+    width: '100%',
 });
 
 export const BodyCard = styled('div', {
@@ -47,6 +47,7 @@ export const BodyCardShow = styled(BodyCard, {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    height: '100%',
     padding: '0.45rem',
     transition: 'all 1s cubic-bezier(0,1,0,1)',
 });
@@ -54,7 +55,9 @@ export const BodyCardShow = styled(BodyCard, {
 export const Info = styled('div', {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     gap: '0.5rem',
+    marginBottom: '0.5rem',
 });
 
 export const StatusText = styled('h2', {

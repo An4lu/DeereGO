@@ -7,8 +7,7 @@ export const Perfil = () => {
     return (
         <>
             <ProfileCard/>
-            <Button><Trophy weight='bold'/>Metas
-            </Button>
+            <Button><Trophy weight='bold'/>Metas</Button>
             <Record/>
         </>
     )
