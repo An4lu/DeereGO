@@ -1,6 +1,6 @@
 import { Heading } from "../../../components/Heading"
 import { useAuth } from "../../../contexts/AuthContext";
-import { Background, Column01, Div, Row01, Row02 } from "./styles";
+import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, Linha, Map, Row01, Row02 } from "./styles";
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -14,10 +14,21 @@ export const DashboardAdmin = () => {
             ) : (
                 <Heading>Olá Administrador</Heading>
             )}
-            <Div>
-                <Column01></Column01>
-                <Row01></Row01><Row02></Row02>
-            </Div>
+            <DivContainer>
+                <Div css={{ width: '20%' }}>
+                    <Column01></Column01>
+                    <Column02></Column02>
+                </Div>
+                <Div css={{ width: '80%' }}>
+                    <Linha>
+                        <Row01></Row01><Row02></Row02>
+                    </Linha>
+                    <Linha>
+                        <Map></Map>
+                        <ContainerEntregas></ContainerEntregas>
+                    </Linha>
+                </Div>
+            </DivContainer>
         </Background>
     )
 }
