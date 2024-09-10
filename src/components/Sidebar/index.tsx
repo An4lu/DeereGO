@@ -17,23 +17,23 @@ export function Sidebar() {
                         <HouseSimple size={30} weight='fill' />
                         <TextLink>VISÃO GERAL</TextLink>
                     </SidebarItem>
-                    <SidebarItem to='/'>
+                    <SidebarItem to='/adm/mapa'>
                         <MapTrifold size={30} weight='fill' />
                         <TextLink>MAPA</TextLink>
                     </SidebarItem>
-                    <SidebarItem to='/'>
+                    <SidebarItem to='/adm/carrinhos'>
                         <Toolbox size={30} weight='fill' />
                         <TextLink>CARRO-KITS</TextLink>
                     </SidebarItem>
-                    <SidebarItem to='/'>
+                    <SidebarItem to='/adm/ajustes'>
                         <UserCircle size={30} weight='fill' />
                         <TextLink>AJUSTES</TextLink>
                     </SidebarItem>
+                    <SidebarButton onClick={logout}>
+                        <Power size={30} weight='fill' />
+                        <TextLink>SAIR</TextLink>
+                    </SidebarButton>
                 </ContentContainer>
-                <SidebarButton onClick={logout}>
-                    <Power size={30} weight='fill' />
-                    <TextLink>SAIR</TextLink>
-                </SidebarButton>
             </Div>
         </SidebarContainer >
     );

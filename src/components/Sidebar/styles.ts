@@ -37,7 +37,6 @@ export const SidebarItem = styled(NavLink, {
     },
 
     '&.active': {
-        backgroundColor: '$litepurple',
         color: '$maingreen',
         border: 'none',
         borderRadius: '8px',
@@ -55,10 +54,8 @@ export const SidebarButton = styled('button', {
     border: 'none',
     background: 'none',
     transition: 'color 0.4s ease',
-    marginTop: '300px',
-    marginLeft: '30px',
     '&:hover': {
-        color: '$maingreen',
+        color: '$yellow',
     },
 });
 

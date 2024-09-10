@@ -9,6 +9,9 @@ import { Perfil } from './pages/Rebocador/Perfil'
 import { globalStyles } from './styles'
 import { PrivateRoute } from './components/PrivateRoute'
 import { AuthProvider } from './contexts/AuthContext'
+import { Maps } from './pages/Admin/Maps'
+import { Carrinhos } from './pages/Admin/Carrinhos'
+import { Ajustes } from './pages/Admin/Ajustes'
 
 globalStyles()
 
@@ -22,6 +25,9 @@ export const AppRouter = () => {
           <Route element={<PrivateRoute />}>
             <Route element={<LayoutAdmin />}>
               <Route path="adm/home" element={<DashboardAdmin />} />
+              <Route path="adm/mapa" element={<Maps />} />
+              <Route path="adm/carrinhos" element={<Carrinhos />} />
+              <Route path="adm/ajustes" element={<Ajustes />} />
             </Route>
           </Route>
 
