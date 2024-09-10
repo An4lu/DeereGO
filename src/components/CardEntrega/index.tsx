@@ -1,5 +1,5 @@
 import { CaretCircleDown, CaretCircleUp, ShoppingCart } from '@phosphor-icons/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     BodyCard,
     BodyCardShow,
