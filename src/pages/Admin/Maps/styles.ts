@@ -15,7 +15,7 @@ export const Div = styled('div', {
 
 export const ContainerMap = styled('div', {
     width: '85%',
-    height: '400px',
+    height: '525px',
     backgroundColor: '$white',
     borderRadius: '20px',
 })
