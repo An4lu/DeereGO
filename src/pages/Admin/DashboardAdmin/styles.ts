@@ -1,7 +1,7 @@
 import { styled } from "../../../styles/global";
 
 
-export const Backgrond = styled('div', {
+export const Background = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     margin: '60px',
