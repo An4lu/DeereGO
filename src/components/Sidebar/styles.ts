@@ -13,7 +13,7 @@ export const LogoContainer = styled('div', {
     padding: '32px',
 });
 
-export const ContentContainer = styled('div', {
+export const ContentContainer = styled('ul', {
     display: 'flex',
     flexDirection: 'column',
     justifyItems: 'center',
@@ -44,6 +44,33 @@ export const SidebarItem = styled(NavLink, {
     },
 });
 
+export const SidebarButton = styled('button', {
+    fontSize: '15px',
+    display: 'flex',
+    gap: '16px',
+    alignItems: 'center',
+    color: '#333333',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    border: 'none',
+    background: 'none',
+    transition: 'color 0.4s ease',
+    marginTop: '300px',
+    marginLeft: '30px',
+    '&:hover': {
+        color: '$maingreen',
+    },
+});
+
+
 export const TextLink = styled('span', {
 
+})
+
+export const Div = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: '30px',
+    height: '100%',
 })
