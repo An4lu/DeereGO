@@ -1,7 +1,10 @@
-import { House, Package, User } from '@phosphor-icons/react';
+import { House, Package, User , Power} from '@phosphor-icons/react';
 import { Option, MenuContainer } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 export function Menu() {
+    const { logout } = useAuth();
     return (
         <MenuContainer>
             <Option to={`/rebocador/home`}>
@@ -16,6 +19,7 @@ export function Menu() {
                 <User size={38} weight="fill" />
                 Perfil
             </Option>
+            <Power size={30} weight='fill' onClick={logout}/>   
         </MenuContainer>
     );
 }
