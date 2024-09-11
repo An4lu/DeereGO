@@ -1,4 +1,3 @@
-
 import InputMask from 'react-input-mask'
 import { styled } from '../../styles/global'
 

@@ -46,8 +46,11 @@ export const Carrinhos = () => {
                                 <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
                                     Local: {carrinho.Local} {/* Localização do carrinho */}
                                 </DivInfos>
-                                <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
-                                    Status de Capacidade: {carrinho.StatusCapacidade} {/* Status de capacidade */}
+                                <DivInfos css={{ fontWeight: '600', fontSize: '14px', color: carrinho.StatusCapacidade === 'Cheio' ? 'red' : 'green' }}>
+                                    Status de Capacidade:
+                                    <span>
+                                        {carrinho.StatusCapacidade}
+                                    </span>{/* Status de capacidade */}
                                 </DivInfos>
                                 <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
                                     Status de Manutenção: {carrinho.StatusManutenção} {/* Status de manutenção */}
