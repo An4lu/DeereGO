@@ -38,20 +38,28 @@ export const Ajustes = () => {
                         </Div>
                     </DivGestor>
                 </Linha>
-                <Linha css={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                <Linha css={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                    gap: '45px',
+                    marginTop: '20px'
+                }}>
                     {rebocadores
                         .sort((a, b) => Number(b.Status) - Number(a.Status))
                         .map((rebocador) => (
-                            <ContainerReb key={rebocador._id} css={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '15px', gap: '12px', border: '1px solid #ccc', borderRadius: '8px' }}>
+                            <ContainerReb key={rebocador._id}
+                                css={{
+                                    display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px', gap: '12px', border: '1px solid #ccc', borderRadius: '8px'
+                                }}>
                                 <Img css={{ width: '80px', height: '80px', borderRadius: '50%' }} src={admin} alt="" />
                                 <Div css={{ gap: '2px' }}>
-                                    <DivInfos css={{ fontWeight: '700', fontSize: '15px' }}>
+                                    <DivInfos css={{ fontWeight: '700', fontSize: '14px' }}>
                                         {rebocador.Nome}
                                     </DivInfos>
-                                    <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
+                                    <DivInfos css={{ fontWeight: '700', fontSize: '12px' }}>
                                         {rebocador.Email}
                                     </DivInfos>
-                                    <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
+                                    <DivInfos css={{ fontWeight: '500', fontSize: '14px' }}>
                                         {rebocador.Status ? 'Ativo' : 'Inativo'}
                                     </DivInfos>
                                 </Div>

@@ -28,13 +28,15 @@ export const DivGestor = styled('div', {
     alignItems: 'center',
     gap: '30px',
     padding: '35px',
+    cursor: 'pointer',
 })
 
 export const ContainerReb = styled('div', {
-    width: '350px',
+    width: '100%',
     height: '120px',
     backgroundColor: '$white',
     borderRadius: '20px',
+    cursor: 'pointer',
 })
 
 export const DivInfos = styled('div', {
