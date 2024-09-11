@@ -62,10 +62,26 @@ export const Row01 = styled('div', {
 export const Row02 = styled('div', {
     display: 'flex',
     flexDirection: 'row',
+    alignItens: 'center',
+    justifyItems: 'center',
+    justifyContent: 'space-between',
+    padding: '2.6%',
     backgroundColor: '$white',
     width: '70%',
     height: '150px',
     borderRadius: '20px',
+})
+
+export const DivRow = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+})
+
+export const DivRow02 = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
 })
 
 export const Linha = styled('div', {
