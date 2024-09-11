@@ -1,5 +1,5 @@
 import { Heading } from "../../../components/Heading"
-import { Background, ContainerMap, Div } from "./styles"
+import { Background, ContainerM, Div } from "./styles"
 
 
 export const Maps = () => {
@@ -7,7 +7,7 @@ export const Maps = () => {
         <Background>
             <Heading css={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>Mapa</Heading>
             <Div>
-                <ContainerMap></ContainerMap>
+                <ContainerM></ContainerM>
             </Div>
         </Background>
     )

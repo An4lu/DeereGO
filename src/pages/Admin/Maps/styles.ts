@@ -1,5 +1,4 @@
-import { styled } from "../../../styles/global";
-
+import { styled } from "../../../styles/global"
 
 export const Background = styled('div', {
     height: '100%',
@@ -13,7 +12,7 @@ export const Div = styled('div', {
     alignItems: 'center',
 })
 
-export const ContainerMap = styled('div', {
+export const ContainerM = styled('div', {
     width: '85%',
     height: '525px',
     backgroundColor: '$white',
