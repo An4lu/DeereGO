@@ -1,9 +1,10 @@
 import { Heading } from "../../../components/Heading"
 import { useAuth } from "../../../contexts/AuthContext";
 import { Title } from "../../../components/Title";
-import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Linha, Map, Row01, Row02 } from "./styles";
+import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Linha, Map, Row01, Row02 } from "./styles";
 import { useEffect, useState } from "react";
 import { UserCircle } from "@phosphor-icons/react";
+import mapa from '/mapinha.png'
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -94,7 +95,7 @@ export const DashboardAdmin = () => {
                         </Row02>
                     </Linha>
                     <Linha>
-                        <Map></Map>
+                        <Map><Img src={mapa} alt="" /></Map>
                         <ContainerEntregas></ContainerEntregas>
                     </Linha>
                 </Div>
