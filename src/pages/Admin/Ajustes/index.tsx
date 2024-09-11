@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading"
 import { useAuth } from "../../../contexts/AuthContext";
 import { Background, ContainerReb, Div, DivGestor, DivInfos, Img, Linha } from "./styles"
@@ -6,6 +7,23 @@ import admin from "/admin.jpeg"
 
 export const Ajustes = () => {
     const { user } = useAuth();
+    const [rebocadores, setRebocadores] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchRebocadores = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?Role=rebocador`);
+                const data = await response.json();
+
+                setRebocadores(data);
+            } catch (error) {
+                console.error("Erro ao buscar rebocadores:", error);
+            }
+        };
+
+        fetchRebocadores();
+    }, []);
+
 
     return (
         <Background>
@@ -20,12 +38,27 @@ export const Ajustes = () => {
                         </Div>
                     </DivGestor>
                 </Linha>
-                <Linha css={{ display: 'flex', flexDirection: 'row ' }}>
-                    <ContainerReb>
-
-                    </ContainerReb>
+                <Linha css={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                    {rebocadores
+                        .sort((a, b) => Number(b.Status) - Number(a.Status))
+                        .map((rebocador) => (
+                            <ContainerReb key={rebocador._id} css={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '15px', gap: '12px', border: '1px solid #ccc', borderRadius: '8px' }}>
+                                <Img css={{ width: '80px', height: '80px', borderRadius: '50%' }} src={admin} alt="" />
+                                <Div css={{ gap: '2px' }}>
+                                    <DivInfos css={{ fontWeight: '700', fontSize: '15px' }}>
+                                        {rebocador.Nome}
+                                    </DivInfos>
+                                    <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
+                                        {rebocador.Email}
+                                    </DivInfos>
+                                    <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
+                                        {rebocador.Status ? 'Ativo' : 'Inativo'}
+                                    </DivInfos>
+                                </Div>
+                            </ContainerReb>
+                        ))}
                 </Linha>
             </Div>
-        </Background>
+        </Background >
     )
 }

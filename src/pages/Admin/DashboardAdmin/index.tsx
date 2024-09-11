@@ -30,7 +30,7 @@ export const DashboardAdmin = () => {
     useEffect(() => {
         const fetchRebocadores = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?role=rebocador`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?Role=rebocador`);
                 const data = await response.json();
 
                 const ativos = data.filter((rebocador: any) => rebocador.Status === true);

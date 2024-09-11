@@ -9,6 +9,7 @@ export const Background = styled('div', {
 export const Div = styled('div', {
     display: 'flex',
     flexDirection: 'column',
+    gap: '45px',
 })
 
 export const Linha = styled('div', {
@@ -29,7 +30,12 @@ export const DivGestor = styled('div', {
     padding: '35px',
 })
 
-export const ContainerReb = styled('div', {})
+export const ContainerReb = styled('div', {
+    width: '350px',
+    height: '120px',
+    backgroundColor: '$white',
+    borderRadius: '20px',
+})
 
 export const DivInfos = styled('div', {
     fontWeight: '600',
