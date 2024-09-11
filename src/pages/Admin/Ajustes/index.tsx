@@ -27,7 +27,7 @@ export const Ajustes = () => {
 
     return (
         <Background>
-            <Heading css={{ marginBottom: '20px' }}>Ajustes</Heading>
+            <Heading css={{ marginBottom: '25px' }}>Administrador</Heading>
             <Div>
                 <Linha>
                     <DivGestor>
@@ -38,6 +38,7 @@ export const Ajustes = () => {
                         </Div>
                     </DivGestor>
                 </Linha>
+                <Heading css={{ marginBottom: '-40px', fontSize: '22px', fontWeight: '600' }}>Rebocadores</Heading>
                 <Linha css={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
