@@ -3,6 +3,7 @@ import { Cards } from "../../../components/Cards"
 import { ProfileCard } from "../../../components/ProfileCard"
 import { Status } from "../../../components/Status"
 import { Container } from "./styles"
+import { CarrinhosBox } from "../../../components/CarrinhosBox"
 
 export const Dashboard = () => {
     return (
@@ -11,6 +12,7 @@ export const Dashboard = () => {
             <Buttons/>
             <Cards/>
             <Status/>
+            <CarrinhosBox/>
         </Container>
     )
 }
