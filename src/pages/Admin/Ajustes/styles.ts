@@ -21,13 +21,13 @@ export const Linha = styled('div', {
 
 export const DivGestor = styled('div', {
     width: '100%',
-    height: '210px',
+    height: '180px',
     backgroundColor: '$white',
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
     gap: '30px',
-    padding: '35px',
+    padding: '30px',
     cursor: 'pointer',
 })
 
@@ -45,8 +45,8 @@ export const DivInfos = styled('div', {
 })
 
 export const Img = styled('img', {
-    width: '140px',
-    height: '140px',
+    width: '120px',
+    height: '120px',
     objectFit: 'cover',
     borderRadius: '50%',
 })

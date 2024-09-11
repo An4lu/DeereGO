@@ -32,8 +32,8 @@ export const Ajustes = () => {
                 <Linha>
                     <DivGestor>
                         <Img src={admin} alt="" />
-                        <Div css={{ gap: '8px' }}>
-                            <DivInfos css={{ fontWeight: '800', fontSize: '30px' }}>{user?.nome}</DivInfos>
+                        <Div css={{ gap: '3px' }}>
+                            <DivInfos css={{ fontWeight: '800', fontSize: '26px' }}>{user?.nome}</DivInfos>
                             <DivInfos>{user?.email}</DivInfos>
                         </Div>
                     </DivGestor>
