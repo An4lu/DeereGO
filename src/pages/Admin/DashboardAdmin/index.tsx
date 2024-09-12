@@ -10,6 +10,15 @@ export const DashboardAdmin = () => {
     const { user } = useAuth();
     const [totalCarrinhos, setTotalCarrinhos] = useState<number>(0);
     const [rebocadoresAtivos, setRebocadoresAtivos] = useState<any[]>([]);
+    const [setores, setSetores] = useState({
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+        E: 0,
+        F: 0,
+        G: 0,
+    });
 
     useEffect(() => {
         const fetchEntregas = async () => {
@@ -43,6 +52,42 @@ export const DashboardAdmin = () => {
         fetchRebocadores();
     }, []);
 
+    useEffect(() => {
+        const fetchCarrinhos = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`);
+                const data = await response.json();
+
+
+                const contadorSetores = {
+                    A: 0,
+                    B: 0,
+                    C: 0,
+                    D: 0,
+                    E: 0,
+                    F: 0,
+                    G: 0,
+                };
+
+                data.forEach((carrinho: any) => {
+                    if (carrinho.Local.toLowerCase().includes("setor a")) contadorSetores.A += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor b")) contadorSetores.B += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor c")) contadorSetores.C += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor d")) contadorSetores.D += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor e")) contadorSetores.E += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor f")) contadorSetores.F += 1;
+                    if (carrinho.Local.toLowerCase().includes("setor g")) contadorSetores.G += 1;
+                });
+
+                setSetores(contadorSetores);
+            } catch (error) {
+                console.error("Erro ao buscar carrinhos:", error);
+            }
+        };
+
+        fetchCarrinhos();
+    }, []);
+
 
     return (
         <Background>
@@ -60,31 +105,31 @@ export const DashboardAdmin = () => {
                         <Space>
                             <R>
                                 <Text>Setor A</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.A}</Infos>
                             </R>
                             <R>
                                 <Text>Setor B</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.B}</Infos>
                             </R>
                             <R>
                                 <Text>Setor C</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.C}</Infos>
                             </R>
                             <R>
                                 <Text>Setor D</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.D}</Infos>
                             </R>
                             <R>
                                 <Text>Setor E</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.E}</Infos>
                             </R>
                             <R>
                                 <Text>Setor F</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.F}</Infos>
                             </R>
                             <R>
                                 <Text>Setor G</Text>
-                                <Infos>02</Infos>
+                                <Infos>{setores.G}</Infos>
                             </R>
                         </Space>
                     </Column01>
