@@ -1,10 +1,10 @@
-import { Heading } from "../../../components/Heading"
-import { useAuth } from "../../../contexts/AuthContext";
-import { Title } from "../../../components/Title";
-import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Linha, Map, Row01, Row02 } from "./styles";
-import { useEffect, useState } from "react";
 import { UserCircle } from "@phosphor-icons/react";
-import mapa from '/mapinha.png'
+import { useEffect, useState } from "react";
+import { Heading } from "../../../components/Heading";
+import { Title } from "../../../components/Title";
+import { useAuth } from "../../../contexts/AuthContext";
+import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
+import mapa from '/mapinha.png';
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -52,8 +52,42 @@ export const DashboardAdmin = () => {
                 <Heading>Olá Administrador</Heading>
             )}
             <DivContainer>
-                <Div css={{ width: '20%' }}>
-                    <Column01></Column01>
+                <Div css={{ width: '30%' }}>
+                    <Column01>
+                        <Title css={{ fontSize: '16px' }}>
+                            Setores / Warehouse
+                        </Title>
+                        <Space>
+                            <R>
+                                <Text>Setor A</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor B</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor C</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor D</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor E</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor F</Text>
+                                <Infos>02</Infos>
+                            </R>
+                            <R>
+                                <Text>Setor G</Text>
+                                <Infos>02</Infos>
+                            </R>
+                        </Space>
+                    </Column01>
                     <Column02>
                         <Title css={{ fontSize: '16px' }}>
                             Rebocador em Destaque
@@ -63,7 +97,7 @@ export const DashboardAdmin = () => {
                         </Title>
                     </Column02>
                 </Div>
-                <Div css={{ width: '80%' }}>
+                <Div css={{ width: '70%' }}>
                     <Linha>
                         <Row01>
                             <Title>
@@ -78,7 +112,6 @@ export const DashboardAdmin = () => {
                                 <Title css={{ fontSize: '16px' }}>
                                     Rebocadores Ativos
                                 </Title>
-
                                 <Title css={{ color: '$green', fontWeight: '800', fontSize: '35px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '5px' }}>
                                     {rebocadoresAtivos.map((_, index) => (
                                         <UserCircle key={index} size={55} weight="fill" color="#028001" />
@@ -89,7 +122,6 @@ export const DashboardAdmin = () => {
                             <DivRow02>
                                 <Title css={{ color: '$green', fontWeight: '800', fontSize: '48px', }}>
                                     {rebocadoresAtivos.length}
-
                                 </Title>
                             </DivRow02>
                         </Row02>

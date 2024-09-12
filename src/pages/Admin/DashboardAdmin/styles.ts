@@ -20,7 +20,6 @@ export const Div = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     gap: '30px',
-    width: '100%',
     height: '100%',
 })
 
@@ -28,6 +27,7 @@ export const Column01 = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '$white',
+    padding: '8%',
     width: '100%',
     height: '375px',
     borderRadius: '20px',
@@ -52,7 +52,7 @@ export const Row01 = styled('div', {
     alignItens: 'center',
     justifyItems: 'center',
     justifyContent: 'space-between',
-    padding: '3%',
+    padding: '2%',
     width: '30%',
     height: '150px',
     backgroundColor: '$white',
@@ -71,6 +71,32 @@ export const Row02 = styled('div', {
     height: '150px',
     borderRadius: '20px',
 })
+
+export const R = styled('div', {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '15px',
+    width: '100%',
+    height: '100%',
+    fontSize: '16px'
+})
+
+export const Space = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'space-between',
+    height: '100%',
+})
+
+export const Text = styled('span', {
+
+})
+
+export const Infos = styled('span', {
+    fontWeight: '600',
+    color: '$green',
+})
+
 
 export const DivRow = styled('div', {
     display: 'flex',
