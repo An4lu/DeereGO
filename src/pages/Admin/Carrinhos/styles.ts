@@ -27,10 +27,11 @@ export const ContainerReb = styled('div', {
 
 export const DivInfos = styled('div', {
     display: 'flex',
+    alignItems: 'center',
     fontWeight: '600',
     fontSize: '16px',
     gap: '5px',
-    color: '$graymain'
+    color: '$graymain',
 });
 
 export const Img = styled('img', {
