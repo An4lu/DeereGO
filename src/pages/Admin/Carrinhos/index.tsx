@@ -32,11 +32,11 @@ export const Carrinhos = () => {
                     {carrinhos.map((carrinho) => (
                         <ContainerReb key={carrinho._id}
                             css={{
-                                display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '35px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px'
+                                display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px'
                             }}>
 
                             <Div css={{ gap: '2px' }}>
-                                <DivInfos css={{ fontWeight: '700' }}>
+                                <DivInfos css={{ fontWeight: '700', margin: '8px 0', fontSize: '20px' }}>
                                     {carrinho.NomeCarrinho}
                                 </DivInfos>
                                 <DivInfos css={{ fontWeight: '600' }}>
@@ -47,7 +47,7 @@ export const Carrinhos = () => {
                                 </DivInfos>
                                 <DivInfos css={{ fontWeight: '600' }}>
                                     Status de Capacidade:
-                                    <Span css={{ color: carrinho.StatusCapacidade === 'Cheio' ? 'red' : 'green' }}>
+                                    <Span css={{ color: carrinho.StatusCapacidade === 'Cheio' ? '#C81010' : '#028001' }}>
                                         {carrinho.StatusCapacidade}
                                     </Span>
                                 </DivInfos>

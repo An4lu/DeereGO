@@ -18,6 +18,7 @@ export const {
             graymain: '#333333',
             lightGreen: '#98B38D',
             gray: '#ABACA6',
+            red: '#AD1111',
             fontgreen: '#BEDBC4',
             titlegray: '#2F2E41',
             titlegreen: '#77C737',
