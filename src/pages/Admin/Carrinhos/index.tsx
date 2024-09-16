@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
-import { Background, Div, Linha, ContainerReb, DivInfos, Img } from "./styles";
+import { Background, ContainerReb, Div, DivInfos, Linha, Span } from "./styles";
 
 export const Carrinhos = () => {
     const [carrinhos, setCarrinhos] = useState<any[]>([]);
@@ -23,37 +23,36 @@ export const Carrinhos = () => {
         <Background>
             <Heading css={{ marginBottom: '20px' }}>Carros-Kit</Heading>
             <Div>
-                {/* Layout de grid para os carrinhos */}
                 <Linha css={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                    gap: '45px',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
+                    gap: '35px',
                     marginTop: '20px'
                 }}>
                     {carrinhos.map((carrinho) => (
                         <ContainerReb key={carrinho._id}
                             css={{
-                                display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px', gap: '30px', border: '1px solid #ccc', borderRadius: '8px'
+                                display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '35px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px'
                             }}>
-                            <Img css={{ width: '80px', height: '80px', }} src="/forklift.png" alt={carrinho.NomeCarrinho} />
+
                             <Div css={{ gap: '2px' }}>
-                                <DivInfos css={{ fontWeight: '700', fontSize: '15px' }}>
-                                    {carrinho.NomeCarrinho} {/* Nome do carrinho */}
+                                <DivInfos css={{ fontWeight: '700' }}>
+                                    {carrinho.NomeCarrinho}
                                 </DivInfos>
-                                <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
-                                    Peças: {carrinho.Peças} {/* Peças transportadas */}
+                                <DivInfos css={{ fontWeight: '600' }}>
+                                    Peças: <Span>{carrinho.Peças}</Span>
                                 </DivInfos>
-                                <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
-                                    Local: {carrinho.Local} {/* Localização do carrinho */}
+                                <DivInfos css={{ fontWeight: '600' }}>
+                                    Local: <Span> {carrinho.Local}</Span>
                                 </DivInfos>
-                                <DivInfos css={{ fontWeight: '600', fontSize: '14px', color: carrinho.StatusCapacidade === 'Cheio' ? 'red' : 'green' }}>
+                                <DivInfos css={{ fontWeight: '600' }}>
                                     Status de Capacidade:
-                                    <span>
+                                    <Span css={{ color: carrinho.StatusCapacidade === 'Cheio' ? 'red' : 'green' }}>
                                         {carrinho.StatusCapacidade}
-                                    </span>{/* Status de capacidade */}
+                                    </Span>
                                 </DivInfos>
-                                <DivInfos css={{ fontWeight: '600', fontSize: '14px' }}>
-                                    Status de Manutenção: {carrinho.StatusManutenção} {/* Status de manutenção */}
+                                <DivInfos css={{ fontWeight: '600' }}>
+                                    Status de Manutenção: <Span>{carrinho.StatusManutenção}</Span>
                                 </DivInfos>
                             </Div>
                         </ContainerReb>

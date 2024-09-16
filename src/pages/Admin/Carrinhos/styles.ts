@@ -26,11 +26,19 @@ export const ContainerReb = styled('div', {
 });
 
 export const DivInfos = styled('div', {
+    display: 'flex',
     fontWeight: '600',
-    fontSize: '18px',
+    fontSize: '16px',
+    gap: '5px',
+    color: '$graymain'
 });
 
 export const Img = styled('img', {
     width: '120px',
     height: '120px',
 });
+
+export const Span = styled('span', {
+    fontWeight: '500',
+    fontSize: '14px',
+})
