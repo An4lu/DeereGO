@@ -1,3 +1,4 @@
+import { keyframes } from "@stitches/react";
 import { styled } from "../../../styles/global";
 
 export const Background = styled('div', {
@@ -43,3 +44,22 @@ export const Span = styled('span', {
     fontWeight: '500',
     fontSize: '14px',
 })
+
+export const spin = keyframes({
+    '0%': { transform: 'rotate(0deg)' },
+    '100%': { transform: 'rotate(360deg)' },
+});
+
+export const IconWrapper = styled('div', {
+    cursor: 'pointer',
+    variants: {
+        isSpinning: {
+            true: {
+                animation: `${spin} 1s linear infinite`,
+            },
+            false: {
+                animation: 'none',
+            },
+        },
+    },
+});

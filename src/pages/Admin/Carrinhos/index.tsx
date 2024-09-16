@@ -1,27 +1,37 @@
+import { ArrowsClockwise } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
-import { Background, ContainerReb, Div, DivInfos, Linha, Span } from "./styles";
+import { Background, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
 
 export const Carrinhos = () => {
     const [carrinhos, setCarrinhos] = useState<any[]>([]);
+    const [isFetching, setIsFetching] = useState(false);
+
+    const fetchCarrinhos = async () => {
+        setIsFetching(true);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`);
+            const data = await response.json();
+            setCarrinhos(data);
+        } catch (error) {
+            console.error("Erro ao buscar carrinhos:", error);
+        } finally {
+            setIsFetching(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchCarrinhos = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`);
-                const data = await response.json();
-                setCarrinhos(data);
-            } catch (error) {
-                console.error("Erro ao buscar carrinhos:", error);
-            }
-        };
-
         fetchCarrinhos();
     }, []);
 
     return (
         <Background>
-            <Heading css={{ marginBottom: '20px' }}>Carros-Kit</Heading>
+            <Heading css={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                Carros-Kit
+                <IconWrapper isSpinning={isFetching}>
+                    <ArrowsClockwise weight="bold" size={18} onClick={fetchCarrinhos} />
+                </IconWrapper>
+            </Heading>
             <Div>
                 <Linha css={{
                     display: 'grid',
