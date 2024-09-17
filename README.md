@@ -1,5 +1,23 @@
 
 # Challenge John Deere - DEV4INNOVATION
+## Sumário
+
+- [Introdução](#introdução)
+- [Desenvolvimento](#desenvolvimento)
+  - [Arquitetura](#arquitetura)
+  - [Estrutura Banco de Dados](#estrutura-banco-de-dados)
+  - [Tecnologias](#tecnologias)
+- [Funcionalidades](#funcionalidades)
+  - [Rebocador](#rebocador)
+  - [Administrador](#administrador)
+- [Resultados](#resultados)
+  - [Exemplos](#exemplos)
+- [Código Fonte e Estrutura](#codigo-fonte-e-estrutura)
+- [Autores](#autores)
+- [Instalação](#react-+-typeScript-+-vite)
+
+
+
 ## Introdução
 O projeto busca melhorar a visibilidade e o controle das atividades de logística dentro da fábrica, otimizando o tempo e reduzindo erros no processo de entrega.
 ![Proposta do sistema](./src/assets/proposta.png)
