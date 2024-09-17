@@ -17,6 +17,8 @@ A arquitetura do sistema é baseada em uma solução IoT para localização e co
 ![Arquitetura do Sistema](./src/assets/arquitetura.png)
 ![Diagrama de Caso de Uso](./src/assets/diagrama.png)
 
+### Estrutura Banco de Dados
+![Estrutura Banco de Dados](./src/assets/banco-de-dados.jpg)
 
 ### Tecnologias
 
