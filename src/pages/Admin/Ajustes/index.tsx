@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
-import { Heading } from "../../../components/Heading"
+import { Heading } from "../../../components/Heading";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Background, ContainerReb, Div, DivGestor, DivInfos, Img, Linha } from "./styles"
-import admin from "/admin.jpeg"
-
+import { Background, ContainerReb, Div, DivGestor, DivInfos, Img, Linha } from "./styles";
+import admin from "/admin.jpeg";
+import { ArrowsClockwise } from "@phosphor-icons/react";
+import { IconWrapper } from "../Carrinhos/styles";
 
 export const Ajustes = () => {
     const { user } = useAuth();
     const [rebocadores, setRebocadores] = useState<any[]>([]);
+    const [isFetching, setIsFetching] = useState(false);
+
+    const fetchRebocadores = async () => {
+        setIsFetching(true);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?role=rebocador`);
+            const data = await response.json();
+
+            setRebocadores(data);
+        } catch (error) {
+            console.error("Erro ao buscar rebocadores:", error);
+        } finally {
+            setIsFetching(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchRebocadores = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?Role=rebocador`);
-                const data = await response.json();
-
-                setRebocadores(data);
-            } catch (error) {
-                console.error("Erro ao buscar rebocadores:", error);
-            }
-        };
-
         fetchRebocadores();
     }, []);
-
 
     return (
         <Background>
@@ -38,21 +42,45 @@ export const Ajustes = () => {
                         </Div>
                     </DivGestor>
                 </Linha>
-                <Heading css={{ marginBottom: '-40px', fontSize: '22px', fontWeight: '600' }}>Rebocadores</Heading>
-                <Linha css={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                    gap: '45px',
-                    marginTop: '20px'
-                }}>
+                <Heading css={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '-40px', fontSize: '22px', fontWeight: '600' }}>
+                    Rebocadores
+                    <IconWrapper isSpinning={isFetching}>
+                        <ArrowsClockwise weight="bold" size={18} onClick={fetchRebocadores} />
+                    </IconWrapper>
+                </Heading>
+                <Linha
+                    css={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                        gap: '45px',
+                        marginTop: '20px',
+                    }}
+                >
                     {rebocadores
-                        .sort((a, b) => Number(b.Status) - Number(a.Status))
+                        .sort((a, b) => {
+                            if (b.Status !== a.Status) {
+                                return Number(b.Status) - Number(a.Status);
+                            }
+                            return a.Nome.localeCompare(b.Nome);
+                        })
                         .map((rebocador) => (
-                            <ContainerReb key={rebocador._id}
+                            <ContainerReb
+                                key={rebocador._id}
                                 css={{
-                                    display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px', gap: '12px', border: '1px solid #ccc', borderRadius: '8px'
-                                }}>
-                                <Img css={{ width: '80px', height: '80px', borderRadius: '50%' }} src={admin} alt="" />
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    padding: '20px',
+                                    gap: '12px',
+                                    border: '1px solid #ccc',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <Img
+                                    css={{ width: '80px', height: '80px', borderRadius: '50%' }}
+                                    src={admin}
+                                    alt={rebocador.Nome}
+                                />
                                 <Div css={{ gap: '2px' }}>
                                     <DivInfos css={{ fontWeight: '700', fontSize: '14px' }}>
                                         {rebocador.Nome}
@@ -68,6 +96,6 @@ export const Ajustes = () => {
                         ))}
                 </Linha>
             </Div>
-        </Background >
-    )
-}
+        </Background>
+    );
+};
