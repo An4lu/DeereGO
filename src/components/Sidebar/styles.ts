@@ -2,9 +2,13 @@ import { NavLink } from "react-router-dom";
 import { styled } from "../../styles/global";
 
 export const SidebarContainer = styled('div', {
-    width: '300px',
+    width: '250px',
     height: '100vh',
     backgroundColor: '$white',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 1000,
 });
 
 export const LogoContainer = styled('div', {

@@ -30,13 +30,12 @@ export const globalStyles = globalCss({
             borderRadius: '4px',
         },
     },
-    html: {
-        height: '100%',
-    },
+
     body: {
         height: '100%',
         overflowX: 'hidden',
-        overflowY: 'hidden',
+        overflowY: 'auto',
+        backgroundColor: '$darkGreen'
     },
     img: {
         display: 'block',
