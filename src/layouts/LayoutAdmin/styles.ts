@@ -3,6 +3,7 @@ import { styled } from "../../styles/global";
 export const Container = styled('div', {
     display: 'flex',
     flexDirection: 'row',
+    width: '100%',
 })
 
 export const Fundo = styled('div', {

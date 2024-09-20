@@ -97,7 +97,7 @@ export const DashboardAdmin = () => {
                 <Heading>Olá Administrador</Heading>
             )}
             <DivContainer>
-                <Div css={{ width: '30%' }}>
+                <Div css={{ width: '25%' }}>
                     <Column01>
                         <Title css={{ fontSize: '16px' }}>
                             Setores / Warehouse
@@ -142,7 +142,7 @@ export const DashboardAdmin = () => {
                         </Title>
                     </Column02>
                 </Div>
-                <Div css={{ width: '70%' }}>
+                <Div css={{ width: '75%' }}>
                     <Linha>
                         <Row01>
                             <Title>

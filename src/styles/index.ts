@@ -30,11 +30,16 @@ export const globalStyles = globalCss({
             borderRadius: '4px',
         },
     },
+    html: {
+        height: '100%',
+    },
     body: {
-        backgroundColor: '$white',
+        height: '100%',
+        overflowX: 'hidden',
+        overflowY: 'hidden',
     },
     img: {
         display: 'block',
         maxWidth: '100%',
     },
-})
+});
