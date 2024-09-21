@@ -15,7 +15,7 @@
 - [Código Fonte e Estrutura](#codigo-fonte-e-estrutura)
 - [Autores](#autores)
 - [Instalação](#react-+-typeScript-+-vite)
-- [Repositórios](#repositorios)
+- [Stacks](#stacks)
 
 
 
@@ -79,7 +79,7 @@ As principais tecnologias envolvidas no projeto são:
 - [Felipe Wapf Fettback](https://github.com/FelipeFettback)
 - [Ronaldo Veloso Filho](https://www.linkedin.com/in/ronaldoveloso/)
 
-## Repositórios
+## Stacks
 - [BACK-END - API](https://github.com/An4lu/DeereGO-Back)
 - [FRONT-END - WEB APP](https://github.com/An4lu/DeereGO)
 - [ESP](https://github.com/lucvs07/deereGO-ESP)
