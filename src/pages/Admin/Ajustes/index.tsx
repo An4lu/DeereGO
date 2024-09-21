@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Background, ContainerReb, Div, DivGestor, DivInfos, Img, Linha } from "./styles";
+import { Background, ButtonModal, ContainerReb, Div, DivGestor, DivH, DivInfos, Img, Linha } from "./styles";
 import admin from "/admin.jpeg";
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { ArrowsClockwise, Plus } from "@phosphor-icons/react";
 import { IconWrapper } from "../Carrinhos/styles";
+import { Modal } from "../../../components/Modal";
 
 export const Ajustes = () => {
     const { user } = useAuth();
     const [rebocadores, setRebocadores] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     const fetchRebocadores = async () => {
         setIsFetching(true);
@@ -42,20 +52,22 @@ export const Ajustes = () => {
                         </Div>
                     </DivGestor>
                 </Linha>
-                <Heading css={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '-40px', fontSize: '22px', fontWeight: '600' }}>
-                    Rebocadores
-                    <IconWrapper isSpinning={isFetching}>
-                        <ArrowsClockwise weight="bold" size={18} onClick={fetchRebocadores} />
-                    </IconWrapper>
+                <Heading css={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', justifyContent: 'space-between', marginBottom: '-40px', fontSize: '22px', fontWeight: '600' }}>
+                    <DivH>
+                        Rebocadores
+                        <IconWrapper isSpinning={isFetching}>
+                            <ArrowsClockwise weight="bold" size={18} onClick={fetchRebocadores} />
+                        </IconWrapper>
+                    </DivH>
+                    <ButtonModal onClick={handleOpenModal}>
+                        <Plus size={20} weight="bold" />
+                        Criar
+                    </ButtonModal>
+                    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                        <ButtonModal onClick={handleCloseModal}>Fechar</ButtonModal>
+                    </Modal>
                 </Heading>
-                <Linha
-                    css={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                        gap: '45px',
-                        marginTop: '20px',
-                    }}
-                >
+                <Linha isGrid>
                     {rebocadores
                         .sort((a, b) => {
                             if (b.Status !== a.Status) {
@@ -96,6 +108,6 @@ export const Ajustes = () => {
                         ))}
                 </Linha>
             </Div>
-        </Background>
+        </Background >
     );
 };
