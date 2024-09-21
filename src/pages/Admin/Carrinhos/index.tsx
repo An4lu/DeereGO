@@ -1,11 +1,22 @@
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { ArrowsClockwise, Plus } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
 import { Background, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
+import { ButtonModal, DivH } from "../Ajustes/styles";
+import { Modal } from "../../../components/Modal";
 
 export const Carrinhos = () => {
     const [carrinhos, setCarrinhos] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     const fetchCarrinhos = async () => {
         setIsFetching(true);
@@ -26,11 +37,20 @@ export const Carrinhos = () => {
 
     return (
         <Background>
-            <Heading css={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                Carros-Kit
-                <IconWrapper isSpinning={isFetching}>
-                    <ArrowsClockwise weight="bold" size={18} onClick={fetchCarrinhos} />
-                </IconWrapper>
+            <Heading css={{ marginBottom: '20px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', justifyContent: 'space-between' }}>
+                <DivH>
+                    Carros-Kit
+                    <IconWrapper isSpinning={isFetching}>
+                        <ArrowsClockwise weight="bold" size={18} onClick={fetchCarrinhos} />
+                    </IconWrapper>
+                </DivH>
+                <ButtonModal onClick={handleOpenModal}>
+                    <Plus size={20} weight="bold" />
+                    Criar
+                </ButtonModal>
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                    <ButtonModal onClick={handleCloseModal}>Fechar</ButtonModal>
+                </Modal>
             </Heading>
             <Div>
                 <Linha css={{
