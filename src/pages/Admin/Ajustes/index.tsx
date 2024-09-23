@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Background, ButtonModal, ContainerReb, Div, DivGestor, DivH, DivInfos, DivX, Img, Linha } from "./styles";
+import { Background, ButtonDelete, ButtonModal, ContainerReb, Div, DivGestor, DivH, DivInfos, DivX, Img, Linha } from "./styles";
 import admin from "/admin.jpeg";
 import { ArrowsClockwise, Plus, X } from "@phosphor-icons/react";
 import { IconWrapper } from "../Carrinhos/styles";
@@ -135,10 +135,12 @@ export const Ajustes = () => {
                             </ContainerReb>
                         ))}
                 </Linha>
-                <Modal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
                     <p>Tem certeza que deseja deletar este rebocador?</p>
-                    <ButtonModal onClick={onDelete}>Deletar</ButtonModal>
-                    <ButtonModal onClick={handleCloseDeleteModal}>Cancelar</ButtonModal>
+                    <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
+                        <ButtonDelete onClick={onDelete}>Deletar</ButtonDelete>
+                        <ButtonModal onClick={handleCloseDeleteModal}>Cancelar</ButtonModal>
+                    </Div>
                 </Modal>
             </Div>
         </Background>

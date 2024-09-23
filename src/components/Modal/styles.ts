@@ -15,8 +15,9 @@ export const ModalBackground = styled('div', {
 
 export const ModalContent = styled('div', {
     backgroundColor: '$white',
-    padding: '20px',
     borderRadius: '8px',
+    display: 'flex',
+    flexDirection: 'column',
     width: '400px',
     maxHeight: '80vh',
     overflowY: 'auto',
