@@ -9,7 +9,6 @@ export const Background = styled('div', {
 export const Div = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    gap: '45px',
 })
 
 export const ButtonModal = styled('button', {
@@ -75,13 +74,24 @@ export const ContainerReb = styled('div', {
     width: '100%',
     height: '120px',
     backgroundColor: '$white',
-    borderRadius: '20px',
     cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: '20px',
+    gap: '12px',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
 })
 
 export const DivInfos = styled('div', {
     fontWeight: '600',
     fontSize: '18px',
+})
+
+export const DivX = styled('div', {
+    cursor: 'pointer',
+
 })
 
 export const Img = styled('img', {
