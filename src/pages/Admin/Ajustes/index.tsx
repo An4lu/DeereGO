@@ -6,6 +6,7 @@ import admin from "/admin.jpeg";
 import { ArrowsClockwise, Plus, X } from "@phosphor-icons/react";
 import { IconWrapper } from "../Carrinhos/styles";
 import { Modal } from "../../../components/Modal";
+import { MaskedInput } from "../../../components/MaskedInput";
 
 export const Ajustes = () => {
     const { user } = useAuth();
@@ -88,7 +89,8 @@ export const Ajustes = () => {
                         <Plus size={20} weight="bold" />
                         Criar
                     </ButtonModal>
-                    <Modal isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
+                    <Modal css={{ padding: '20px 25px' }} isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
+
                         <ButtonModal onClick={handleCloseCreateModal}>Fechar</ButtonModal>
                     </Modal>
                 </Heading>
@@ -124,8 +126,7 @@ export const Ajustes = () => {
                                 </Div>
                                 <DivInfos css={{
                                     position: 'relative',
-                                    top: '-30px',
-                                    right: '-10px',
+
                                 }} onClick={(e) => {
                                     e.stopPropagation();
                                     handleOpenDeleteModal(rebocador._id);

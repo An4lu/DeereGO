@@ -100,11 +100,12 @@ export const ContainerReb = styled('div', {
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     padding: '20px',
     gap: '12px',
     border: '1px solid #ccc',
     borderRadius: '8px',
+    justifyContent: 'space-between',
 })
 
 export const DivInfos = styled('div', {
