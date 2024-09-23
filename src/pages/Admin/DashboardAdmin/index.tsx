@@ -4,7 +4,7 @@ import { Heading } from "../../../components/Heading";
 import { Title } from "../../../components/Title";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
-import mapa from '/mapinha.png';
+import mapa from '/mapa-2.png';
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();

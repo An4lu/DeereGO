@@ -1,7 +1,8 @@
 import { Heading } from "../../../components/Heading"
 import { Img } from "../DashboardAdmin/styles"
 import { Background, ContainerM, Div } from "./styles"
-import mapa from "/mapinha.png"
+import { MapaSlider } from "../../../components/MapaSlider/MapaSlider"
+import mapa from "/mapa-2.png"
 
 export const Maps = () => {
     return (
@@ -9,6 +10,7 @@ export const Maps = () => {
             <Heading css={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>Mapa</Heading>
             <Div>
                 <ContainerM><Img src={mapa} alt="" /></ContainerM>
+                <MapaSlider />
             </Div>
         </Background>
     )
