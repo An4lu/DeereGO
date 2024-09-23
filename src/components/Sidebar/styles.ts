@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { styled } from "../../styles/global";
+import { styled } from "../../styles";
 
 export const SidebarContainer = styled('div', {
     width: '250px',

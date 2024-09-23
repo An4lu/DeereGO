@@ -1,4 +1,4 @@
-import { styled } from "../../../styles/global";
+import { styled } from "../../../styles"
 
 
 export const Background = styled('div', {
@@ -14,6 +14,7 @@ export const Div = styled('div', {
 export const ButtonModal = styled('button', {
     display: 'flex',
     alignItems: 'center',
+    height: '30px',
     justifyItems: 'center',
     gap: '5px',
     fontWeight: '600',
@@ -111,11 +112,6 @@ export const ContainerReb = styled('div', {
 export const DivInfos = styled('div', {
     fontWeight: '600',
     fontSize: '18px',
-})
-
-export const DivX = styled('div', {
-    cursor: 'pointer',
-
 })
 
 export const Img = styled('img', {

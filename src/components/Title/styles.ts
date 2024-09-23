@@ -1,4 +1,4 @@
-import { styled } from "../../styles/global";
+import { styled } from "../../styles";
 
 export const Text = styled('h1', {
     color: '$grayhigh',

@@ -6,12 +6,12 @@ import { Login } from './pages/Login'
 import { Dashboard } from './pages/Rebocador/Dashboard'
 import { Entregas } from './pages/Rebocador/Entregas'
 import { Perfil } from './pages/Rebocador/Perfil'
-import { globalStyles } from './styles'
 import { PrivateRoute } from './components/PrivateRoute'
 import { AuthProvider } from './contexts/AuthContext'
 import { Maps } from './pages/Admin/Maps'
 import { Carrinhos } from './pages/Admin/Carrinhos'
 import { Ajustes } from './pages/Admin/Ajustes'
+import { globalStyles } from './styles/global'
 
 globalStyles()
 

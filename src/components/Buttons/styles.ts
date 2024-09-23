@@ -1,4 +1,4 @@
-import { styled } from "../../styles/global";
+import { styled } from "../../styles";
 
 export const ButtonContainer = styled('div', {
     display: 'flex',

@@ -1,5 +1,5 @@
 import { styled } from '../../styles'
-import InputMask from 'react-input-mask'
+import { InputMask } from 'react-input-mask';
 
 export const Input = styled(InputMask, {
   width: '100%',

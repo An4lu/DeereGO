@@ -16,7 +16,7 @@ interface PropInput extends React.InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean
 }
 
-export const Input: React.FC<PropInput> = ({
+export const InputForms: React.FC<PropInput> = ({
   type,
   css,
   placeholder,

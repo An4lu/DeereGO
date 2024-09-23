@@ -6,32 +6,33 @@ export const Container = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    gap: '8px',
+    gap: '6px',
 })
 
 export const FieldInput = styled('input', {
     width: '100%',
-    padding: '20px 10px',
+    padding: '15px 8px',
     borderRadius: '10px',
     height: '15px',
-    border: '2px solid $fontgreen',
+    border: '2px solid $grayfont',
     fontSize: '14px',
-    color: '$fontgreen',
+    color: '$grayfont',
     backgroundColor: 'transparent',
     '&::placeholder': {
-        color: 'rgba(190,219,196, 0.3)',
+        color: '$maingreen',
         fontWeight: '400',
         fontSize: '14px',
     },
     '&:focus': {
         outline: 'none',
+        borderColor: '$maingreen',
     },
 })
 
 export const TextDesc = styled('span', {
-    fontSize: '15px',
+    fontSize: '14px',
     fontWeight: '500',
-    color: '$fontgreen',
+    color: '$grayfont',
 })
 
 export const ForHelper = styled('div', {

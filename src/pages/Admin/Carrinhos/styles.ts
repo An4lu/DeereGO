@@ -1,5 +1,5 @@
 import { keyframes } from "@stitches/react";
-import { styled } from "../../../styles/global";
+import { styled } from "../../../styles";
 
 export const Background = styled('div', {
     height: '100%',

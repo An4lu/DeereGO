@@ -1,44 +1,45 @@
-import { globalCss } from './global'
+import { createStitches } from '@stitches/react'
 
-export const globalStyles = globalCss({
-    '*': {
-        margin: '0px',
-        padding: '0rem',
-        boxSizing: 'border-box',
-        fontFamily: '$poppins',
-        '&::-webkit-scrollbar': {
-            width: '5px',
-            height: '8px',
+export const {
+    config,
+    styled,
+    css,
+    globalCss,
+    keyframes,
+    getCssText,
+    theme,
+    createTheme,
+} = createStitches({
+    theme: {
+        colors: {
+            green: '#016600',
+            maingreen: '#028001',
+            darkGreen: '#014201',
+            graymain: '#333333',
+            lightGreen: '#98B38D',
+            gray: '#ABACA6',
+            red: '#AD1111',
+            fontgreen: '#BEDBC4',
+            titlegray: '#2F2E41',
+            titlegreen: '#77C737',
+            cardgray: '#737373',
+            white: '#FFFFFF',
+            lightgray: '#BEBEBE',
+            border: '#F0EFEF',
+            lightfont: '#A3A3A3',
+            softgray: '#B6B6B6',
+            extrasoftgray: '#BABABA',
+            grayfont: '#656565',
+            grayhigh: '#393939',
+            mediumGray: '#BFBFBF',
+            placeholder: '#DCDCDC',
+            hiperlightgray: '#D7D7D7',
+            yellow: '#F7FA46',
+            input: '#CCC',
+            background: ' #F9F9F9;',
         },
-        '&::-webkit-scrollbar-track': {
-            backgroundColor: '#028001',
-        },
-        '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#BEBEBE',
-            borderRadius: '4px',
+        fonts: {
+            poppins: 'Poppins, sans-serif',
         },
     },
-    'body, input, textarea, button, select': {
-        '&::-webkit-scrollbar': {
-            width: '2px',
-        },
-        '&::-webkit-scrollbar-track': {
-            backgroundColor: '#ffffff',
-        },
-        '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#BEBEBE',
-            borderRadius: '4px',
-        },
-    },
-
-    body: {
-        height: '100%',
-        overflowX: 'hidden',
-        overflowY: 'auto',
-        backgroundColor: '$darkGreen'
-    },
-    img: {
-        display: 'block',
-        maxWidth: '100%',
-    },
-});
+})

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { styled } from "../../styles/global"
+import { styled } from "../../styles"
 
 export const Fundo = styled('div', {
     backgroundImage: "url('/fundo.png')",
