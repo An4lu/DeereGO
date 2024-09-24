@@ -12,6 +12,30 @@ export const Div = styled('div', {
     gap: '45px',
 });
 
+export const ButtonModal = styled('button', {
+    display: 'flex',
+    alignItems: 'center',
+    height: '30px',
+    justifyItems: 'center',
+    gap: '5px',
+    fontWeight: '600',
+    fontSize: '16px',
+    padding: '4px 10px',
+    color: '$white',
+    borderRadius: '30px',
+    backgroundColor: '$green',
+    style: 'none',
+    cursor: 'pointer',
+    letterSpacing: '0',
+    border: 'none',
+    transition: 'all 0.3s ease-out',
+    '&:hover': {
+        color: '$green',
+        backgroundColor: '$white',
+        transform: 'scale(1.02)',
+    },
+})
+
 export const Linha = styled('div', {
     width: '100%',
     display: 'flex',

@@ -212,7 +212,7 @@ export const Ajustes = () => {
                             />
 
                             <Select
-                                title="Role"
+                                title="Cargo"
                                 options={roleOptions}
                                 value={formData.Role}
                                 onChange={(e) => handleFormChange(e)}

@@ -1,6 +1,6 @@
-import React from 'react';
 import { Container, TextDesc } from './styles';
 import { CSS } from '@stitches/react';
+import React from 'react';
 
 interface Option {
   label: string;
