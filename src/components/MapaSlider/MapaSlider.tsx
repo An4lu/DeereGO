@@ -26,16 +26,13 @@
 import { Canvas } from '../Canvas/Canvas';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y} from 'swiper/modules';
+import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/zoom';
 import 'swiper/css/scrollbar';
 import './slider.css';
-
-
-
 
 interface Carrinho {
     _id: string;
@@ -117,19 +114,20 @@ interface Dado {
 //     return '';
 // }
 
-export function MapaSlider(){
+export function MapaSlider() {
     const [dados, setDados] = useState<Dado[]>([]);
-    
-    
+
+
     useEffect(() => {
-        fetch('https://deerego-back.onrender.com/user?role=rebocador')
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/user?role=rebocador`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
                     console.log(data);
                     setDados(data);
                 }
-            });
+            })
+            .catch(error => console.error("Erro ao buscar os dados:", error));
     }, []);
 
     return (
@@ -141,16 +139,17 @@ export function MapaSlider(){
             pagination={{ clickable: true }}
             className='mySwiper'
         >
-            {dados.map((dado) => {
-                const rebocadores = dado.rebocadores || [];
-                const carrinhos = rebocadores.length > 0 ? rebocadores[0].carrinhos : [];
+            {dados.map((dado, index) => {
+                const rebocadores = Array.isArray(dado.rebocadores) ? dado.rebocadores : [];
 
-                return carrinhos.length > 0 ? (
-                    carrinhos.map((carrinho) => (
-                        <SwiperSlide key={carrinho._id}>
+                return rebocadores.map((rebocador, rebocadorIndex) => {
+                    const carrinhos = Array.isArray(rebocador.carrinhos) ? rebocador.carrinhos : [];
+
+                    return carrinhos.map((carrinho) => (
+                        <SwiperSlide key={`${index}-${rebocadorIndex}-${carrinho._id}`}>
                             <h1>{carrinho.Local}</h1>
                             <Canvas
-                                img={carrinho.Local}
+                                img={carrinho.Local} 
                                 posX={carrinho.PosX}
                                 posY={carrinho.PosY}
                                 id={carrinho._id}
@@ -159,10 +158,9 @@ export function MapaSlider(){
                                 height="600"
                             />
                         </SwiperSlide>
-                    ))
-                ) : <></>
+                    ));
+                });
             })}
         </Swiper>
-    )
-
+    );
 }
