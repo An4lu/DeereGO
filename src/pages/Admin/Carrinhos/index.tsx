@@ -4,11 +4,23 @@ import { Heading } from "../../../components/Heading";
 import { Background, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
 import { ButtonModal, DivH } from "../Ajustes/styles";
 import { Modal } from "../../../components/Modal";
+import { InputForms } from "../../../components/InputForms";
+import { Select } from "../../../components/Select";
+import { z } from "zod";
+
+const carSchema = z.object({
+    Peças: z.string(),
+    Local: z.enum(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]),
+    Capacidade: z.enum(["Cheio", "Vazio"]),
+    Manutenção: z.enum(["Operando", "Parado"]),
+});
 
 export const Carrinhos = () => {
     const [carrinhos, setCarrinhos] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [, setIsCreateModalOpen] = useState(false);
+
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -16,7 +28,29 @@ export const Carrinhos = () => {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        setFormData({
+            Peças: '',
+            Local: 'Setor A',
+            Capacidade: 'Cheio',
+            Manutenção: 'Operando',
+            Status: true,
+        });
+        setFormErrors({});
     };
+
+    const handleCloseCreateModal = () => {
+        setIsCreateModalOpen(false);
+        setFormData({
+            Peças: '',
+            Local: 'Setor A',
+            Capacidade: 'Cheio',
+            Manutenção: 'Operando',
+            Status: true,
+        });
+        setFormErrors({});
+    };
+
+    const [formErrors, setFormErrors] = useState<any>({});
 
     const fetchCarrinhos = async () => {
         setIsFetching(true);
@@ -31,6 +65,91 @@ export const Carrinhos = () => {
         }
     };
 
+    const localOptions = [
+        { label: 'A1', value: 'A1' },
+        { label: 'A2', value: 'A2' },
+        { label: 'A3', value: 'A3' },
+        { label: 'A4', value: 'A4' },
+        { label: 'B1', value: 'B1' },
+        { label: 'B2', value: 'B2' },
+        { label: 'B3', value: 'B3' },
+        { label: 'B4', value: 'B4' },
+        { label: 'C1', value: 'C1' },
+        { label: 'C2', value: 'C2' },
+        { label: 'C3', value: 'C3' },
+        { label: 'C4', value: 'C4' },
+        { label: 'D1', value: 'D1' },
+        { label: 'D2', value: 'D2' },
+        { label: 'D3', value: 'D3' },
+        { label: 'D4', value: 'D4' },
+    ];
+
+    const capacityOptions = [
+        { label: 'Cheio', value: 'cheio' },
+        { label: 'Vazio', value: 'vazio' },
+    ];
+
+    const operationOptions = [
+        { label: 'Operando', value: 'operando' },
+        { label: 'Parado', value: 'parado' },
+    ];
+
+    const [formData, setFormData] = useState({
+        Peças: '',
+        Local: 'A1',
+        Capacidade: 'Cheio',
+        Manutenção: 'Operando',
+        Status: true,
+    });
+
+    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleLocalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newLocal = e.target.value;
+        setFormData((prev) => ({ ...prev, Local: newLocal }));
+    };    
+
+    const handleCapacityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newCapacity = e.target.value;
+        setFormData((prev) => ({ ...prev, Capacidade: newCapacity }));
+    };
+    
+    const handleOperationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newOperation = e.target.value;
+        setFormData((prev) => ({ ...prev, Manutenção: newOperation }));
+    };
+
+    const onSubmitCreate = async () => {
+        try {
+            const parsedData = carSchema.parse(formData);
+
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(parsedData),
+            });
+
+            if (response.ok) {
+                fetchCarrinhos();
+                handleCloseCreateModal();
+            } else {
+                console.error("Erro ao criar carrinho");
+            }
+        } catch (error: any) {
+            if (error instanceof z.ZodError) {
+                const errors = error.format();
+                setFormErrors(errors);
+            } else {
+                console.error("Erro desconhecido", error);
+            }
+        }
+    };
+    
     useEffect(() => {
         fetchCarrinhos();
     }, []);
@@ -48,8 +167,49 @@ export const Carrinhos = () => {
                     <Plus size={20} weight="bold" />
                     Criar
                 </ButtonModal>
-                <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-                    <ButtonModal onClick={handleCloseModal}>Fechar</ButtonModal>
+                <Modal css={{ padding: '20px 25px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
+                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Carrinho</Heading>
+                        <Div>
+                            <InputForms
+                                title="Peças"
+                                type="text"
+                                name="Peças"
+                                value={formData.Peças}
+                                onChange={handleFormChange}
+                                css={{ marginBottom: '-25px' }}
+                            />
+                            {formErrors?.Peças && <p>{formErrors.Peças?._errors?.[0]}</p>}
+
+                            <Select
+                                title="Local"
+                                options={localOptions}
+                                value={formData.Local}
+                                onChange={handleLocalChange}
+                                css={{ marginBottom: '-25px' }}
+                            />
+                            {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
+
+                            <Select
+                                title="Capacidade"
+                                options={capacityOptions}
+                                value={formData.Capacidade}
+                                onChange={handleCapacityChange}
+                                css={{ marginBottom: '-25px' }}
+                            />
+                            {formErrors?.Senha && <p>{formErrors.Senha?._errors?.[0]}</p>}
+
+                            <Select
+                                title="Manutenção"
+                                options={operationOptions}
+                                value={formData.Manutenção}
+                                onChange={handleOperationChange}
+                                css={{ marginBottom: '-25px' }}
+                            />
+                        </Div>
+                    <Div css={{display: 'flex', flexDirection: 'row', margin: '45px 0px 0px 0px', gap: '20px'}}>
+                    <ButtonModal css={{ width: '60px'}} onClick={onSubmitCreate}>Criar</ButtonModal>
+                    <ButtonModal css={{ width: '75px' }} onClick={handleCloseModal}>Fechar</ButtonModal>
+                    </Div>
                 </Modal>
             </Heading>
             <Div>

@@ -98,9 +98,11 @@ export const Ajustes = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleRoleChange = (newRole: string) => {
+    const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newRole = e.target.value;
         setFormData((prev) => ({ ...prev, Role: newRole }));
     };
+    
 
     const onSubmitCreate = async () => {
         try {
@@ -216,7 +218,7 @@ export const Ajustes = () => {
                             />
 
                             <Select
-                                title="Role"
+                                title="Cargo"
                                 options={roleOptions}
                                 value={formData.Role}
                                 onChange={handleRoleChange}

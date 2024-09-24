@@ -1,6 +1,6 @@
-import React from 'react';
 import { Container, TextDesc, SelectField } from './styles'; // importando os estilos
 import { CSS } from '@stitches/react';
+import React from 'react';
 
 interface Option {
   label: string;
