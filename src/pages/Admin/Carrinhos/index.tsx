@@ -9,6 +9,7 @@ import { Select } from "../../../components/Select";
 import { z } from "zod";
 
 const carSchema = z.object({
+    NomeCarrinho: z.string().min(1, { message: "Nome do carrinho é obrigatório" }),
     Peças: z.string(),
     Local: z.enum(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]),
     Capacidade: z.enum(["Cheio", "Vazio"]),
@@ -28,6 +29,7 @@ export const Carrinhos = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setFormData({
+            NomeCarrinho: '',
             Peças: '',
             Local: 'A1',
             Capacidade: 'Cheio',
@@ -40,6 +42,7 @@ export const Carrinhos = () => {
     const handleCloseCreateModal = () => {
         setIsCreateModalOpen(false);
         setFormData({
+            NomeCarrinho: '',
             Peças: '',
             Local: 'A1',
             Capacidade: 'Cheio',
@@ -94,6 +97,7 @@ export const Carrinhos = () => {
     ];
 
     const [formData, setFormData] = useState({
+        NomeCarrinho: '',
         Peças: '',
         Local: 'A1',
         Capacidade: 'Cheio',
@@ -131,8 +135,8 @@ export const Carrinhos = () => {
             });
 
             if (response.ok) {
-                fetchCarrinhos();
-                handleCloseCreateModal();
+                fetchCarrinhos(); 
+                handleCloseModal(); 
             } else {
                 console.error("Erro ao criar carrinho");
             }
@@ -145,6 +149,7 @@ export const Carrinhos = () => {
             }
         }
     };
+
 
     useEffect(() => {
         fetchCarrinhos();
@@ -166,6 +171,15 @@ export const Carrinhos = () => {
                 <Modal css={{ padding: '20px 25px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
                     <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Carrinho</Heading>
                     <Div>
+                        <InputForms
+                            title="Nome do Carrinho"
+                            type="text"
+                            name="NomeCarrinho"
+                            value={formData.NomeCarrinho}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.NomeCarrinho && <p>{formErrors.NomeCarrinho?._errors?.[0]}</p>}
+
                         <InputForms
                             title="Peças"
                             type="text"
@@ -209,7 +223,7 @@ export const Carrinhos = () => {
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
                     gap: '35px',
-                    marginTop: '20px'
+                    margin: '15px 0 50px 0'
                 }}>
                     {carrinhos.map((carrinho) => (
                         <ContainerReb key={carrinho._id}
