@@ -12,8 +12,8 @@ const carSchema = z.object({
     NomeCarrinho: z.string().min(1, { message: "Nome do carrinho é obrigatório" }),
     Peças: z.string(),
     Local: z.enum(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]),
-    Capacidade: z.enum(["Cheio", "Vazio"]),
-    Manutenção: z.enum(["Operando", "Parado"]),
+    StatusCapacidade: z.enum(["Cheio", "Vazio"]),
+    StatusManutenção: z.enum(["Operando", "Parado"]),
 });
 
 export const Carrinhos = () => {
@@ -33,9 +33,8 @@ export const Carrinhos = () => {
             NomeCarrinho: '',
             Peças: '',
             Local: 'A1',
-            Capacidade: 'Cheio',
-            Manutenção: 'Operando',
-            Status: true,
+            StatusCapacidade: 'Cheio',
+            StatusManutenção: 'Operando',
         });
         setFormErrors({});
     };
@@ -111,9 +110,8 @@ export const Carrinhos = () => {
         NomeCarrinho: '',
         Peças: '',
         Local: 'A1',
-        Capacidade: 'Cheio',
-        Manutenção: 'Operando',
-        Status: true,
+        StatusCapacidade: 'Cheio',
+        StatusManutenção: 'Operando',
     });
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,11 +124,11 @@ export const Carrinhos = () => {
     };
 
     const handleCapacityChange = (newCapacity: string) => {
-        setFormData((prev) => ({ ...prev, Capacidade: newCapacity }));
+        setFormData((prev) => ({ ...prev, StatusCapacidade: newCapacity }));
     };
 
     const handleOperationChange = (newOperation: string) => {
-        setFormData((prev) => ({ ...prev, Manutenção: newOperation }));
+        setFormData((prev) => ({ ...prev, StatusManutenção: newOperation }));
     };
 
     const onSubmitCreate = async () => {
@@ -210,15 +208,15 @@ export const Carrinhos = () => {
                         <Select
                             title="Capacidade"
                             options={capacityOptions}
-                            value={formData.Capacidade}
+                            value={formData.StatusCapacidade}
                             onChange={handleCapacityChange}
                         />
-                        {formErrors?.Capacidade && <p>{formErrors.Capacidade?._errors?.[0]}</p>}
+                        {formErrors?.StatusCapacidade && <p>{formErrors.StatusCapacidade?._errors?.[0]}</p>}
 
                         <Select
                             title="Manutenção"
                             options={operationOptions}
-                            value={formData.Manutenção}
+                            value={formData.StatusManutenção}
                             onChange={handleOperationChange}
                         />
                     </Div>
