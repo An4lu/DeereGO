@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { styled } from "../../../styles";
 
 
@@ -23,7 +24,7 @@ export const Div = styled('div', {
     height: '100%',
 })
 
-export const Column01 = styled('div', {
+export const Column01 = styled(Link, {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '$white',
@@ -31,6 +32,8 @@ export const Column01 = styled('div', {
     width: '100%',
     height: '375px',
     borderRadius: '20px',
+    textDecoration: 'none',
+    color: 'inherit',
 })
 
 export const Column02 = styled('div', {
@@ -46,20 +49,21 @@ export const Column02 = styled('div', {
     borderRadius: '20px',
 })
 
-export const Row01 = styled('div', {
+export const Row01 = styled(Link, {
     display: 'flex',
     flexDirection: 'column',
     alignItens: 'center',
     justifyItems: 'center',
     justifyContent: 'space-between',
-    padding: '2%',
+    padding: '12px 20px',
     width: '30%',
     height: '150px',
     backgroundColor: '$white',
     borderRadius: '20px',
+    textDecoration: 'none',
 })
 
-export const Row02 = styled('div', {
+export const Row02 = styled(Link, {
     display: 'flex',
     flexDirection: 'row',
     alignItens: 'center',
@@ -70,6 +74,7 @@ export const Row02 = styled('div', {
     width: '70%',
     height: '150px',
     borderRadius: '20px',
+    textDecoration: 'none',
 })
 
 export const R = styled('div', {
@@ -104,10 +109,11 @@ export const DivRow = styled('div', {
     justifyContent: 'space-between',
 })
 
-export const DivRow02 = styled('div', {
+export const DivRow02 = styled(Link, {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
+    textDecoration: 'none',
 })
 
 export const Linha = styled('div', {
