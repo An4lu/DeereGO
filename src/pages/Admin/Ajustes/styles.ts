@@ -3,7 +3,7 @@ import { styled } from "../../../styles"
 
 export const Background = styled('div', {
     height: '100%',
-    margin: '60px',
+    margin: '40px 60px',
 })
 
 export const Div = styled('div', {
@@ -69,7 +69,6 @@ export const Linha = styled('div', {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-
     variants: {
         isGrid: {
             true: {
