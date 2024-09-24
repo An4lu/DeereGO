@@ -15,7 +15,7 @@ export const TextDesc = styled('span', {
 
 export const SelectInput = styled('select', {
     width: '100%',
-    padding: '5px 8px',
+    padding: '5px 5px',
     borderRadius: '10px',
     height: '35px',
     border: '2px solid $grayfont',
