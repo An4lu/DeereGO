@@ -1,4 +1,4 @@
-import { Container, TextDesc, SelectField } from './styles'; // importando os estilos
+import { Container, TextDesc, SelectInput } from './styles';
 import { CSS } from '@stitches/react';
 import React from 'react';
 
@@ -19,13 +19,13 @@ export const Select: React.FC<SelectProps> = ({ title, options, value, onChange,
   return (
     <Container css={css}>
       <TextDesc>{title}</TextDesc>
-      <SelectField value={value} onChange={onChange}>
-        {options.map(option => (
+      <SelectInput value={value} onChange={onChange}>
+        {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </SelectField>
+      </SelectInput>
     </Container>
   );
 };

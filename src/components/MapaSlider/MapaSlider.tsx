@@ -45,11 +45,11 @@ interface Carrinho {
 }
 
 interface Rebocador {
-    carrinhos : Carrinho[];
+    carrinhos: Carrinho[];
 }
 
 interface Dado {
-    rebocadores : Rebocador[];
+    rebocadores: Rebocador[];
 }
 
 // function getImageMapa(local: string): string{

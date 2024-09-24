@@ -1,26 +1,35 @@
-import React, {useEffect, useRef} from "react";
-import {useCanvas} from "./CanvasHooks";
+import React, { useEffect, useRef, useState } from "react";
 import { LogotipoDiv, CanvasComponent } from "./styles";
-import logo from "../../assets/shopping-cart-fill.svg"
+import logo from "../../assets/shopping-cart-fill.svg";
 
 interface CanvasProps {
     posX: number;
     posY: number;
-    img: string;
+    img: Promise<string> | string;
     id: string;
     className: string;
     width: string;
     height: string;
 }
 
-export const Canvas: React.FC<CanvasProps> = ({posX, posY, img, id, className, width, height, ...rest}) => { 
+export const Canvas: React.FC<CanvasProps> = ({ posX, posY, img, id, className, width, height, ...rest }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     const logoImg = useRef<HTMLImageElement>(new Image());
+    const [resolvedImg, setResolvedImg] = useState<string>(typeof img === 'string' ? img : '');
 
     useEffect(() => {
-        logoImg.current.src = logo;
-    }, []);
+        if (typeof img === 'string') {
+            setResolvedImg(img);
+        } else {
+            img.then(resolved => setResolvedImg(resolved))
+                .catch(error => console.error("Erro ao carregar a imagem:", error));
+        }
+    }, [img]);
 
-    const draw = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+    const draw = (context: CanvasRenderingContext2D) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
         context.drawImage(logoImg.current, posX, posY, 24, 24);
@@ -28,21 +37,28 @@ export const Canvas: React.FC<CanvasProps> = ({posX, posY, img, id, className, w
         context.closePath();
     };
 
-    const canvasRef = useCanvas(draw);
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const context = canvas.getContext("2d");
+            if (context) {
+                draw(context);
+            }
+        }
+    }, [resolvedImg, posX, posY]);
 
     return (
         <>
-            <style>
-                {`
-                  .class-${id}{
-                        background-image: url(${img});
-                    }  
-                `}
-            </style>
             <LogotipoDiv>
-                <img src={logo} alt="" />
+                <img src={logo} alt="Logo" />
             </LogotipoDiv>
-            <CanvasComponent ref={canvasRef}{...rest}></CanvasComponent>
+            <CanvasComponent
+                ref={canvasRef}
+                width={width}
+                height={height}
+                className={className}
+                {...rest}
+            />
         </>
-    )
-}
+    );
+};
