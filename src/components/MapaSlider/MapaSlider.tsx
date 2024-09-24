@@ -1,7 +1,7 @@
 import { Canvas } from '../Canvas/Canvas';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y, Zoom} from 'swiper/modules';
+import { Navigation, Pagination, A11y, Zoom } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,14 +14,14 @@ interface Carrinho {
 }
 
 interface Rebocador {
-    carrinhos : Carrinho[];
+    carrinhos: Carrinho[];
 }
 
 interface Dado {
-    rebocadores : Rebocador[];
+    rebocadores: Rebocador[];
 }
 
-export function MapaSlider(){
+export function MapaSlider() {
     const [dados, setDados] = useState<Dado[]>([]);
     useEffect(() => {
         fetch('https://deerego-back.onrender.com/user?role=rebocador')
@@ -35,8 +35,7 @@ export function MapaSlider(){
 
     const images = import.meta.glob('./Assets/mapa/*.png');
 
-    function getImage(local: string): Promise<string>{
-        // Mapeamento de imagens
+    function getImage(local: string): Promise<string> {
         const imageMap: Record<string, string> = {
             'A': 'SETOR A.png',
             'A1': 'SAQ1.png',

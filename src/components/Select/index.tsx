@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, TextDesc, SelectField } from './styles'; // importando os estilos
+import { Container, TextDesc } from './styles';
 import { CSS } from '@stitches/react';
 
 interface Option {
@@ -19,13 +19,13 @@ export const Select: React.FC<SelectProps> = ({ title, options, value, onChange,
   return (
     <Container css={css}>
       <TextDesc>{title}</TextDesc>
-      <SelectField value={value} onChange={onChange}>
-        {options.map(option => (
+      <select value={value} onChange={onChange}>
+        {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </SelectField>
+      </select>
     </Container>
   );
 };

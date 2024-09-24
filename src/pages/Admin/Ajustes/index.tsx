@@ -98,10 +98,6 @@ export const Ajustes = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleRoleChange = (newRole: string) => {
-        setFormData((prev) => ({ ...prev, Role: newRole }));
-    };
-
     const onSubmitCreate = async () => {
         try {
             const parsedData = userSchema.parse(formData);
@@ -219,7 +215,7 @@ export const Ajustes = () => {
                                 title="Role"
                                 options={roleOptions}
                                 value={formData.Role}
-                                onChange={handleRoleChange}
+                                onChange={(e) => handleFormChange(e)}
                                 css={{ marginBottom: '10px' }}
                             />
 
