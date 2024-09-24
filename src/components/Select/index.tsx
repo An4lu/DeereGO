@@ -1,31 +1,43 @@
-import { Container, TextDesc, SelectInput } from './styles';
-import { CSS } from '@stitches/react';
-import React from 'react';
+import React, { useState } from 'react';
+import { Container, DropdownContainer, DropdownOption, DropdownSelected, TextDesc } from './styles';
 
 interface Option {
   label: string;
   value: string;
 }
 
-interface SelectProps {
+interface SelectCustomProps {
   title: string;
   options: Option[];
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  css?: CSS;
+  onChange: (value: string) => void;
 }
 
-export const Select: React.FC<SelectProps> = ({ title, options, value, onChange, css }) => {
+export const Select: React.FC<SelectCustomProps> = ({ title, options, value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (optionValue: string) => {
+    onChange(optionValue);
+    setIsOpen(false);
+  };
+
   return (
-    <Container css={css}>
+    <Container>
       <TextDesc>{title}</TextDesc>
-      <SelectInput value={value} onChange={onChange}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </SelectInput>
+      <DropdownSelected onClick={() => setIsOpen(!isOpen)}>{options.find(option => option.value === value)?.label || 'Selecione uma opção'}</DropdownSelected>
+      {isOpen && (
+        <DropdownContainer>
+          {options.map((option) => (
+            <DropdownOption
+              key={option.value}
+              onClick={() => handleSelect(option.value)}
+              selected={option.value === value}
+            >
+              {option.label}
+            </DropdownOption>
+          ))}
+        </DropdownContainer>
+      )}
     </Container>
   );
 };

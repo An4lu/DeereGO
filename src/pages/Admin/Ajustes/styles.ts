@@ -14,8 +14,8 @@ export const Div = styled('div', {
 export const ButtonModal = styled('button', {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     height: '30px',
-    justifyItems: 'center',
     gap: '5px',
     fontWeight: '600',
     fontSize: '16px',

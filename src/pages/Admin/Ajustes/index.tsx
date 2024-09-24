@@ -215,8 +215,7 @@ export const Ajustes = () => {
                                 title="Cargo"
                                 options={roleOptions}
                                 value={formData.Role}
-                                onChange={(e) => setFormData((prev) => ({ ...prev, Role: e.target.value }))}
-                                css={{ marginBottom: '10px' }}
+                                onChange={(newRole) => setFormData((prev) => ({ ...prev, Role: newRole }))}
                             />
 
                             <ButtonModal css={{ margin: '10px 0px', width: '60px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
