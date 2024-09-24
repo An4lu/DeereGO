@@ -9,4 +9,6 @@ export const CanvasComponent = styled('canvas', {
     backgroundSize: 'cover',
     border: '4px solid $green',
     borderRadius: '1rem',
+    width: '80%',
+    height: '80%',
 });

@@ -23,7 +23,7 @@ export const Canvas: React.FC<CanvasProps> = ({posX, posY, img, id, className, w
     const draw = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
-        context.drawImage(logoImg.current, posX, posY, 50, 50);
+        context.drawImage(logoImg.current, posX, posY, 24, 24);
         context.fill();
         context.closePath();
     };

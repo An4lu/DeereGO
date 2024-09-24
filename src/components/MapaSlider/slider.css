@@ -1,0 +1,22 @@
+:root {
+    --swiper-theme-color: #028001;
+}
+.swiper {
+    width: 50%;
+    height: 50%;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 2rem;
+}
+  
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    gap: 2rem;
+}

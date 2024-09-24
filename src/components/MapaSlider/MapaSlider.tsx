@@ -1,10 +1,41 @@
+// //import images setor a
+// import SetorA from '../../assets/mapa/SETOR A.png';
+// import SetorAQ1 from '../../assets/mapa/SAQ1.png';
+// import SetorAQ2 from '../../assets/mapa/SAQ2.png';
+// import SetorAQ3 from '../../assets/mapa/SAQ3.png';
+// import SetorAQ4 from '../../assets/mapa/SAQ4.png';
+// //import images setor b
+// import SetorB from '../../assets/mapa/SETOR B.png';
+// import SetorBQ1 from '../../assets/mapa/SBQ1.png';
+// import SetorBQ2 from '../../assets/mapa/SBQ2.png';
+// import SetorBQ3 from '../../assets/mapa/SBQ3.png';
+// import SetorBQ4 from '../../assets/mapa/SBQ4.png';
+// //import images setor c
+// import SetorC from '../../assets/mapa/SETOR C.png';
+// import SetorCQ1 from '../../assets/mapa/SCQ1.png';
+// import SetorCQ2 from '../../assets/mapa/SCQ2.png';
+// import SetorCQ3 from '../../assets/mapa/SCQ3.png';
+// import SetorCQ4 from '../../assets/mapa/SCQ4.png';
+// //import images setor d
+// import SetorD from '../../assets/mapa/SETOR D.png';
+// import SetorDQ1 from '../../assets/mapa/SDQ1.png';
+// import SetorDQ2 from '../../assets/mapa/SDQ2.png';
+// import SetorDQ3 from '../../assets/mapa/SDQ3.png';
+// import SetorDQ4 from '../../assets/mapa/SDQ4.png';
+
 import { Canvas } from '../Canvas/Canvas';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y, Zoom} from 'swiper/modules';
+import { Navigation, Pagination, A11y} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/zoom';
+import 'swiper/css/scrollbar';
+import './slider.css';
+
+
+
 
 interface Carrinho {
     _id: string;
@@ -21,58 +52,93 @@ interface Dado {
     rebocadores : Rebocador[];
 }
 
+// function getImageMapa(local: string): string{
+//     console.log(local)
+//     if(local === 'SETOR A'){
+//         return SetorA;
+//     }
+//     if(local === 'A1'){
+//         return SetorAQ1;
+//     }
+//     if(local === 'A2'){
+//         return SetorAQ2;
+//     }
+//     if(local === 'A3'){
+//         return SetorAQ3;
+//     }
+//     if(local === 'A4'){
+//         return SetorAQ4;
+//     }
+//     if(local === 'SETOR B'){
+//         return SetorB;
+//     }
+//     if(local === 'B1'){
+//         return SetorBQ1;
+//     }
+//     if(local === 'B2'){
+//         return SetorBQ2;
+//     }
+//     if(local === 'B3'){
+//         return SetorBQ3;
+//     }
+//     if(local === 'B4'){
+//         return SetorBQ4;
+//     }
+//     if(local === 'SETOR C'){
+//         return SetorC;
+//     }
+//     if(local === 'C1'){
+//         return SetorCQ1;
+//     }
+//     if(local === 'C2'){
+//         return SetorCQ2;
+//     }
+//     if(local === 'C3'){
+//         return SetorCQ3;
+//     }
+//     if(local === 'C4'){
+//         return SetorCQ4;
+//     }
+//     if(local === 'SETOR D'){
+//         return SetorD;
+//     }
+//     if(local === 'D1'){
+//         return SetorDQ1;
+//     }
+//     if(local === 'D2'){
+//         return SetorDQ2;
+//     }
+//     if(local === 'D3'){
+//         return SetorDQ3;
+//     }
+//     if(local === 'D4'){
+//         return SetorDQ4;
+//     }
+//     return '';
+// }
+
 export function MapaSlider(){
     const [dados, setDados] = useState<Dado[]>([]);
+    
+    
     useEffect(() => {
         fetch('https://deerego-back.onrender.com/user?role=rebocador')
             .then(response => response.json())
             .then(data => {
                 if (data) {
+                    console.log(data);
                     setDados(data);
                 }
             });
     }, []);
 
-    const images = import.meta.glob('./Assets/mapa/*.png');
-
-    function getImage(local: string): Promise<string>{
-        // Mapeamento de imagens
-        const imageMap: Record<string, string> = {
-            'A': 'SETOR A.png',
-            'A1': 'SAQ1.png',
-            'A2': 'SAQ2.png',
-            'A3': 'SAQ3.png',
-            'A4': 'SAQ4.png',
-            'B1': 'SBQ1.png',
-            'B2': 'SBQ2.png',
-            'B3': 'SBQ3.png',
-            'B4': 'SBQ4.png',
-            'C1': 'SCQ1.png',
-            'C2': 'SCQ2.png',
-            'C3': 'SCQ3.png',
-            'C4': 'SCQ4.png',
-            'D1': 'SDQ1.png',
-            'D2': 'SDQ2.png',
-            'D3': 'SDQ3.png',
-            'D4': 'SDQ4.png',
-        };
-
-        const imageName = imageMap[local];
-
-        if (imageName && images[`./Assets/mapa/${imageName}`]) {
-            return images[`./Assets/mapa/${imageName}`]().then((mod: any) => mod.default);
-        }
-        return Promise.reject('Imagem não encontrada');
-    }
-
     return (
         <Swiper
-            modules={[Navigation, Pagination, A11y, Zoom]}
+            modules={[Navigation, Pagination, A11y]}
             centeredSlides={true}
             slidesPerView={1}
             navigation={true}
             pagination={{ clickable: true }}
-            zoom={true}
             className='mySwiper'
         >
             {dados.map((dado) => {
@@ -82,14 +148,15 @@ export function MapaSlider(){
                 return carrinhos.length > 0 ? (
                     carrinhos.map((carrinho) => (
                         <SwiperSlide key={carrinho._id}>
+                            <h1>{carrinho.Local}</h1>
                             <Canvas
-                                img={getImage(carrinho.Local)}
+                                img={carrinho.Local}
                                 posX={carrinho.PosX}
                                 posY={carrinho.PosY}
                                 id={carrinho._id}
                                 className={`class-${carrinho._id}`}
-                                width="400"
-                                height="400"
+                                width="600"
+                                height="600"
                             />
                         </SwiperSlide>
                     ))
