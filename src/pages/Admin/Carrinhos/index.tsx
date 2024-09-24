@@ -1,8 +1,8 @@
-import { ArrowsClockwise, Plus } from "@phosphor-icons/react";
+import { ArrowsClockwise, Plus, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
 import { Background, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
-import { ButtonModal, DivH } from "../Ajustes/styles";
+import { ButtonDelete, ButtonModal, DivH } from "../Ajustes/styles";
 import { Modal } from "../../../components/Modal";
 import { InputForms } from "../../../components/InputForms";
 import { Select } from "../../../components/Select";
@@ -20,7 +20,8 @@ export const Carrinhos = () => {
     const [carrinhos, setCarrinhos] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [, setIsCreateModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [deleteCarrinhoId, setDeleteCarrinhoId] = useState<string | null>(null);
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -39,17 +40,27 @@ export const Carrinhos = () => {
         setFormErrors({});
     };
 
-    const handleCloseCreateModal = () => {
-        setIsCreateModalOpen(false);
-        setFormData({
-            NomeCarrinho: '',
-            Peças: '',
-            Local: 'A1',
-            Capacidade: 'Cheio',
-            Manutenção: 'Operando',
-            Status: true,
-        });
-        setFormErrors({});
+    const handleOpenDeleteModal = (id: string) => {
+        setDeleteCarrinhoId(id);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    const handleDeleteCarrinho = async () => {
+        if (!deleteCarrinhoId) return;
+        try {
+            await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho/${deleteCarrinhoId}`, {
+                method: 'DELETE',
+            });
+
+            setCarrinhos((prev) => prev.filter((carrinho) => carrinho._id !== deleteCarrinhoId));
+            handleCloseDeleteModal();
+        } catch (error) {
+            console.error("Erro ao deletar carrinho:", error);
+        }
     };
 
     const [formErrors, setFormErrors] = useState<any>({});
@@ -135,8 +146,8 @@ export const Carrinhos = () => {
             });
 
             if (response.ok) {
-                fetchCarrinhos(); 
-                handleCloseModal(); 
+                fetchCarrinhos();
+                handleCloseModal();
             } else {
                 console.error("Erro ao criar carrinho");
             }
@@ -149,7 +160,6 @@ export const Carrinhos = () => {
             }
         }
     };
-
 
     useEffect(() => {
         fetchCarrinhos();
@@ -228,7 +238,7 @@ export const Carrinhos = () => {
                     {carrinhos.map((carrinho) => (
                         <ContainerReb key={carrinho._id}
                             css={{
-                                display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px'
+                                display: 'flex', flexDirection: 'row', alignItems: 'flex-start', padding: '30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px', justifyContent: 'space-between'
                             }}>
                             <Div css={{ gap: '2px' }}>
                                 <DivInfos css={{ fontWeight: '700', margin: '8px 0', fontSize: '20px' }}>
@@ -250,9 +260,22 @@ export const Carrinhos = () => {
                                     Status de Manutenção: <Span>{carrinho.StatusManutenção}</Span>
                                 </DivInfos>
                             </Div>
+                            <DivInfos css={{
+                                position: 'relative',
+                                cursor: 'pointer'
+                            }} onClick={() => handleOpenDeleteModal(carrinho._id)}>
+                                <X size={20} weight="bold" />
+                            </DivInfos>
                         </ContainerReb>
                     ))}
                 </Linha>
+                <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                    <p>Tem certeza que deseja deletar este carrinho?</p>
+                    <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
+                        <ButtonDelete onClick={handleDeleteCarrinho}>Deletar</ButtonDelete>
+                        <ButtonModal onClick={handleCloseDeleteModal} css={{ backgroundColor: 'white', color: '$maingreen' }}>Cancelar</ButtonModal>
+                    </Div>
+                </Modal>
             </Div>
         </Background>
     );
