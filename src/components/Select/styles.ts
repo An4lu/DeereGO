@@ -13,7 +13,7 @@ export const TextDesc = styled('span', {
     color: '$grayfont',
 });
 
-export const SelectField = styled('select', {
+export const SelectInput = styled('select', {
     width: '100%',
     padding: '5px 8px',
     borderRadius: '10px',
@@ -25,5 +25,9 @@ export const SelectField = styled('select', {
     '&:focus': {
         outline: 'none',
         borderColor: '$maingreen',
+    },
+    '& option': {
+        backgroundColor: 'white',
+        color: '$grayfont',
     },
 });

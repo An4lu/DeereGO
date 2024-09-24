@@ -215,7 +215,7 @@ export const Ajustes = () => {
                                 title="Cargo"
                                 options={roleOptions}
                                 value={formData.Role}
-                                onChange={(e) => handleFormChange(e)}
+                                onChange={(e) => setFormData((prev) => ({ ...prev, Role: e.target.value }))}
                                 css={{ marginBottom: '10px' }}
                             />
 
