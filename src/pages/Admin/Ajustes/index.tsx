@@ -218,11 +218,14 @@ export const Ajustes = () => {
                                 onChange={(newRole) => setFormData((prev) => ({ ...prev, Role: newRole }))}
                             />
 
-                            <ButtonModal css={{ margin: '10px 0px', width: '60px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
+                            <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
+                                <ButtonModal css={{ width: '75px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
+                                <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseCreateModal}>Fechar</ButtonModal>
+                            </Div>
                         </Div>
                     </Modal>
                 </Heading>
-                <Linha isGrid >
+                <Linha isGrid>
                     {rebocadores
                         .sort((a, b) => {
                             if (b.Status !== a.Status) {
@@ -231,9 +234,7 @@ export const Ajustes = () => {
                             return a.Nome.localeCompare(b.Nome);
                         })
                         .map((rebocador) => (
-                            <ContainerReb
-                                key={rebocador._id}
-                            >
+                            <ContainerReb key={rebocador._id}>
                                 <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                     <Img
                                         css={{ width: '80px', height: '80px', borderRadius: '50%' }}
@@ -252,12 +253,7 @@ export const Ajustes = () => {
                                         </DivInfos>
                                     </Div>
                                 </Div>
-                                <DivInfos css={{
-                                    position: 'relative',
-                                }} onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleOpenDeleteModal(rebocador._id);
-                                }}>
+                                <DivInfos css={{ position: 'relative' }} onClick={(e) => { e.stopPropagation(); handleOpenDeleteModal(rebocador._id); }}>
                                     <X size={20} weight="bold" />
                                 </DivInfos>
                             </ContainerReb>

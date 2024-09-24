@@ -76,7 +76,6 @@ export const Linha = styled('div', {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                 gap: '45px',
-                marginTop: '20px',
             },
         },
     },
