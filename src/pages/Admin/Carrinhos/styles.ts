@@ -9,7 +9,7 @@ export const Background = styled('div', {
 export const Div = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    gap: '45px',
+    gap: '18px',
 });
 
 export const ButtonModal = styled('button', {

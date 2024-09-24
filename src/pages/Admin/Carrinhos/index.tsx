@@ -21,7 +21,6 @@ export const Carrinhos = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [, setIsCreateModalOpen] = useState(false);
 
-
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -30,7 +29,7 @@ export const Carrinhos = () => {
         setIsModalOpen(false);
         setFormData({
             Peças: '',
-            Local: 'Setor A',
+            Local: 'A1',
             Capacidade: 'Cheio',
             Manutenção: 'Operando',
             Status: true,
@@ -42,7 +41,7 @@ export const Carrinhos = () => {
         setIsCreateModalOpen(false);
         setFormData({
             Peças: '',
-            Local: 'Setor A',
+            Local: 'A1',
             Capacidade: 'Cheio',
             Manutenção: 'Operando',
             Status: true,
@@ -85,13 +84,13 @@ export const Carrinhos = () => {
     ];
 
     const capacityOptions = [
-        { label: 'Cheio', value: 'cheio' },
-        { label: 'Vazio', value: 'vazio' },
+        { label: 'Cheio', value: 'Cheio' },
+        { label: 'Vazio', value: 'Vazio' },
     ];
 
     const operationOptions = [
-        { label: 'Operando', value: 'operando' },
-        { label: 'Parado', value: 'parado' },
+        { label: 'Operando', value: 'Operando' },
+        { label: 'Parado', value: 'Parado' },
     ];
 
     const [formData, setFormData] = useState({
@@ -102,23 +101,20 @@ export const Carrinhos = () => {
         Status: true,
     });
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleLocalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newLocal = e.target.value;
+    const handleLocalChange = (newLocal: string) => {
         setFormData((prev) => ({ ...prev, Local: newLocal }));
-    };    
+    };
 
-    const handleCapacityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newCapacity = e.target.value;
+    const handleCapacityChange = (newCapacity: string) => {
         setFormData((prev) => ({ ...prev, Capacidade: newCapacity }));
     };
-    
-    const handleOperationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newOperation = e.target.value;
+
+    const handleOperationChange = (newOperation: string) => {
         setFormData((prev) => ({ ...prev, Manutenção: newOperation }));
     };
 
@@ -149,7 +145,7 @@ export const Carrinhos = () => {
             }
         }
     };
-    
+
     useEffect(() => {
         fetchCarrinhos();
     }, []);
@@ -169,46 +165,42 @@ export const Carrinhos = () => {
                 </ButtonModal>
                 <Modal css={{ padding: '20px 25px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
                     <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Carrinho</Heading>
-                        <Div>
-                            <InputForms
-                                title="Peças"
-                                type="text"
-                                name="Peças"
-                                value={formData.Peças}
-                                onChange={handleFormChange}
-                                css={{ marginBottom: '-25px' }}
-                            />
-                            {formErrors?.Peças && <p>{formErrors.Peças?._errors?.[0]}</p>}
+                    <Div>
+                        <InputForms
+                            title="Peças"
+                            type="text"
+                            name="Peças"
+                            value={formData.Peças}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.Peças && <p>{formErrors.Peças?._errors?.[0]}</p>}
 
-                            <Select
-                                title="Local"
-                                options={localOptions}
-                                value={formData.Local}
-                                onChange={handleLocalChange}
-                                css={{ marginBottom: '-25px' }}
-                            />
-                            {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
+                        <Select
+                            title="Local"
+                            options={localOptions}
+                            value={formData.Local}
+                            onChange={handleLocalChange}
+                        />
+                        {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
 
-                            <Select
-                                title="Capacidade"
-                                options={capacityOptions}
-                                value={formData.Capacidade}
-                                onChange={handleCapacityChange}
-                                css={{ marginBottom: '-25px' }}
-                            />
-                            {formErrors?.Senha && <p>{formErrors.Senha?._errors?.[0]}</p>}
+                        <Select
+                            title="Capacidade"
+                            options={capacityOptions}
+                            value={formData.Capacidade}
+                            onChange={handleCapacityChange}
+                        />
+                        {formErrors?.Capacidade && <p>{formErrors.Capacidade?._errors?.[0]}</p>}
 
-                            <Select
-                                title="Manutenção"
-                                options={operationOptions}
-                                value={formData.Manutenção}
-                                onChange={handleOperationChange}
-                                css={{ marginBottom: '-25px' }}
-                            />
-                        </Div>
-                    <Div css={{display: 'flex', flexDirection: 'row', margin: '45px 0px 0px 0px', gap: '20px'}}>
-                    <ButtonModal css={{ width: '60px'}} onClick={onSubmitCreate}>Criar</ButtonModal>
-                    <ButtonModal css={{ width: '75px' }} onClick={handleCloseModal}>Fechar</ButtonModal>
+                        <Select
+                            title="Manutenção"
+                            options={operationOptions}
+                            value={formData.Manutenção}
+                            onChange={handleOperationChange}
+                        />
+                    </Div>
+                    <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
+                        <ButtonModal css={{ width: '75px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
+                        <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseModal}>Fechar</ButtonModal>
                     </Div>
                 </Modal>
             </Heading>
@@ -224,7 +216,6 @@ export const Carrinhos = () => {
                             css={{
                                 display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px'
                             }}>
-
                             <Div css={{ gap: '2px' }}>
                                 <DivInfos css={{ fontWeight: '700', margin: '8px 0', fontSize: '20px' }}>
                                     {carrinho.NomeCarrinho}
