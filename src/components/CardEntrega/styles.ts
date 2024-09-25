@@ -71,3 +71,17 @@ export const InfoText = styled('p', {
     color: '$lightGreen',
     fontWeight: '500',
 });
+
+export const ActionButton = styled('button', {
+    padding: '0.5rem 1rem',
+    backgroundColor: '$green',
+    color: '$white',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+    border: 'none',
+    
+    '&:hover': {
+        backgroundColor: '$darkGreen',
+    },
+});
