@@ -5,7 +5,6 @@ import { Title } from "../../../components/Title";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
 import mapa from '/mapa-2.png';
-import { Link } from "react-router-dom";
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -155,27 +154,51 @@ export const DashboardAdmin = () => {
                         </Row01>
                         <Row02 to="/adm/ajustes">
                             <DivRow>
-                                    <Title css={{ fontSize: '16px' }}>
-                                        Rebocadores Ativos
-                                    </Title>
-                                    <Title css={{ color: '$green', fontWeight: '800', fontSize: '35px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '5px' }}>
-                                        {rebocadoresAtivos.map((_, index) => (
-                                            <UserCircle key={index} size={40} weight="fill" color="#028001" />
-                                        ))}
-                                    </Title>
+                                <Title css={{ fontSize: '16px' }}>
+                                    Rebocadores Ativos
+                                </Title>
+                                <Title css={{ color: '$green', fontWeight: '800', fontSize: '35px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '5px' }}>
+                                    {rebocadoresAtivos.map((_, index) => (
+                                        <UserCircle key={index} size={40} weight="fill" color="#028001" />
+                                    ))}
+                                </Title>
                             </DivRow>
                             <DivRow02 to="/adm/ajustes">
-                                    <Title css={{ color: '$green', fontWeight: '800', fontSize: '46px' }}>
-                                        {rebocadoresAtivos.length}
-                                    </Title>
+                                <Title css={{ color: '$green', fontWeight: '800', fontSize: '46px' }}>
+                                    {rebocadoresAtivos.length}
+                                </Title>
                             </DivRow02>
                         </Row02>
                     </Linha>
                     <Linha>
-                            <Map>
-                                <Img src={mapa} alt="" />
-                            </Map>
-                        <ContainerEntregas></ContainerEntregas>
+                        <Map>
+                            <Img src={mapa} alt="" />
+                        </Map>
+                        <ContainerEntregas>
+                            <Title css={{ fontSize: '16px' }}>
+                                Últimas Entregas
+                            </Title>
+                            <Space>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                                <R>
+                                    <Text>Nome Carrinho</Text>
+                                </R>
+                            </Space>
+                        </ContainerEntregas>
                     </Linha>
                 </Div>
             </DivContainer>
