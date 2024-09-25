@@ -19,7 +19,9 @@ export const DashboardAdmin = () => {
         F: 0,
         G: 0,
     });
+    const [ultimasEntregas, setUltimasEntregas] = useState<any[]>([]); // Estado para armazenar as últimas entregas
 
+    // Fetch total de carrinhos
     useEffect(() => {
         const fetchEntregas = async () => {
             try {
@@ -36,6 +38,7 @@ export const DashboardAdmin = () => {
         fetchEntregas();
     }, []);
 
+    // Fetch rebocadores ativos
     useEffect(() => {
         const fetchRebocadores = async () => {
             try {
@@ -52,12 +55,12 @@ export const DashboardAdmin = () => {
         fetchRebocadores();
     }, []);
 
+    // Fetch carrinhos e contagem por setor
     useEffect(() => {
         const fetchCarrinhos = async () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`);
                 const data = await response.json();
-
 
                 const contadorSetores = {
                     A: 0,
@@ -88,6 +91,20 @@ export const DashboardAdmin = () => {
         fetchCarrinhos();
     }, []);
 
+    // Fetch últimas entregas
+    useEffect(() => {
+        const fetchUltimasEntregas = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega`);
+                const data = await response.json();
+                setUltimasEntregas(data.slice(0, 6)); // Limitando a 6 entregas
+            } catch (error) {
+                console.error("Erro ao buscar últimas entregas:", error);
+            }
+        };
+
+        fetchUltimasEntregas();
+    }, []);
 
     return (
         <Background>
@@ -178,25 +195,12 @@ export const DashboardAdmin = () => {
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>
-                            <Space>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
-                                <R>
-                                    <Text>Nome Carrinho</Text>
-                                </R>
+                            <Space css={{}}>
+                                {ultimasEntregas.map((entrega) => (
+                                    <R key={entrega._id}>
+                                        <Text>{entrega._id}</Text>
+                                    </R>
+                                ))}
                             </Space>
                         </ContainerEntregas>
                     </Linha>
