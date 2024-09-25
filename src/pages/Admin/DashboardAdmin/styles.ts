@@ -80,10 +80,10 @@ export const Row02 = styled(Link, {
 export const R = styled('div', {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: '15px',
+    marginTop: '12px',
     width: '100%',
     height: '100%',
-    fontSize: '16px'
+    fontSize: '15px'
 })
 
 export const Space = styled('div', {
@@ -142,4 +142,5 @@ export const ContainerEntregas = styled('div', {
     height: '400px',
     backgroundColor: '$white',
     borderRadius: '20px',
+    padding: '20px'
 })
