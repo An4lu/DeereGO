@@ -67,9 +67,9 @@ export function MapaSlider() {
                         return null;
                     }
 
-                    interface ImageMap {
-                        [key: string]: string;
-                    }
+                    // interface ImageMap {
+                    //     [key: string]: string;
+                    // }
 
                     // const imageMap: ImageMap = {
                     //     A: 'https://i.postimg.cc/1RMt6LG9/SETOR-A.png',
