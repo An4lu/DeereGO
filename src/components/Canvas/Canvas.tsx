@@ -1,34 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import { LogotipoDiv, CanvasComponent } from "./styles";
 import logo from "../../assets/shopping-cart-fill.svg";
+import { useCanvas } from "./CanvasHooks";
 
 interface CanvasProps {
     posX: number;
     posY: number;
-    img: Promise<string> | string;
-    id: string;
-    className: string;
     width: string;
     height: string;
+    style: React.CSSProperties;
 }
 
-export const Canvas: React.FC<CanvasProps> = ({ posX, posY, img, id, className, width, height, ...rest }) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style, ...rest }) => {
     const logoImg = useRef<HTMLImageElement>(new Image());
-    const [resolvedImg, setResolvedImg] = useState<string>(typeof img === 'string' ? img : '');
 
     useEffect(() => {
-        if (typeof img === 'string') {
-            setResolvedImg(img);
-        } else {
-            img.then(resolved => setResolvedImg(resolved))
-                .catch(error => console.error("Erro ao carregar a imagem:", error));
-        }
-    }, [img]);
-
-    const draw = (context: CanvasRenderingContext2D) => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
+        logoImg.current.src = logo;
+    }, []);
+   
+    const draw = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
 
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
@@ -37,15 +27,8 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, img, id, className, 
         context.closePath();
     };
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (canvas) {
-            const context = canvas.getContext("2d");
-            if (context) {
-                draw(context);
-            }
-        }
-    }, [resolvedImg, posX, posY]);
+    const canvasRef = useCanvas(draw)
+
 
     return (
         <>
@@ -54,9 +37,6 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, img, id, className, 
             </LogotipoDiv>
             <CanvasComponent
                 ref={canvasRef}
-                width={width}
-                height={height}
-                className={className}
                 {...rest}
             />
         </>

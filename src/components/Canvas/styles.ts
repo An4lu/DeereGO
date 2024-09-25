@@ -5,6 +5,7 @@ export const LogotipoDiv = styled('div', {
 });
 
 export const CanvasComponent = styled('canvas', {
+    backgroundColor: '$green',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     border: '4px solid $green',
