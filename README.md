@@ -7,11 +7,9 @@
   - [Arquitetura](#arquitetura)
   - [Estrutura Banco de Dados](#estrutura-banco-de-dados)
   - [Tecnologias](#tecnologias)
-- [Funcionalidades](#funcionalidades)
+- [Funcionalidades e Resultados](#funcionalidades-e-resultados)
   - [Rebocador](#rebocador)
   - [Administrador](#administrador)
-- [Resultados](#resultados)
-  - [Exemplos](#exemplos)
 - [Código Fonte e Estrutura](#codigo-fonte-e-estrutura)
 - [Autores](#autores)
 - [Instalação](#react-+-typeScript-+-vite)
@@ -28,7 +26,7 @@ O projeto busca melhorar a visibilidade e o controle das atividades de logístic
 
 A arquitetura do sistema é baseada em uma solução IoT para localização e controle de um rebocador dentro de uma fábrica. Utilizamos um ESP32 para calcular a posição do rebocador, e essas coordenadas são enviadas para uma API desenvolvida em Node.js, que armazena os dados no banco de dados MongoDB. O front-end, construído em Vite.js com TypeScript, permite que o administrador visualize o andamento das entregas e o desempenho dos rebocadores.
 
-- O ESP32 coleta dados de localização via RSSI dos roteadores presentes na fábrica.
+- O ESP32 coleta dados de localização via RSSI dos roteadores presentes na fábrica, utilizando a fórmula de multilateração para determinar a posição do carro kit.
 - O ESP32 envia os dados para uma API REST (Node.js) via Wi-Fi.
 - A API processa os dados e os armazena no banco de dados MongoDB.
 - O front-end consome esses dados e os exibe em um mapa, permitindo que o administrador veja a posição atual e as tarefas em andamento do rebocador.
@@ -50,26 +48,29 @@ As principais tecnologias envolvidas no projeto são:
 - **TypeScript**: Usado no desenvolvimento do front-end e back-end, para maior consistência e manutenção do código.
 - **C++**: Linguagem utilizada para programar o ESP32.
 
-## Funcionalidades
+## Funcionalidades e Resultados
+![Tela Login](./src/assets/print-login.jpg)
+
 ### Rebocador
 - Controle de entregas realizadas
 - Direcionamento de entregas a serem feitas
+- Aplicativo Web voltado para o rebocador para auxiliar na locomoção de peças dentro da fábrica
+![Tela Rebocador](./src/assets/rebocador-mobile-home)
+
+
 ### Administrador
 - Controle das informações dos rebocadores
 - Informações sobre o desempenho das atividades
-
-## Resultados
-- Aplicativo Web voltado para o rebocador para auxiliar na locomoção de peças dentro da fábrica
 - Aplicativo Web voltado para o administrador para visualizar o andamento das atividades realizadas pelos rebocadores
+![Tela Administrador - Dashboard](./src/assets/print-dashboard-admin.jpeg)
+![Tela Administrador - Carros](./src/assets/carros-adm.jpg)
+![Tela Administrador- Ajustes](./src/assets/ajustes-adm.jpg)
 
-### Exemplos
-[**Inserir print do painel do administrador**]
-[**Inserir print da interface de monitoramento do rebocador**]
 
 ## Código Fonte e Estrutura
 - O código-fonte do projeto está disponível na pasta `scr`.
 - As imagens utilizadas no projeto estão organizadas na pasta `assets`.
-- Link do vídeo demonstrativo: [YouTube](https://link-do-video)
+- Link do vídeo demonstrativo: [YouTube](https://youtu.be/uc9tMSPD7P0)
 
 ## Autores
 
