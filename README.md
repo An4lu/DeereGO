@@ -49,13 +49,13 @@ As principais tecnologias envolvidas no projeto são:
 - **C++**: Linguagem utilizada para programar o ESP32.
 
 ## Funcionalidades e Resultados
-![Tela Login](./src/assets/print-login.jpg)
+![Tela Login](./src/assets/print-login.jpeg)
 
 ### Rebocador
 - Controle de entregas realizadas
 - Direcionamento de entregas a serem feitas
 - Aplicativo Web voltado para o rebocador para auxiliar na locomoção de peças dentro da fábrica
-![Tela Rebocador](./src/assets/rebocador-mobile-home)
+![Tela Rebocador](./src/assets/rebocador-mobile-home.png)
 
 
 ### Administrador
@@ -63,8 +63,8 @@ As principais tecnologias envolvidas no projeto são:
 - Informações sobre o desempenho das atividades
 - Aplicativo Web voltado para o administrador para visualizar o andamento das atividades realizadas pelos rebocadores
 ![Tela Administrador - Dashboard](./src/assets/print-dashboard-admin.jpeg)
-![Tela Administrador - Carros](./src/assets/carros-adm.jpg)
-![Tela Administrador- Ajustes](./src/assets/ajustes-adm.jpg)
+![Tela Administrador - Carros](./src/assets/carros-adm.jpeg)
+![Tela Administrador- Ajustes](./src/assets/ajustes-adm.jpeg)
 
 
 ## Código Fonte e Estrutura
