@@ -1,6 +1,7 @@
 
 
 import { Canvas } from '../Canvas/Canvas';
+import { CanvasHead } from '../Canvas/HeadCanvas';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
@@ -98,8 +99,10 @@ export function MapaSlider() {
 
                     return (
                         <SwiperSlide key={`${index}-${carrinho._id}`}>
-                            <h2>{carrinho.NomeCarrinho}</h2>
-                            <h3>{carrinho.Local}</h3>
+                            <CanvasHead
+                                NomeCarrinho={carrinho.NomeCarrinho}
+                                Local={carrinho.Local} 
+                            />
                             <Canvas
                                 posX={carrinho.PosX}
                                 posY={carrinho.PosY}
