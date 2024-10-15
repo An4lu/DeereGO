@@ -14,6 +14,11 @@ interface CanvasProps {
 export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style, ...rest }) => {
     const logoImg = useRef<HTMLImageElement>(new Image());
 
+     // Desenhar a imagem do logo em alta resolução
+     const scaleFactor = window.devicePixelRatio || 1;
+     const logoWidth = 24 * scaleFactor;
+     const logoHeight = 24 * scaleFactor;
+
     useEffect(() => {
         logoImg.current.src = logo;
     }, []);
@@ -22,7 +27,7 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style
 
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
-        context.drawImage(logoImg.current, posX, posY, 24, 24);
+        context.drawImage(logoImg.current, posX * scaleFactor, posY * scaleFactor, logoWidth, logoHeight);
         context.fill();
         context.closePath();
     };
@@ -37,6 +42,8 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style
             </LogotipoDiv>
             <CanvasComponent
                 ref={canvasRef}
+                width={parseInt(width) * scaleFactor}
+                height={parseInt(height) * scaleFactor}
                 style={style}
                 {...rest}
             />
