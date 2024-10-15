@@ -28,7 +28,7 @@ export function ProfileCard() {
                         />
                         <TextProfile>
                             <h2>{user?.nome}</h2>
-                            <p>ID: {user?._id}</p>
+                            <p>ID: {user?.id}</p>
                         </TextProfile>
                     </ImgText>
                     <IconeProfile>

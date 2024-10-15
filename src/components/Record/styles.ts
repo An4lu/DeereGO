@@ -49,19 +49,34 @@ export const BodyCard = styled('div', {
 export const BodyCardShow = styled('div', {
     display: 'flex',
     flexDirection: 'column',
+    width: '90%',
     gap: '1rem',
 });
 
 export const Info = styled('div', {
     display: 'flex',
     flexDirection: 'row',
+    flexFlow: 'wrap',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     gap: '0.5rem',
 });
 
 export const Linha = styled('div', {
-    border: 'dashed 1px #fff',
+    border: 'dashed 1px $yellow',
     width: '100%',
     height: 0,
+});
+
+export const InfoTitle = styled('p', {
+    fontWeight: 'semibold',
+    fontSize: '1.2rem',
+    color: '$white',
+    textAlign: 'center',
+});
+
+export const InfoValue = styled('p', {
+    fontWeight: 'bold',
+    color: '$titlegreen',
 });

@@ -8,6 +8,7 @@ interface ButtonProps {
   children: ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
+  style?: React.CSSProperties
 }
 
 export const Button = ({

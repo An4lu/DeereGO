@@ -7,7 +7,7 @@ export const Perfil = () => {
     return (
         <>
             <ProfileCard/>
-            <Button><Trophy weight='bold'/>Metas</Button>
+            <Button style={{marginTop: '1rem', fontSize: '1rem'}}><Trophy weight='bold'/>Metas</Button>
             <Record/>
         </>
     )
