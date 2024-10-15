@@ -18,6 +18,7 @@ interface Rebocador {
         PosX: number;
         PosY: number;
         Local: string;
+        NomeCarrinho: string;
 
     };
 }
@@ -45,6 +46,33 @@ export function MapaSlider() {
             .catch(error => console.error("Erro ao buscar os dados:", error));
     }, []);
 
+    interface ImageMap {
+        [key: string]: string;
+    }
+
+    const imageMap: ImageMap = {
+        A: 'https://i.postimg.cc/1RMt6LG9/SETOR-A.png',
+        A1: 'https://i.postimg.cc/t4p2fn1d/SAQ1.png',
+        A2: 'https://i.postimg.cc/mk4HDCW8/SAQ2.png',
+        A3: 'https://i.postimg.cc/m4JStKkb/SAQ3.png',
+        A4: 'https://i.postimg.cc/rs9tts8c/SAQ4.png',
+        B: 'https://i.postimg.cc/fRSTGy6L/SETOR-B.png',
+        B1: 'https://i.postimg.cc/fTwdQcKb/SBQ1.png',
+        B2: 'https://i.postimg.cc/J4Pkrs65/SBQ2.png',
+        B3: 'https://i.postimg.cc/s2ZQ4wVT/SBQ3.png',
+        B4: 'https://i.postimg.cc/Cx5fzw9T/SBQ4.png',
+        C: 'https://i.postimg.cc/nLvVL5Vf/SETOR-C.png',
+        C1: 'https://i.postimg.cc/gJFwS8jm/SCQ1.png',
+        C2: 'https://i.postimg.cc/L5mJRSjW/SCQ2.png',
+        C3: 'https://i.postimg.cc/Hn3VkN2k/SCQ3.png',
+        C4: 'https://i.postimg.cc/v8v1h1sw/SCQ4.png',
+        D: 'https://i.postimg.cc/4NSx2V2q/SETOR-D.png',
+        D1: 'https://i.postimg.cc/hPyXFHvC/SDQ1.png',
+        D2: 'https://i.postimg.cc/TPm1D19S/SDQ2.png',
+        D3: 'https://i.postimg.cc/Hxgx4mvL/SDQ3.png',
+        D4: 'https://i.postimg.cc/MTmG9Lgm/SDQ4.png',
+    };
+
     return (
         <Swiper
             modules={[Navigation, Pagination, A11y]}
@@ -66,43 +94,19 @@ export function MapaSlider() {
                         console.warn(`Rebocador ${index} não tem carrinhos com informações válidas`);
                         return null;
                     }
-
-                    // interface ImageMap {
-                    //     [key: string]: string;
-                    // }
-
-                    // const imageMap: ImageMap = {
-                    //     A: 'https://i.postimg.cc/1RMt6LG9/SETOR-A.png',
-                    //     A1: 'https://i.postimg.cc/t4p2fn1d/SAQ1.png',
-                    //     A2: 'https://i.postimg.cc/mk4HDCW8/SAQ2.png',
-                    //     A3: 'https://i.postimg.cc/m4JStKkb/SAQ3.png',
-                    //     A4: 'https://i.postimg.cc/rs9tts8c/SAQ4.png',
-                    //     B: 'https://i.postimg.cc/fRSTGy6L/SETOR-B.png',
-                    //     B1: 'https://i.postimg.cc/fTwdQcKb/SBQ1.png',
-                    //     B2: 'https://i.postimg.cc/J4Pkrs65/SBQ2.png',
-                    //     B3: 'https://i.postimg.cc/s2ZQ4wVT/SBQ3.png',
-                    //     B4: 'https://i.postimg.cc/Cx5fzw9T/SBQ4.png',
-                    //     C: 'https://i.postimg.cc/nLvVL5Vf/SETOR-C.png',
-                    //     C1: 'https://i.postimg.cc/gJFwS8jm/SCQ1.png',
-                    //     C2: 'https://i.postimg.cc/L5mJRSjW/SCQ2.png',
-                    //     C3: 'https://i.postimg.cc/Hn3VkN2k/SCQ3.png',
-                    //     C4: 'https://i.postimg.cc/v8v1h1sw/SCQ4.png',
-                    //     D: 'https://i.postimg.cc/4NSx2V2q/SETOR-D.png',
-                    //     D1: 'https://i.postimg.cc/hPyXFHvC/SDQ1.png',
-                    //     D2: 'https://i.postimg.cc/TPm1D19S/SDQ2.png',
-                    //     D3: 'https://i.postimg.cc/Hxgx4mvL/SDQ3.png',
-                    //     D4: 'https://i.postimg.cc/MTmG9Lgm/SDQ4.png',
-                    // };
+                    console.log('Local: ', imageMap[carrinho.Local]); // Verifique se o local está correto
 
                     return (
                         <SwiperSlide key={`${index}-${carrinho._id}`}>
+                            <h2>{carrinho.NomeCarrinho}</h2>
+                            <h3>{carrinho.Local}</h3>
                             <Canvas
                                 posX={carrinho.PosX}
                                 posY={carrinho.PosY}
                                 width="400"
                                 height="400"
                                 style={{
-                                    backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20211031/pngtree-abstract-bg-image_914283.png")`
+                                    backgroundImage: `url(${imageMap[carrinho.Local]})`,
                                 }}
                             />
                         </SwiperSlide>

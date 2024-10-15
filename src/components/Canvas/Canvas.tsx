@@ -37,6 +37,7 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style
             </LogotipoDiv>
             <CanvasComponent
                 ref={canvasRef}
+                style={style}
                 {...rest}
             />
         </>
