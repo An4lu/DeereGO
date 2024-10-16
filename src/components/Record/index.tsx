@@ -51,10 +51,7 @@ export function Record() {
     }
   }, [user]);
 
-  const hasRebocadores = dados.length > 0 && dados[0].rebocadores.length > 0;
-
-  const userTempoTotal = hasRebocadores ? dados[0].rebocadores[0].TempoTotal : 'N/A';
-  const userTotalCarrinhos = hasRebocadores ? dados[0].rebocadores[0].TotalCarrinhos : 'N/A';
+  console.log(dados);
 
 
   const [selected, setSelected] = useState<boolean>(false);
@@ -88,12 +85,12 @@ export function Record() {
           </Info>
           <Info>
             <InfoTitle>Tempo Total</InfoTitle>
-            <InfoValue>{userTempoTotal}</InfoValue>
+            <InfoValue>{user?.rebocadores?.[0]?.TempoTotal ?? 'N/A'}</InfoValue>
             <Linha />
           </Info>
           <Info>
             <InfoTitle>Total de Carrinhos</InfoTitle>
-            <InfoValue>{userTotalCarrinhos}</InfoValue>
+            <InfoValue>{user?.rebocadores?.[0]?.TotalCarrinhos ?? 'N/A'}</InfoValue>
             <Linha />
           </Info>
         </BodyCardShow>

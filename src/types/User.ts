@@ -18,16 +18,16 @@ export type User = {
         posY: number;
         local: string;
         statusManuntencao: string;
-        nomeCarrinho: string;
+        NomeCarrinho: string;
         statusCapacidade: string;
         entregas?: Array<{
           _id: string;
-          partida: string;
-          destino: string;
-          horaPartida: string;
-          horaEntrega: string;
+          Partida: string;
+          Destino: string;
+          HoraPartida: string;
+          HoraEntrega: string;
           status: string;
-          idCarrinho: string;
+          IdCarrinho: string;
         }>;
       };
     }>;
