@@ -8,8 +8,8 @@ export type User = {
     status?: boolean;
     rebocadores?: Array<{
       _id: string;
-      tempoTotal: number;
-      totalCarrinhos: number;
+      TempoTotal: number;
+      TotalCarrinhos: number;
       statusRebocador: string;
       carrinhos?: {
         _id: string;

@@ -48,18 +48,18 @@ export const Login = () => {
 
             if (userResponse.ok) {
               const userDetails = await userResponse.json();
-              console.log('Resposta da API (detalhes do usuário):', userDetails);
+              console.log('Resposta da API (detalhes do usuário):', userDetails[0]);
 
               // Mapeie os dados completos para o objeto User.
               const userData: User = {
-                id: loginResponse._id || '',
-                nome: loginResponse.Nome || '',
-                email: loginResponse.Email || '',
-                role: loginResponse.Role || '',
-                fabrica: loginResponse.Fabrica || '',
-                telefone: loginResponse.Telefone || '',
-                status: loginResponse.Status || false,
-                rebocadores: userDetails.rebocadores || [],
+                id: userDetails[0]._id || '',
+                nome: userDetails[0].Nome || '',
+                email: userDetails[0].Email || '',
+                role: userDetails[0].Role || '',
+                fabrica: userDetails[0].Fabrica || '',
+                telefone: userDetails[0].Telefone || '',
+                status: userDetails[0].Status || false,
+                rebocadores: userDetails[0].rebocadores || [],
               };
 
               console.log('Dados do usuário mapeados:', userData);
