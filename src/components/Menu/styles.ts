@@ -10,6 +10,12 @@ export const MenuContainer = styled('nav', {
     justifyContent: 'space-around',
     borderRadius: '100px',
     height: '65px',
+    position: 'fixed',
+    bottom: '2%',
+    width: '90%',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: '1000',
 });
 
 export const Option = styled(NavLink, {

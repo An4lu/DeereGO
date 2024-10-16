@@ -8,9 +8,25 @@ export const ButtonContainer = styled('div', {
     marginTop: '1rem',
 });
 
-export const Button = styled('button', {
+export const ButtonEntrega = styled('button', {
     border: 'none',
-    backgroundColor: '$white',
+    backgroundColor: '$midgreen',
+    color: '$white',
+    padding: '0.5rem 1rem',
+    fontWeight: '700',
+    borderRadius: '20px',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '0.6rem',
+    gap: '0.5rem',
+    cursor: 'pointer',
+});
+export const ButtonMetas = styled('button', {
+    border: 'none',
+    backgroundColor: '$yellow',
+    color: '$darkGreen',
     padding: '0.5rem 1rem',
     fontWeight: '700',
     borderRadius: '20px',

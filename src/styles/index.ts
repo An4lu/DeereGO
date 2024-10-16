@@ -15,6 +15,7 @@ export const {
             green: '#016600',
             maingreen: '#028001',
             darkGreen: '#014201',
+            midgreen: '#3AA52D',
             graymain: '#333333',
             lightGreen: '#98B38D',
             gray: '#ABACA6',

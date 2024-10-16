@@ -35,7 +35,7 @@ export const globalStyles = globalCss({
         height: '100%',
         overflowX: 'hidden',
         overflowY: 'auto',
-        backgroundColor: '$darkGreen'
+        backgroundColor: 'rgb(248, 244, 244)'
     },
     img: {
         display: 'block',

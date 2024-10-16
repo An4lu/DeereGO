@@ -6,4 +6,6 @@ export const Container = styled('div', {
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     backgroundColor: '#F8F4F4',
+    width: '100%',
+    height: '100vh',
 })

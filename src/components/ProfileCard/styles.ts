@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { styled } from "../../styles";
 
 
@@ -31,6 +32,7 @@ export const ImgText = styled('div', {
     flexDirection: 'row',
     alignItems: 'center',
     gap: '1rem',
+    flexFlow: 'wrap',
 });
 
 export const ImgProfile = styled('img', {
@@ -78,7 +80,7 @@ export const Text = styled('div', {
     },
 });
 
-export const BtnHistoric = styled('button', {
+export const BtnHistoric = styled(NavLink, {
     fontFamily: 'Poppins, sans-serif',
     fontSize: '0.8rem',
     fontWeight: 500,
@@ -87,4 +89,5 @@ export const BtnHistoric = styled('button', {
     border: 'none',
     borderRadius: '2rem',
     padding: '0.5rem 1rem',
+    textDecoration: 'none',
 });
