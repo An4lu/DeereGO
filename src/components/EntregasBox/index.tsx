@@ -1,100 +1,74 @@
-import { useEffect, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 import { CardEntrega } from '../CardEntrega';
 import { EntregasContainer } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
-interface Carro {
+interface Dado {
+    Entregas: any;
+    rebocadores: Rebocador[];
+}
+interface Rebocador {
+    TempoTotal: number | string,
+    TotalCarrinhos: number | string,
+    carrinhos: {
+        _id: string;
+        PosX: number;
+        PosY: number;
+        Local: string;
+        NomeCarrinho: string;
+        entregas: Entregas[];
+  
+    };
+}
+
+interface Entregas {
     _id: string;
-    Status: string;
+    IdCarrinho: string;
+    IdUser: string;
     Partida: string;
     Destino: string;
-    DataHora: string;
-    tempoInicio?: number; // Adicione esta propriedade para armazenar o tempo de início
+    HoraPartida: string
+    HoraEntrega: string;
+    Status: string;
 }
 
 export function EntregasBox() {
-    const [entregas, setEntregas] = useState<Carro[]>([]);
+    const { user } = useAuth();
+    const [entregas, setEntregas] = useState<Dado[]>([]);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega`)
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    setEntregas(data);
-                }
-            });
+        if (user) {
+            fetch(`${apiBaseUrl}/user?nome=${user.nome}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        setEntregas(data[0].rebocadores[0].carrinhos);
+                    }
+                });
+        }
     }, []);
+    console.log(entregas)
 
-    const iniciarEntrega = async (id: string) => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id, status: 'iniciar', tempoInicio: Date.now() }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao iniciar a entrega.');
-            }
-
-            const updatedEntrega = entregas.map((entrega) =>
-                entrega._id === id ? { ...entrega, tempoInicio: Date.now(), Status: 'Em andamento' } : entrega
-            );
-
-            setEntregas(updatedEntrega);
-            console.log(`Entrega do carro ${id} iniciada.`);
-
-        } catch (error) {
-            console.error('Erro ao iniciar a entrega:', error);
-        }
-    };
-
-    const concluirEntrega = async (id: string) => {
-        try {
-            const entrega = entregas.find((carro) => carro._id === id);
-
-            if (!entrega || !entrega.tempoInicio) {
-                console.error('Entrega não encontrada ou ainda não iniciada.');
-                return;
-            }
-
-            const tempoTotal = Date.now() - entrega.tempoInicio;
-
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id, status: 'concluir', tempoTotal }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao concluir a entrega.');
-            }
-
-            setEntregas(entregas.filter((entrega) => entrega._id !== id));
-            console.log(`Entrega do carro ${id} concluída em ${tempoTotal / 1000} segundos.`);
-
-        } catch (error) {
-            console.error('Erro ao concluir a entrega:', error);
-        }
-    };
 
     return (
         <EntregasContainer>
-            {entregas.map(entrega => (
-                <CardEntrega 
-                    key={entrega._id} 
-                    idCart={entrega._id} 
-                    opStatus={entrega.Status} 
-                    Partida={entrega.Partida} 
-                    Destino={entrega.Destino} 
-                    DataHora={entrega.DataHora} // Passando o DataHora atualizado
-                    onIniciarEntrega={iniciarEntrega} 
-                    onConcluirEntrega={concluirEntrega}
-                />
-            ))}
+            {entregas.map(info => {
+                const registros = info.Entregas;
+                return registros.map((log: any, index: Key | null | undefined) => {
+                    return (
+                        <CardEntrega
+                            key={index}
+                            idCart={log._id}
+                            titleCart={log.NomeCarrinho}
+                            Partida={log.Partida}
+                            Destino={log.Destino}
+                            DataHora={log.HoraPartida}
+                        />
+                    )
+                })
+            })}
+            
         </EntregasContainer>
     );
 }

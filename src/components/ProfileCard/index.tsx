@@ -39,7 +39,7 @@ export function ProfileCard() {
             <Bottom>
                 <Text>
                     <p>Carros-Kit Entregues</p>
-                    <h2>17</h2>
+                    <h2>{user?.rebocadores?.[0]?.totalCarrinhos ?? 'Sem dados'}</h2>
                 </Text>
                 <BtnHistoric>Histórico</BtnHistoric>
             </Bottom>

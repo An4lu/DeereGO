@@ -12,7 +12,6 @@ import 'swiper/css/zoom';
 import 'swiper/css/scrollbar';
 import './slider.css';
 
-
 interface Rebocador {
     carrinhos: {
         _id: string;
@@ -27,8 +26,6 @@ interface Rebocador {
 interface Dado {
     rebocadores: Rebocador[];
 }
-
-
 
 
 export function MapaSlider() {

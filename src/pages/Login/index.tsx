@@ -33,14 +33,53 @@ export const Login = () => {
         });
 
         if (response.ok) {
-          const userData: User = await response.json();
-          login(userData);
-          if (userData.role === 'admin') {
-            navigate('/adm/home');
-          } else if (userData.role === 'rebocador') {
-            navigate('/rebocador/home');
+          const loginResponse = await response.json();
+          console.log('Resposta da API (login):', loginResponse);
+
+          const nome = loginResponse.Nome || loginResponse.nome;
+
+          if (nome) {
+            const userResponse = await fetch(`${apiBaseUrl}/user?nome=${nome}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            if (userResponse.ok) {
+              const userDetails = await userResponse.json();
+              console.log('Resposta da API (detalhes do usuário):', userDetails);
+
+              // Mapeie os dados completos para o objeto User.
+              const userData: User = {
+                id: loginResponse._id || '',
+                nome: loginResponse.Nome || '',
+                email: loginResponse.Email || '',
+                role: loginResponse.Role || '',
+                fabrica: loginResponse.Fabrica || '',
+                telefone: loginResponse.Telefone || '',
+                status: loginResponse.Status || false,
+                rebocadores: userDetails.rebocadores || [],
+              };
+
+              console.log('Dados do usuário mapeados:', userData);
+
+              // Realizar o login com os dados mapeados
+              login(userData);
+
+              // Redirecionamento
+              if (userData.role === 'admin') {
+                navigate('/adm/home');
+              } else if (userData.role === 'rebocador') {
+                navigate('/rebocador/home');
+              } else {
+                toast.error('Função desconhecida');
+              }
+            } else {
+              toast.error('Erro ao buscar os dados completos do usuário');
+            }
           } else {
-            toast.error('Função desconhecida');
+            toast.error('Nome do usuário não encontrado.');
           }
         } else {
           const errorData = await response.json();
