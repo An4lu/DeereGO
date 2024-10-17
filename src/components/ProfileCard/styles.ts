@@ -36,18 +36,19 @@ export const ImgText = styled('div', {
 });
 
 export const ImgProfile = styled('img', {
-    width: '95px',
-    height: '95px',
+    width: '45px',
+    height: '45px',
     objectFit: 'cover',
-    border: 'solid 4px #F2B705',
+    border: 'solid 2px #F2B705',
     borderRadius: '50%',
 });
 
 export const TextProfile = styled('div', {
     h2: {
-        fontSize: '1rem',
+        fontSize: '15px',
     },
     p: {
+        fontSize: '10px',
         margin: 0,
     },
 });
@@ -60,8 +61,8 @@ export const IconeProfile = styled('div', {
     padding: '0.5rem',
     color: '#fff',
     backgroundColor: '#3aa52d',
-    width: '40px',
-    height: '40px',
+    width: '30px',
+    height: '30px',
 });
 
 export const Bottom = styled('div', {

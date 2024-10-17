@@ -1,14 +1,11 @@
 import { Bell } from '@phosphor-icons/react';
 import {
-    Bottom,
-    BtnHistoric,
     Detalhes,
     Head,
     IconeProfile,
     ImgProfile,
     ImgText,
     ProfileContainer,
-    Text,
     TextProfile
 } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
@@ -32,17 +29,10 @@ export function ProfileCard() {
                         </TextProfile>
                     </ImgText>
                     <IconeProfile>
-                        <Bell size={32} />
+                        <Bell size={32} weight="fill" />
                     </IconeProfile>
                 </Detalhes>
             </Head>
-            <Bottom>
-                <Text>
-                    <p>Carros-Kit Entregues</p>
-                    <h2>{user?.rebocadores?.[0]?.TotalCarrinhos}</h2>
-                </Text>
-                <BtnHistoric to={`/rebocador/entregas`}>Histórico</BtnHistoric>
-            </Bottom>
         </ProfileContainer>
     );
 }
