@@ -11,7 +11,7 @@ export const MenuContainer = styled('nav', {
     borderRadius: '100px',
     height: '65px',
     position: 'fixed',
-    bottom: '2%',
+    bottom: '0%',
     width: '90%',
     left: '50%',
     transform: 'translateX(-50%)',

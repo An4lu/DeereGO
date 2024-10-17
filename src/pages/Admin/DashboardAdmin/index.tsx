@@ -38,7 +38,7 @@ export const DashboardAdmin = () => {
         fetchEntregas();
     }, []);
 
-    // Fetch rebocadores ativos
+
     useEffect(() => {
         const fetchRebocadores = async () => {
             try {
@@ -55,7 +55,6 @@ export const DashboardAdmin = () => {
         fetchRebocadores();
     }, []);
 
-    // Fetch carrinhos e contagem por setor
     useEffect(() => {
         const fetchCarrinhos = async () => {
             try {
