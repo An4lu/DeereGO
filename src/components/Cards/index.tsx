@@ -25,12 +25,12 @@ export function Cards() {
     return (
         <Container>
             <Card>
-                <CardTitle>Tempo Médio</CardTitle>
+                <CardTitle>Carrinhos Entregues</CardTitle>
                 <CardText>15m</CardText>
             </Card>
             <Card>
                 <CardTitle>Status</CardTitle>
-                <CardText>{user?.status}</CardText>
+                <CardText>{user?.status ? 'Operando' : 'Inativo'}</CardText>
             </Card>
             <Card>
                 <CardTitle>Experiência</CardTitle>
