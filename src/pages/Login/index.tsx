@@ -60,6 +60,8 @@ export const Login = () => {
                 telefone: userDetails[0].Telefone || '',
                 status: userDetails[0].Status || false,
                 rebocadores: userDetails[0].rebocadores || [],
+                experiencia: userDetails[0].dataCriacao
+                  ? new Date(userDetails[0].dataCriacao) : new Date()
               };
 
               console.log('Dados do usuário mapeados:', userData);
