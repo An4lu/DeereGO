@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import { CardCarrinho } from '../CardCarrinho';
 import { EntregasContainer } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface Carro {
     _id: string;
     NomeCarrinho: string;
     Local: string;
     Peças: string;
-
+    Bloco: string;
 }
 
 export function CarrinhosBox() {
+    const { user } = useAuth();
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
 
     useEffect(() => {
@@ -25,9 +27,17 @@ export function CarrinhosBox() {
 
     return (
         <EntregasContainer>
-            {carrinhos.map(carrinho => (
-                <CardCarrinho key={carrinho._id} idCart={carrinho._id} NomeCarrinho={`${carrinho.NomeCarrinho}`} Local={carrinho.Local} Peças={carrinho.Peças}/>
-            ))}
+            {carrinhos
+                .filter(carrinho => carrinho.Bloco === user?.blocokit)
+                .map(carrinho => (
+                    <CardCarrinho 
+                        key={carrinho._id}
+                        idCart={carrinho._id}
+                        NomeCarrinho={`${carrinho.NomeCarrinho}`}
+                        Local={carrinho.Local}
+                        Peças={carrinho.Peças}
+                    />
+                ))}
         </EntregasContainer>
     );
 }
