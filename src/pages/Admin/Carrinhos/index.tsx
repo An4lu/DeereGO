@@ -12,6 +12,7 @@ const carSchema = z.object({
     NomeCarrinho: z.string().min(1, { message: "Nome do carrinho é obrigatório" }),
     Peças: z.string(),
     Local: z.enum(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]),
+    Bloco: z.string(),
     StatusCapacidade: z.enum(["Cheio", "Vazio"]),
     StatusManutenção: z.enum(["Operando", "Parado"]),
 });
@@ -33,6 +34,7 @@ export const Carrinhos = () => {
             NomeCarrinho: '',
             Peças: '',
             Local: 'A1',
+            Bloco: '',
             StatusCapacidade: 'Cheio',
             StatusManutenção: 'Operando',
         });
@@ -110,6 +112,7 @@ export const Carrinhos = () => {
         NomeCarrinho: '',
         Peças: '',
         Local: 'A1',
+        Bloco: '',
         StatusCapacidade: 'Cheio',
         StatusManutenção: 'Operando',
     });
@@ -204,6 +207,14 @@ export const Carrinhos = () => {
                             onChange={handleLocalChange}
                         />
                         {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
+                        <InputForms
+                            title="Bloco"
+                            type="text"
+                            name="Bloco"
+                            value={formData.Bloco}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.Bloco && <p>{formErrors.Bloco?._errors?.[0]}</p>}
 
                         <Select
                             title="Capacidade"

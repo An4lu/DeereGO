@@ -4,6 +4,7 @@ export type User = {
   email: string;
   role: string;
   fabrica?: string;
+  blocokit?: string;
   telefone?: string | number;
   status?: boolean;
   experiencia: Date;

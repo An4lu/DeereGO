@@ -57,6 +57,7 @@ export const Login = () => {
                 email: userDetails[0].Email || '',
                 role: userDetails[0].Role || '',
                 fabrica: userDetails[0].Fabrica || '',
+                blocokit: userDetails[0].BlocoKit || '',
                 telefone: userDetails[0].Telefone || '',
                 status: userDetails[0].Status || false,
                 rebocadores: userDetails[0].rebocadores || [],

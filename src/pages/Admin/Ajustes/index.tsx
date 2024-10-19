@@ -16,6 +16,7 @@ const userSchema = z.object({
     Email: z.string().email({ message: "Email inválido" }),
     Role: z.enum(["admin", "rebocador"]),
     Fabrica: z.string(),
+    BlocoKit: z.string(),
     Telefone: z.string().min(8, { message: "Telefone inválido" }),
     Status: z.boolean(),
 });
@@ -34,6 +35,7 @@ export const Ajustes = () => {
         Email: '',
         Role: 'rebocador',
         Fabrica: '',
+        BlocoKit: '',
         Telefone: '',
         Status: true,
     });
@@ -51,6 +53,7 @@ export const Ajustes = () => {
             Email: '',
             Role: 'rebocador',
             Fabrica: '',
+            BlocoKit: '',
             Telefone: '',
             Status: true,
         });
@@ -115,6 +118,7 @@ export const Ajustes = () => {
     const onSubmitCreate = async () => {
         try {
             const parsedData = userSchema.parse(formData);
+            console.log("Dados válidos:", parsedData);
 
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
                 method: 'POST',
@@ -293,13 +297,23 @@ export const Ajustes = () => {
                             onChange={handleFormChange}
                             css={{ marginBottom: '10px' }}
                         />
-
+                        {formErrors?.Fabrica && <p>{formErrors.Fabrica?._errors?.[0]}</p>}
+                        <InputForms
+                            title="BlocoKit"
+                            type="text"
+                            name="BlocoKit"
+                            value={formData.BlocoKit}
+                            onChange={handleFormChange}
+                            css={{ marginBottom: '10px' }}
+                        />
+                        {formErrors?.Bloco && <p>{formErrors.Bloco?._errors?.[0]}</p>}
                         <Select
                             title="Cargo"
                             options={roleOptions}
                             value={formData.Role}
                             onChange={(newRole) => setFormData((prev) => ({ ...prev, Role: newRole }))}
                         />
+                        {formErrors?.Role && <p>{formErrors.Role?._errors?.[0]}</p>}
 
                         <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
                             <ButtonModal css={{ width: '75px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
