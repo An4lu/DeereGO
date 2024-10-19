@@ -8,14 +8,18 @@ import {
   Bottom,
 } from './styles';
 
-export function Status() {
+interface StatusProps {
+  carrinhosSelecionados: string[];
+}
+
+export function Status({carrinhosSelecionados}: StatusProps) {
   return (
     <StatusContainer>
       <Head>
         <Text>
           <h3>Entrega Atual</h3>
           <p>
-            Carrinhos: 002, 023, 033 <Question size={16} />
+            Carrinhos: {carrinhosSelecionados.join(', ')} <Question size={16} />
           </p>
         </Text>
         <BtnBox>
@@ -30,7 +34,7 @@ export function Status() {
           <h3>Enviar Para</h3>
           <p>
             <MapPin size={16} />
-            Corredor ABC
+            Centro de Trabalho
           </p>
         </Text>
       </Bottom>

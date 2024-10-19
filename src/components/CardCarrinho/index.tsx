@@ -12,15 +12,21 @@ import {
     StatusText,
     TitleCard
 } from './styles';
+import { Button } from '../Button';
+
 
 interface CardCarrinhoProps {
     idCart: string;
     NomeCarrinho: string;
     Local: string;
     Peças: string;
+    Bloco: string;
+    onAdicionar: () => void;
+    onRemover: () => void;
+    isSelecionado: boolean;
 }
 
-export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças}: CardCarrinhoProps) {
+export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
     const [selected, setSelected] = useState<number | null>(null);
     const i = 0;
 
@@ -62,6 +68,22 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças}: CardCarrinh
                         <Linha />
                         
                     </Info>
+                    <Info>
+                        <StatusText>Bloco (Layout)</StatusText>
+                        <InfoText>{Bloco}</InfoText>
+                        <Linha />
+                        
+                    </Info>
+                    {isSelecionado ? (
+                        <Button type="submit" css={{ width: '100%' }} onClick={onRemover}>
+                            Remover ao Carrinho
+                        </Button>
+                        ) : (
+                        <Button type="submit" css={{ width: '100%' }} onClick={onAdicionar}>
+                            Adicionar ao Carrinho
+                        </Button>
+                    )}
+                    
                 </BodyCardShow>
             ) : (
                 <BodyCard />

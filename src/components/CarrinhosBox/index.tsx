@@ -11,9 +11,16 @@ interface Carro {
     Bloco: string;
 }
 
-export function CarrinhosBox() {
+interface CarrinhosBoxProps {
+    adicionarCarrinho: (nomeCarrinho: string) => void;
+    removerCarrinho: (nomeCarrinho: string) => void;
+    carrinhosSelecionados: string[];
+}
+
+export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados}: CarrinhosBoxProps) {
     const { user } = useAuth();
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
+    
 
     useEffect(() => {
         fetch('https://deerego-back.onrender.com/rebocador/entrega/carrinho')
@@ -37,6 +44,10 @@ export function CarrinhosBox() {
                         NomeCarrinho={`${carrinho.NomeCarrinho}`}
                         Local={carrinho.Local}
                         Peças={carrinho.Peças}
+                        Bloco={carrinho.Bloco}
+                        onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}
+                        onRemover={() => removerCarrinho(carrinho.NomeCarrinho)}
+                        isSelecionado={carrinhosSelecionados.includes(carrinho.NomeCarrinho)}
                     />
                 ))}
         </EntregasContainer>
