@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CardCarrinho } from '../CardCarrinho';
-import { EntregasContainer } from './styles';
+import { EntregasContainer, ContainerH3} from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface Carro {
@@ -27,6 +27,7 @@ export function CarrinhosBox() {
 
     return (
         <EntregasContainer>
+            <ContainerH3>Carrinhos Disponíveis</ContainerH3>
             {carrinhos
                 .filter(carrinho => carrinho.Bloco === user?.blocokit)
                 .map(carrinho => (
