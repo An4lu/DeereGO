@@ -5,24 +5,46 @@ import { useAuth } from '../../contexts/AuthContext';
 
 export function EntregasBox() {
     const { user } = useAuth();
-    console.log('response user context: ',user)
+    console.log('response user context - Entregas: ',user?.rebocadores?.[0]?.carrinhos)
 
-
-    return (
-        <EntregasContainer>
-            {user?.rebocadores?.[0]?.carrinhos?.entregas?.map((entrega) => {
-                const nomeCarrinho = user?.rebocadores?.[0]?.carrinhos?.NomeCarrinho || 'Carro-Kit'
+    user?.rebocadores?.map((rebocador) => {
+        const carrinho = rebocador.carrinhos;
+        if (carrinho?.entregas) {
+            carrinho.entregas.map((entrega: any) => {
+                console.log('response entregas - Entregas: ', entrega);
                 return (
                     <CardEntrega
                         key={entrega._id}
                         idCart={entrega.IdCarrinho}
-                        titleCart={nomeCarrinho}
+                        titleCart={carrinho.NomeCarrinho}
                         Partida={entrega.Partida}
                         Destino={entrega.Destino}
                         DataHora={entrega.HoraEntrega}
                     />
-                );
-            },)}
+                )
+            });
+        }
+    })
+
+
+    return (
+        <EntregasContainer>
+            {user?.rebocadores?.flatMap((rebocador) => {
+                const carrinho = rebocador.carrinhos;
+                if (carrinho?.entregas) {
+                    return carrinho.entregas.map((entrega: any) => (
+                        <CardEntrega
+                            key={entrega._id}
+                            idCart={entrega.IdCarrinho}
+                            titleCart={carrinho.NomeCarrinho}
+                            Partida={entrega.Partida}
+                            Destino={entrega.Destino}
+                            DataHora={entrega.HoraEntrega}
+                        />
+                    ));
+                }
+                return [];
+            })}
         </EntregasContainer>
     );
 }
