@@ -3,6 +3,7 @@ import { CardCarrinho } from '../CardCarrinho';
 import { EntregasContainer, ContainerH3} from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
+
 interface Carro {
     _id: string;
     NomeCarrinho: string;
@@ -14,10 +15,11 @@ interface Carro {
 interface CarrinhosBoxProps {
     adicionarCarrinho: (nomeCarrinho: string) => void;
     removerCarrinho: (nomeCarrinho: string) => void;
+    openMapModal: () => void;
     carrinhosSelecionados: string[];
 }
 
-export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados}: CarrinhosBoxProps) {
+export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados, openMapModal}: CarrinhosBoxProps) {
     const { user } = useAuth();
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
     
@@ -47,6 +49,7 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                         Bloco={carrinho.Bloco}
                         onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}
                         onRemover={() => removerCarrinho(carrinho.NomeCarrinho)}
+                        onOpenMapModal={openMapModal}
                         isSelecionado={carrinhosSelecionados.includes(carrinho.NomeCarrinho)}
                     />
                 ))}

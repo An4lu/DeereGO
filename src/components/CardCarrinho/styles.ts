@@ -26,6 +26,13 @@ export const Left = styled('div', {
     gap: '0.5rem',
 });
 
+export const Right = styled('div', {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '0.5rem',
+    cursor: 'pointer',
+});
+
 export const TitleCard = styled('div', {
     display: 'flex',
     flexDirection: 'column',

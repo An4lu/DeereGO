@@ -5,9 +5,19 @@ import { Status } from "../../../components/Status"
 import { Container } from "./styles"
 import { CarrinhosBox } from "../../../components/CarrinhosBox"
 import { useState } from "react"
+import { Modal } from "../../../components/Modal"
+import { Canvas } from "../../../components/Canvas/Canvas"
+import { CanvasHead } from "../../../components/Canvas/HeadCanvas"
 //import { MapaRebocador } from "../../../components/MapaRebocador/MapaRebocador"
 
 export const Dashboard = () => {
+    const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+    const handleOpenMapModal = () => {
+        setIsMapModalOpen(true);  // Garante que o modal será aberto
+    };
+    const handleCloseMapModal = () => {
+        setIsMapModalOpen(false);  // Garante que o modal será fechado
+    };
     const [carrinhosSelecionados, setCarrinhosSelecionados] = useState<string[]>([]);
     console.log('Carrinhos Selecionados',carrinhosSelecionados);
 
@@ -42,8 +52,15 @@ export const Dashboard = () => {
                 adicionarCarrinho={adicionarCarrinho}
                 removerCarrinho={removerCarrinho}
                 carrinhosSelecionados={carrinhosSelecionados}
+                openMapModal={handleOpenMapModal}
             />
             {/* <MapaRebocador/> */}
+            <Modal isOpen={isMapModalOpen} onClose={handleCloseMapModal}>
+                <CanvasHead
+                    NomeCarrinho={'Carro 1'}
+                    Local={'A1'} />
+                <Canvas posX={50} posY={50} width="200" height="200" style={{ width: "100%", height: "100%" }}/>
+            </Modal>
         </Container>
     )
 }

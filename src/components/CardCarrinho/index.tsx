@@ -1,4 +1,4 @@
-import { CaretCircleDown, CaretCircleUp, ShoppingCart } from '@phosphor-icons/react';
+import { CaretCircleDown, CaretCircleUp, ShoppingCart, MapTrifold} from '@phosphor-icons/react';
 import { useState } from 'react';
 import {
     BodyCard,
@@ -8,6 +8,7 @@ import {
     Info,
     InfoText,
     Left,
+    Right,
     Linha,
     StatusText,
     TitleCard
@@ -23,10 +24,11 @@ interface CardCarrinhoProps {
     Bloco: string;
     onAdicionar: () => void;
     onRemover: () => void;
+    onOpenMapModal: () => void;
     isSelecionado: boolean;
 }
 
-export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
+export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdicionar, onRemover, onOpenMapModal,isSelecionado}: CardCarrinhoProps) {
     const [selected, setSelected] = useState<number | null>(null);
     const i = 0;
 
@@ -47,11 +49,14 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
                         <InfoText>{Local}</InfoText>
                     </TitleCard>
                 </Left>
-                {selected === i ? (
-                    <CaretCircleUp size={32} weight="fill" />
-                ) : (
-                    <CaretCircleDown size={32} weight="fill" />
-                )}
+                <Right>
+                    <MapTrifold size={32} weight="fill" onClick={onOpenMapModal}/>
+                    {selected === i ? (
+                        <CaretCircleUp size={32} weight="fill" />
+                    ) : (
+                        <CaretCircleDown size={32} weight="fill" />
+                    )}
+                </Right>
             </HeadCard>
             {selected === i ? (
                 <BodyCardShow>
