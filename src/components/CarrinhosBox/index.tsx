@@ -10,6 +10,8 @@ interface Carro {
     Local: string;
     Peças: string;
     Bloco: string;
+    PosX : number;
+    PosY : number;
 }
 
 interface CarrinhosBoxProps {
@@ -48,6 +50,8 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                         Local={carrinho.Local}
                         Peças={carrinho.Peças}
                         Bloco={carrinho.Bloco}
+                        PosX={carrinho.PosX}
+                        PosY={carrinho.PosY}
                         onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}
                         onRemover={() => removerCarrinho(carrinho.NomeCarrinho)}
                         isSelecionado={carrinhosSelecionados.includes(carrinho.NomeCarrinho)}

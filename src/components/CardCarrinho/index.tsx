@@ -25,12 +25,14 @@ interface CardCarrinhoProps {
     Local: string;
     Peças: string;
     Bloco: string;
+    PosX: number;
+    PosY: number;
     onAdicionar: () => void;
     onRemover: () => void;
     isSelecionado: boolean;
 }
 
-export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
+export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, PosX, PosY, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
 
     const [isMapModalOpen, setIsMapModalOpen] = useState(false);
     // Funções para controle do modal
@@ -133,7 +135,7 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
                 <CanvasHead
                     NomeCarrinho={NomeCarrinho}
                     Local={Local} />
-                <Canvas posX={7} posY={7} width="400" height="400" style={{backgroundImage: `url(${imageMap[Local]})` }} />
+                <Canvas posX={PosX} posY={PosY} width="400" height="400" style={{backgroundImage: `url(${imageMap[Local]})` }} />
         </Modal></>
     );
 }
