@@ -116,35 +116,35 @@ export const DashboardAdmin = () => {
                 <Div css={{ width: '25%' }}>
                     <Column01 to="/adm/mapa">
                         <Title css={{ fontSize: '16px' }}>
-                            Setores / Warehouse
+                            Warehouse
                         </Title>
                         <Space>
                             <R>
-                                <Text>Setor A</Text>
+                                <Text>Mercado A</Text>
                                 <Infos>{setores.A}</Infos>
                             </R>
                             <R>
-                                <Text>Setor B</Text>
+                                <Text>Mercado B</Text>
                                 <Infos>{setores.B}</Infos>
                             </R>
                             <R>
-                                <Text>Setor C</Text>
+                                <Text>Mercado C</Text>
                                 <Infos>{setores.C}</Infos>
                             </R>
                             <R>
-                                <Text>Setor D</Text>
+                                <Text>Mercado D</Text>
                                 <Infos>{setores.D}</Infos>
                             </R>
                             <R>
-                                <Text>Setor E</Text>
+                                <Text>Mercado E</Text>
                                 <Infos>{setores.E}</Infos>
                             </R>
                             <R>
-                                <Text>Setor F</Text>
+                                <Text>Mercado F</Text>
                                 <Infos>{setores.F}</Infos>
                             </R>
                             <R>
-                                <Text>Setor G</Text>
+                                <Text>Mercado G</Text>
                                 <Infos>{setores.G}</Infos>
                             </R>
                         </Space>

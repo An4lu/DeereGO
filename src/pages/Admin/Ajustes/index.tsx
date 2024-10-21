@@ -1,14 +1,14 @@
+import { ArrowsClockwise, Plus, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { Heading } from "../../../components/Heading";
-import { useAuth } from "../../../contexts/AuthContext";
 import { z } from "zod";
+import { Heading } from "../../../components/Heading";
+import { InputForms } from "../../../components/InputForms";
+import { Modal } from "../../../components/Modal";
+import { Select } from "../../../components/Select";
+import { useAuth } from "../../../contexts/AuthContext";
+import { IconWrapper } from "../Carrinhos/styles";
 import { Background, ButtonDelete, ButtonModal, ContainerReb, Div, DivGestor, DivH, DivInfos, Img, Linha } from "./styles";
 import adminImage from "/admin.jpeg";
-import { ArrowsClockwise, Plus, X } from "@phosphor-icons/react";
-import { IconWrapper } from "../Carrinhos/styles";
-import { Modal } from "../../../components/Modal";
-import { InputForms } from "../../../components/InputForms";
-import { Select } from "../../../components/Select";
 
 const userSchema = z.object({
     Nome: z.string().min(2, { message: "Nome é obrigatório" }),
@@ -183,7 +183,7 @@ export const Ajustes = () => {
 
                 <Linha isGrid>
                     {rebocadores.map((rebocador) => (
-                        <ContainerReb key={rebocador._id}>
+                        <ContainerReb key={rebocador._id} onClick={handleOpenCreateModal}>
                             <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <Img
                                     css={{ width: '80px', height: '80px', borderRadius: '50%' }}
