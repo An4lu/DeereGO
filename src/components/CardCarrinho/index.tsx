@@ -74,12 +74,9 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
         D3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533778/SDQ3_kouvmx.png',
         D4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533105/SDQ4_immuh9.png',
     };
-
-    console.log(`img ${Local}: `, imageMap[Local])
-
     return (
         <><CardEntregaContainer>
-            <HeadCard onClick={() => toggle(i)}>
+            <HeadCard >
                 <Left>
                     <ShoppingCart width={24} height={24} weight="bold" />
                     <TitleCard>
@@ -90,9 +87,9 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
                 <Right>
                     <MapTrifold size={32} weight="fill" onClick={handleOpenMapModal} />
                     {selected === i ? (
-                        <CaretCircleUp size={32} weight="fill" />
+                        <CaretCircleUp size={32} weight="fill" onClick={() => toggle(i)}/>
                     ) : (
-                        <CaretCircleDown size={32} weight="fill" />
+                        <CaretCircleDown size={32} weight="fill" onClick={() => toggle(i)}/>
                     )}
                 </Right>
             </HeadCard>

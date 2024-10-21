@@ -17,18 +17,15 @@ export const Canvas: React.FC<CanvasProps> = ({ posX, posY, width, height, style
      // Desenhar a imagem do logo em alta resolução
      const scaleFactor = window.devicePixelRatio || 1;
      const scalePx = parseInt(width) / 14;
-     console.log(scalePx*posX)
-     const logoWidth = 32 * scaleFactor;
-     const logoHeight = 32 * scaleFactor;
+     const logoWidth = 38 * scaleFactor;
+     const logoHeight = 38 * scaleFactor;
 
     useEffect(() => {
         logoImg.current.src = logo;
     }, []);
    
     const draw = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-        console.log('Width: ', canvas.width);
-        console.log('Height: ', canvas.height);
-
+        
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
         context.drawImage(logoImg.current, posX*scalePx, posY*scalePx, logoWidth, logoHeight);
