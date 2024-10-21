@@ -15,11 +15,10 @@ interface Carro {
 interface CarrinhosBoxProps {
     adicionarCarrinho: (nomeCarrinho: string) => void;
     removerCarrinho: (nomeCarrinho: string) => void;
-    openMapModal: () => void;
     carrinhosSelecionados: string[];
 }
 
-export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados, openMapModal}: CarrinhosBoxProps) {
+export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados}: CarrinhosBoxProps) {
     const { user } = useAuth();
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
     
@@ -49,7 +48,6 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                         Bloco={carrinho.Bloco}
                         onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}
                         onRemover={() => removerCarrinho(carrinho.NomeCarrinho)}
-                        onOpenMapModal={openMapModal}
                         isSelecionado={carrinhosSelecionados.includes(carrinho.NomeCarrinho)}
                     />
                 ))}
