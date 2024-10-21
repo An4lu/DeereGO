@@ -7,7 +7,7 @@ export type User = {
   blocokit?: string;
   telefone?: string | number;
   status?: boolean;
-  experiencia: Date;
+  dataCriacao: Date;
   rebocadores?: Array<{
     _id: string;
     TempoTotal: number;

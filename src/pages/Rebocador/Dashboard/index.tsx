@@ -40,7 +40,7 @@ export const Dashboard = () => {
 
     // Função para fechar o Status (limpar a seleção de carrinhos)
     const fecharStatus = () => {
-        setCarrinhosSelecionados([]);  // Limpa a seleção de carrinhos
+        setCarrinhosSelecionados([]);
     };
 
     return (

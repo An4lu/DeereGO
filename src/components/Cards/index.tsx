@@ -2,7 +2,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Card, CardText, CardTitle, Container } from './styles';
 
 function calcularTempoDeCriacao(dataCriacao: Date) {
-    const now = new Date();
+
+    const now = new Date();  // Data atual
     const diffInMs = now.getTime() - dataCriacao.getTime(); // Diferença em milissegundos
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Diferença em dias
 
@@ -18,9 +19,15 @@ function calcularTempoDeCriacao(dataCriacao: Date) {
 }
 
 export function Cards() {
-
     const { user } = useAuth();
-    const tempoDeCriacao = user?.experiencia ? calcularTempoDeCriacao(new Date(user.experiencia)) : 'Data não disponível';
+
+    // Verificação da data de criação antes do cálculo
+    console.log('Data de criação:', user?.dataCriacao);
+
+    // Utilizando o campo correto "DataCriacao" para calcular o tempo de experiência
+    const tempoDeCriacao = user?.dataCriacao
+        ? calcularTempoDeCriacao(new Date(user.dataCriacao))
+        : 'Data não disponível';
 
     return (
         <Container>
