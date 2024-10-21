@@ -17,6 +17,8 @@ interface CarrinhosBoxProps {
     removerCarrinho: (nomeCarrinho: string) => void;
     carrinhosSelecionados: string[];
 }
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 
 export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados}: CarrinhosBoxProps) {
     const { user } = useAuth();
@@ -24,7 +26,7 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
     
 
     useEffect(() => {
-        fetch('https://deerego-back.onrender.com/rebocador/entrega/carrinho')
+        fetch(`${apiBaseUrl}/rebocador/entrega/carrinho`)
             .then(response => response.json())
             .then(data => {
                 if (data) {

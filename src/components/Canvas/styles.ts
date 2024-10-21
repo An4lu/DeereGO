@@ -9,8 +9,8 @@ export const CanvasComponent = styled('canvas', {
     backgroundSize: 'cover',
     border: '4px solid $green',
     borderRadius: '1rem',
-    width: '80%',
-    height: '80%',
+    width: '100%',
+    height: '100%',
 });
 
 export const HeadCanvas = styled('div', {
@@ -21,7 +21,7 @@ export const HeadCanvas = styled('div', {
     gap: '1rem',
     borderBottom: '4px solid $yellow',
     padding: '1rem',
-    width: '80%',
+    width: '95%',
 
 });
 export const NomeH2 = styled('h2', {
@@ -46,6 +46,6 @@ export const CircleLocal = styled('div', {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '$maingreen',
-    padding: '12px 1rem',
+    padding: '0.5rem 1rem',
     borderRadius: '50%',
 });

@@ -15,11 +15,13 @@ export const ModalBackground = styled('div', {
 
 export const ModalContent = styled('div', {
     backgroundColor: '$white',
-    padding: '20 30px',
+    padding: '1rem',
     borderRadius: '8px',
     display: 'flex',
+    alignItems: 'center',
+    gap: '0.2rem',
     flexDirection: 'column',
-    width: '400px',
+    width: '30%',
     maxHeight: '80vh',
     overflowY: 'auto',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',

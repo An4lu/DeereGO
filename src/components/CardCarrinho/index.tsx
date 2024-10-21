@@ -52,6 +52,31 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
         setSelected(i);
     };
 
+    interface ImageMap {
+        [key: string]: string;
+    }
+
+    const imageMap: ImageMap = {
+        A1: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533103/SAQ1_sh1gdl.png',
+        A2: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533103/SAQ2_kqqocj.png',
+        A3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533103/SAQ3_pclm0n.png',
+        A4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533104/SAQ4_yqjxtk.png',
+        B1: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533104/SBQ1_rq63ec.png',
+        B2: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533104/SBQ2_ak04cv.png',
+        B3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533104/SBQ3_jnoyd6.png',
+        B4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533105/SBQ4_qghfse.png',
+        C1: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533103/SCQ1_vwmdjo.png',
+        C2: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533103/SCQ2_kyugwk.png',
+        C3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533104/SCQ3_swpgis.png',
+        C4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533711/SCQ4_jrhth0.png',
+        D1: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533776/SDQ1_nrn444.png',
+        D2: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533778/SDQ2_szkty0.png',
+        D3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533778/SDQ3_kouvmx.png',
+        D4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533105/SDQ4_immuh9.png',
+    };
+
+    console.log(`img ${Local}: `, imageMap[Local])
+
     return (
         <><CardEntregaContainer>
             <HeadCard onClick={() => toggle(i)}>
@@ -111,7 +136,7 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, onAdi
                 <CanvasHead
                     NomeCarrinho={NomeCarrinho}
                     Local={Local} />
-                <Canvas posX={100} posY={50} width="100" height="100" style={{ width: "100%", height: "100%" }} />
+                <Canvas posX={7} posY={7} width="400" height="400" style={{backgroundImage: `url(${imageMap[Local]})` }} />
         </Modal></>
     );
 }
