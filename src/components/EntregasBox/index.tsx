@@ -2,6 +2,7 @@ import { CardEntrega } from '../CardEntrega';
 import { EntregasContainer } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
+import { ContainerH3 } from '../CarrinhosBox/styles';
 
 interface Entregas {
     _id: string;
@@ -11,6 +12,7 @@ interface Entregas {
     Destino: string;
     HoraPartida: string;
     HoraEntrega: string;
+    Tempo: string;
     Status: string;
 }
 interface Carro {
@@ -28,6 +30,10 @@ export function EntregasBox() {
     
     const [entregas, setEntregas] = useState<Entregas[]>([]);
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
+
+    const formatarData = (data: string): string => {
+        return new Date(data).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+    };
 
     useEffect(() => {
         fetch(`${apiBaseUrl}/rebocador/entrega`)
@@ -57,6 +63,7 @@ export function EntregasBox() {
 
     return (
         <EntregasContainer>
+            <ContainerH3>Registro de Entregas</ContainerH3>
             {entregas
                 .filter(entrega => entrega.IdUser === user?.id)
                 .map(entrega => (
@@ -66,7 +73,8 @@ export function EntregasBox() {
                         titleCart={getNomeCarrinho(entrega.IdCarrinho)}
                         Partida={entrega.Partida}
                         Destino={entrega.Destino}
-                        DataHora={entrega.HoraEntrega}
+                        DataHora={formatarData(entrega.HoraEntrega)}
+                        Tempo={entrega.Tempo}
                     />
                 ))}
         </EntregasContainer>

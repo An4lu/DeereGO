@@ -19,9 +19,10 @@ interface CardEntregaProps {
     Partida: string;
     Destino: string;
     DataHora: string; // DataHora agora representa o tempo total formatado em mm:ss
+    Tempo: string;
 }
 
-export function CardEntrega({ idCart, titleCart, Partida, Destino, DataHora}: CardEntregaProps) {
+export function CardEntrega({ idCart, titleCart, Partida, Destino, DataHora, Tempo}: CardEntregaProps) {
     const [selected, setSelected] = useState<number | null>(null);
     const i = 0;
 
@@ -66,6 +67,13 @@ export function CardEntrega({ idCart, titleCart, Partida, Destino, DataHora}: Ca
                         <StatusText>Horário</StatusText>
                         <InfoText>
                             {DataHora}
+                        </InfoText> {/* Mostra mm:ss enquanto em entrega ou tempo total após conclusão */}
+                        <Linha />
+                    </Info>
+                    <Info>
+                        <StatusText>Duração</StatusText>
+                        <InfoText>
+                            {Tempo}
                         </InfoText> {/* Mostra mm:ss enquanto em entrega ou tempo total após conclusão */}
                         <Linha />
                     </Info>

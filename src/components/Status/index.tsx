@@ -31,16 +31,19 @@ export function Status({ carrinhosSelecionados, onClose }: StatusProps) {
   const [emEntrega, setEmEntrega] = useState(false);
   const [tempoDecorrido, setTempoDecorrido] = useState(0); // Tempo decorrido em segundos
   const [tempoTotal, setTempoTotal] = useState(0); // Tempo total após a conclusão
+  const [horaPartida, setHoraPartida] = useState('');
 
   const handleIniciarEntrega = () => {
     setEmEntrega(true);
     setTempoDecorrido(0); // Reseta o tempo decorrido
     setTempoTotal(0); // Reseta o tempo total ao iniciar uma nova entrega
+    setHoraPartida(new Date().toISOString()); // Reseta a hora de partida ao iniciar uma nova entrega
   };
 
   const handleConcluirEntrega = () => {
     setEmEntrega(false);
     setTempoTotal(tempoDecorrido); // Armazena o tempo total
+    console.log('Tempo total:', formatarTempo(tempoTotal));
     finalizarEntrega();
   };
 
@@ -90,7 +93,7 @@ export function Status({ carrinhosSelecionados, onClose }: StatusProps) {
 
   const finalizarEntrega = async () => {
     const destino = 'Centro de Trabalho';
-    const horaPartida = new Date().toISOString();
+    const horaEntrega = new Date().toISOString();
 
     try {
       for (const nomeCarrinho of selectedCarrinhos) {
@@ -101,10 +104,12 @@ export function Status({ carrinhosSelecionados, onClose }: StatusProps) {
             IdUser: user?.id,
             Partida: carrinho.Local,
             Destino: destino,
-            horaPartida: horaPartida,
-            horaEntrega: " ",
-            Status: true
+            HoraPartida: horaPartida,
+            HoraEntrega: horaEntrega,
+            Tempo : formatarTempo(tempoDecorrido),
+            Status: 'Concluído'
           };
+          console.log('Entrega:', entregaData);
 
           // Fazer o post
           const response = await fetch(`${apiBaseUrl}/rebocador/entrega`, {
