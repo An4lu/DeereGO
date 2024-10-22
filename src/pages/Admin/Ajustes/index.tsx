@@ -246,9 +246,9 @@ export const Ajustes = () => {
                     ))}
                 </Linha>
 
-                <Modal css={{ padding: '20px' }} isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
+                <Modal css={{ padding: '20px 40px', width: '450px' }} isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
                     <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Usuário</Heading>
-                    <Div>
+                    <Div css={{ width: '100%' }}>
                         <InputForms
                             title="Nome"
                             type="text"
