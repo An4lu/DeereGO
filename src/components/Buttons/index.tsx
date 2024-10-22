@@ -1,5 +1,7 @@
-import { ShoppingCartSimple, Trophy } from '@phosphor-icons/react';
-import { ButtonMetas, ButtonEntrega, ButtonContainer } from './styles';
+import { Trophy } from '@phosphor-icons/react';
+import { ButtonMetas, ButtonContainer } from './styles';
+
+
 
 export function Buttons() {
     return (
@@ -8,10 +10,6 @@ export function Buttons() {
                 <Trophy weight="light" width={20} height={20} />
                 Metas
             </ButtonMetas>
-            <ButtonEntrega>
-                <ShoppingCartSimple weight="light" width={20} height={22} />
-                Iniciar Entrega
-            </ButtonEntrega>
         </ButtonContainer>
     );
 }
