@@ -294,11 +294,11 @@ export const Carrinhos = () => {
                     </Div>
                 </Modal>
 
-                <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                <Modal css={{ width: '450px', padding: '20px', display: 'flex', gap: '12px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
                     <p>Tem certeza que deseja deletar este carrinho?</p>
                     <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
-                        <ButtonDelete onClick={handleDeleteCarrinho}>Deletar</ButtonDelete>
                         <ButtonModal onClick={handleCloseDeleteModal} css={{ backgroundColor: 'white', color: '$maingreen' }}>Cancelar</ButtonModal>
+                        <ButtonDelete onClick={handleDeleteCarrinho}>Deletar</ButtonDelete>
                     </Div>
                 </Modal>
             </Div>
