@@ -19,7 +19,7 @@ export const DashboardAdmin = () => {
         F: 0,
         G: 0,
     });
-    const [ultimasEntregas, setUltimasEntregas] = useState<any[]>([]); // Estado para armazenar as últimas entregas
+    const [ultimasEntregas, setUltimasEntregas] = useState<any[]>([]);
 
     // Fetch total de carrinhos
     useEffect(() => {
@@ -37,7 +37,6 @@ export const DashboardAdmin = () => {
 
         fetchEntregas();
     }, []);
-
 
     useEffect(() => {
         const fetchRebocadores = async () => {
@@ -90,13 +89,37 @@ export const DashboardAdmin = () => {
         fetchCarrinhos();
     }, []);
 
-    // Fetch últimas entregas
+    // Função para buscar o nome do usuário
+    const fetchUserName = async (userId: string) => {
+        try {
+            const response = await fetch(`https://deerego-back.onrender.com/user/${userId}`);
+            const userData = await response.json();
+            return userData.nome;
+        } catch (error) {
+            console.error("Erro ao buscar nome do usuário:", error);
+            return "Usuário desconhecido";
+        }
+    };
+
+    // Função para buscar últimas entregas com o nome do usuário responsável
     useEffect(() => {
         const fetchUltimasEntregas = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/`);
                 const data = await response.json();
-                setUltimasEntregas(data.slice(0, 6)); // Limitando a 6 entregas
+
+                // Obter os nomes dos usuários responsáveis por cada entrega
+                const entregasComNomes = await Promise.all(
+                    data.slice(0, 6).map(async (entrega: any) => {
+                        const nomeUsuario = await fetchUserName(entrega.IdUser);
+                        return {
+                            ...entrega,
+                            nomeUsuario,
+                        };
+                    })
+                );
+
+                setUltimasEntregas(entregasComNomes);
             } catch (error) {
                 console.error("Erro ao buscar últimas entregas:", error);
             }
@@ -113,8 +136,8 @@ export const DashboardAdmin = () => {
                 <Heading>Olá Administrador</Heading>
             )}
             <DivContainer>
-                <Div css={{ width: '25%' }}>
-                    <Column01 to="/adm/mapa">
+                <Div css={{ width: '20%' }}>
+                    <Column01 to="/adm/mapa" >
                         <Title css={{ fontSize: '16px' }}>
                             Warehouse
                         </Title>
@@ -150,7 +173,7 @@ export const DashboardAdmin = () => {
                         </Space>
                     </Column01>
                     <Column02>
-                        <Title css={{ fontSize: '16px' }}>
+                        <Title css={{ fontSize: '16px', marginBottom: '80px' }}>
                             Rebocador em Destaque
                         </Title>
                         <Title css={{ color: '$green', fontWeight: '800', fontSize: '32px', display: 'flex', justifyContent: 'flex-end' }}>
@@ -158,7 +181,7 @@ export const DashboardAdmin = () => {
                         </Title>
                     </Column02>
                 </Div>
-                <Div css={{ width: '75%' }}>
+                <Div css={{ width: '80%' }}>
                     <Linha>
                         <Row01 to="/adm/carrinhos">
                             <Title>
@@ -187,17 +210,27 @@ export const DashboardAdmin = () => {
                         </Row02>
                     </Linha>
                     <Linha>
-                        <Map>
+                        <Map css={{ width: "68%" }}>
                             <Img src={mapa} alt="" />
                         </Map>
-                        <ContainerEntregas>
+                        <ContainerEntregas css={{ overflowX: 'auto', whiteSpace: 'nowrap', width: "32%" }}>
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>
-                            <Space css={{}}>
+                            <Space css={{ display: 'inline-flex', gap: '20px' }}>
                                 {ultimasEntregas.map((entrega) => (
-                                    <R key={entrega._id}>
-                                        <Text>{entrega._id}</Text>
+                                    <R css={{
+                                        flexDirection: 'column',
+                                        minWidth: '200px',  // Largura mínima para evitar que quebre
+                                        border: '1px solid #ddd',
+                                        padding: '10px',
+                                        borderRadius: '5px',
+                                    }} key={entrega._id}>
+                                        <Text>Rebocador: {entrega.nomeUsuario}</Text>
+                                        <Text>Partida: {entrega.Partida}</Text>
+                                        <Text>Destino: {entrega.Destino}</Text>
+                                        <Text>Tempo: {entrega.Tempo}</Text>
+                                        <Text>Status: {entrega.Status}</Text>
                                     </R>
                                 ))}
                             </Space>

@@ -21,7 +21,7 @@ export const Div = styled('div', {
     display: 'flex',
     flexDirection: 'column',
     gap: '30px',
-    height: '100%',
+    height: '680px',
 })
 
 export const Column01 = styled(Link, {
@@ -30,7 +30,8 @@ export const Column01 = styled(Link, {
     backgroundColor: '$white',
     padding: '8%',
     width: '100%',
-    height: '375px',
+    height: '70%',
+    gap: '20px',
     borderRadius: '20px',
     textDecoration: 'none',
     color: 'inherit',
@@ -45,7 +46,7 @@ export const Column02 = styled('div', {
     padding: '6%',
     backgroundColor: '$white',
     width: '100%',
-    height: '175px',
+    height: '30%',
     borderRadius: '20px',
 })
 
@@ -124,8 +125,7 @@ export const Linha = styled('div', {
 })
 
 export const Map = styled('div', {
-    width: '70%',
-    height: '400px',
+    height: '500px',
     borderRadius: '20px',
     backgroundColor: 'white',
 })
@@ -139,7 +139,7 @@ export const Img = styled('img', {
 
 export const ContainerEntregas = styled('div', {
     width: '30%',
-    height: '400px',
+    height: '500px',
     backgroundColor: '$white',
     borderRadius: '20px',
     padding: '20px'
