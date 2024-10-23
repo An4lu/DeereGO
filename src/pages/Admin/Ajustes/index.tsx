@@ -112,7 +112,27 @@ export const Ajustes = () => {
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        if (name === 'Nome') {
+            const nome = value.toLowerCase().replace(/\s+/g, '');
+            generateEmail(nome);
+        }
+
         setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const generateEmail = (nome: string) => {
+        const baseEmail = `${nome}@deerego.com`;
+        let email = baseEmail;
+        let counter = 1;
+        let existingUsers = [...rebocadores, ...administradores];
+
+        while (existingUsers.some((user) => user.Email === email)) {
+            email = `${nome}${counter}@deerego.com`;
+            counter++;
+        }
+
+        setFormData((prev) => ({ ...prev, Email: email }));
     };
 
     const onSubmitCreate = async () => {
@@ -276,7 +296,7 @@ export const Ajustes = () => {
                             type="email"
                             name="Email"
                             value={formData.Email}
-                            onChange={handleFormChange}
+                            readOnly
                             css={{ marginBottom: '10px' }}
                         />
                         {formErrors?.Email && <p>{formErrors.Email?._errors?.[0]}</p>}
