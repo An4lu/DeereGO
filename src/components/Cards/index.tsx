@@ -1,5 +1,20 @@
 import { useAuth } from '../../contexts/AuthContext';
 import { Card, CardText, CardTitle, Container } from './styles';
+import { useEffect, useState } from 'react';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+interface Entregas {
+    _id: string;
+    IdCarrinho: string[];
+    IdUser: string;
+    Partida: string;
+    Destino: string;
+    HoraPartida: string;
+    HoraEntrega: string;
+    Tempo: string;
+    Status: string;
+}
+
 
 function calcularTempoDeCriacao(dataCriacao: Date) {
 
@@ -21,6 +36,19 @@ function calcularTempoDeCriacao(dataCriacao: Date) {
 export function Cards() {
     const { user } = useAuth();
 
+    const [entregas, setEntregas] = useState<Entregas[]>([]);
+    useEffect(() => {
+        fetch(`${apiBaseUrl}/rebocador/entrega`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    setEntregas(data.filter((data: Entregas) => data.IdUser === user?.id));
+                }
+            });
+    }, []);
+
+    console.log('Número de entregas:', entregas.length);
+
     // Verificação da data de criação antes do cálculo
     console.log('Data de criação:', user?.dataCriacao);
 
@@ -32,8 +60,8 @@ export function Cards() {
     return (
         <Container>
             <Card>
-                <CardTitle>Carrinhos Entregues</CardTitle>
-                <CardText>15m</CardText>
+                <CardTitle>Entregas Realizadas</CardTitle>
+                <CardText>{entregas.length}</CardText>
             </Card>
             <Card>
                 <CardTitle>Status</CardTitle>

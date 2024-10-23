@@ -3,7 +3,14 @@ import { CardCarrinho } from '../CardCarrinho';
 import { EntregasContainer, ContainerH3} from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
-
+interface Dado {
+    rebocadores: Rebocador[];
+}
+interface Rebocador {
+    PosX: number;
+    PosY: number;
+    Quadrante: string;
+}
 interface Carro {
     _id: string;
     NomeCarrinho: string;
@@ -26,6 +33,7 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelecionados}: CarrinhosBoxProps) {
     const { user } = useAuth();
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
+    const [userData, setUserData] = useState<Dado | null>(null);
     
 
     useEffect(() => {
@@ -37,6 +45,18 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                 }
             });
     }, []);
+
+    useEffect(() => {
+        fetch(`${apiBaseUrl}/user?id=${user?.id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    setUserData(data[0]);
+                }
+            });
+    }, []);
+   
+
 
     return (
         <EntregasContainer>
@@ -54,6 +74,8 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                         StatusCapacidade={carrinho.StatusCapacidade}
                         PosX={carrinho.PosX}
                         PosY={carrinho.PosY}
+                        PosXRebocador={userData && userData.rebocadores[0].Quadrante === carrinho.Local ? userData.rebocadores[0].PosX : 0}
+                        PosYRebocador={userData && userData.rebocadores[0].Quadrante === carrinho.Local ? userData.rebocadores[0].PosY : 0}
                         onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}
                         onRemover={() => removerCarrinho(carrinho.NomeCarrinho)}
                         isSelecionado={carrinhosSelecionados.includes(carrinho.NomeCarrinho)}

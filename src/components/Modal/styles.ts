@@ -21,7 +21,7 @@ export const ModalContent = styled('div', {
     alignItems: 'center',
     gap: '0.2rem',
     flexDirection: 'column',
-    width: '30%',
+    width: '85%',
     maxHeight: '80vh',
     overflowY: 'auto',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',

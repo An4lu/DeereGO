@@ -14,6 +14,18 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
+interface Entregas {
+  _id: string;
+  IdCarrinho: string[];
+  IdUser: string;
+  Partida: string;
+  Destino: string;
+  HoraPartida: string;
+  HoraEntrega: string;
+  Tempo: string;
+  Status: string;
+}
+
 interface Dado {
   rebocadores: Rebocador[];
 }
@@ -30,10 +42,38 @@ interface Rebocador {
   };
 }
 
+function calcularTempoDeCriacao(dataCriacao: Date) {
+
+  const now = new Date();  // Data atual
+  const diffInMs = now.getTime() - dataCriacao.getTime(); // Diferença em milissegundos
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Diferença em dias
+
+  if (diffInDays < 30) {
+      return `${diffInDays} dia(s)`;
+  } else if (diffInDays < 365) {
+      const diffInMonths = Math.floor(diffInDays / 30); // Aproximando meses
+      return `${diffInMonths} mês(es)`;
+  } else {
+      const diffInYears = Math.floor(diffInDays / 365);
+      return `${diffInYears} ano(s)`;
+  }
+}
+
 export function Record() {
   const { user } = useAuth();
   const [dados, setDados] = useState<Dado[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const [entregas, setEntregas] = useState<Entregas[]>([]);
+    useEffect(() => {
+        fetch(`${apiBaseUrl}/rebocador/entrega`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    setEntregas(data.filter((data: Entregas) => data.IdUser === user?.id));
+                }
+            });
+    }, []);
 
   useEffect(() => {
     if (user) {
@@ -58,6 +98,9 @@ export function Record() {
   const toggle = () => {
     setSelected(prev => !prev);
   };
+  const tempoDeCriacao = user?.dataCriacao
+        ? calcularTempoDeCriacao(new Date(user.dataCriacao))
+        : 'Data não disponível';
 
   return (
     <ContainerInfo>
@@ -89,8 +132,13 @@ export function Record() {
             <Linha />
           </Info>
           <Info>
-            <InfoTitle>Total de Carrinhos</InfoTitle>
-            <InfoValue>{user?.rebocadores?.[0]?.TotalCarrinhos ?? 'N/A'}</InfoValue>
+            <InfoTitle>Entregas Realizadas</InfoTitle>
+            <InfoValue>{entregas.length ?? 'N/A'}</InfoValue>
+            <Linha />
+          </Info>
+          <Info>
+            <InfoTitle>Experiência</InfoTitle>
+            <InfoValue>{tempoDeCriacao}</InfoValue>
             <Linha />
           </Info>
         </BodyCardShow>

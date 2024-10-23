@@ -9,7 +9,9 @@ export const Maps = () => {
         <Background>
             <Heading css={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>Mapa</Heading>
             <Div>
-                <ContainerM><Img src={mapa} alt="" /></ContainerM>
+                <ContainerM>
+                    <Img src={mapa} alt="" />
+                </ContainerM>
                 <MapaSlider />
             </Div>
         </Background>

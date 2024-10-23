@@ -33,12 +33,14 @@ interface CardCarrinhoProps {
     StatusCapacidade: string;
     PosX: number;
     PosY: number;
+    PosXRebocador: number;
+    PosYRebocador: number;
     onAdicionar: () => void;
     onRemover: () => void;
     isSelecionado: boolean;
 }
 
-export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, StatusCapacidade,PosX, PosY, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
+export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, StatusCapacidade,PosX, PosY, PosXRebocador, PosYRebocador, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
 
     const [checked, setChecked] = useState(StatusCapacidade === 'Vazio');
     
@@ -185,7 +187,7 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, Statu
                 <CanvasHead
                     NomeCarrinho={NomeCarrinho}
                     Local={Local} />
-                <Canvas posX={PosX} posY={PosY} width="400" height="400" style={{backgroundImage: `url(${imageMap[Local]})` }} />
+                <Canvas posXCarro={PosX} posYCarro={PosY} posXRebocador={PosXRebocador} posYRebocador={PosYRebocador} width="400" height="400" style={{backgroundImage: `url(${imageMap[Local]})` }} />
         </Modal></>
     );
 }
