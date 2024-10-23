@@ -72,6 +72,7 @@ export function MapaSlider() {
             navigation={true}
             pagination={{ clickable: true }}
             className='mySwiper'
+            spaceBetween={50}
         >
             {carrinhos.map(carrinho => (
                 <SwiperSlide key={`${carrinho._id}`}>
