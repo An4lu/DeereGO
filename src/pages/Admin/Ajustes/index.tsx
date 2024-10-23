@@ -125,9 +125,31 @@ export const Ajustes = () => {
         }
     };
 
+    // Função para gerar o email automaticamente com base no nome
+    const generateEmail = (nome: string) => {
+        const baseEmail = `${nome.toLowerCase().replace(/\s+/g, '')}@deerego.com`; // Remove espaços e ajusta o nome
+        let email = baseEmail;
+        let counter = 1;
+        let existingUsers = [...rebocadores, ...administradores];
+
+        // Verifica se o email já existe e ajusta caso necessário
+        while (existingUsers.some((user) => user.Email === email)) {
+            email = `${nome}${counter}@deerego.com`;
+            counter++;
+        }
+
+        setFormData((prev) => ({ ...prev, Email: email }));
+    };
+
+    // Modifica o estado do formulário e gera o email com base no nome
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+
+        // Gera o email automaticamente quando o nome é alterado
+        if (name === 'Nome') {
+            generateEmail(value);
+        }
     };
 
     // Abrir modal para edição e preencher os dados do formulário
@@ -144,6 +166,37 @@ export const Ajustes = () => {
         });
         setEditUserId(userData._id); // Armazena o ID do usuário sendo editado
         setIsCreateModalOpen(true); // Abre o modal para edição
+    };
+
+    // Função para criar um novo usuário
+    const onSubmitCreate = async () => {
+        try {
+            // Valida os dados do formulário
+            const parsedData = createUserSchema.parse(formData);
+
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(parsedData),
+            });
+
+            if (response.ok) {
+                fetchRebocadores();
+                fetchAdministradores();
+                handleCloseCreateModal();
+            } else {
+                console.error("Erro ao criar usuário");
+            }
+        } catch (error: any) {
+            if (error instanceof z.ZodError) {
+                const errors = error.format();
+                setFormErrors(errors);
+            } else {
+                console.error("Erro desconhecido", error);
+            }
+        }
     };
 
     // Enviar PATCH para atualizar o usuário
@@ -354,7 +407,7 @@ export const Ajustes = () => {
                         {formErrors?.Role && <p>{formErrors.Role?._errors?.[0]}</p>}
 
                         <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
-                            <ButtonModal css={{ width: '75px' }} onClick={editUserId ? onSubmitEdit : null}>
+                            <ButtonModal css={{ width: '75px' }} onClick={editUserId ? onSubmitEdit : onSubmitCreate}>
                                 {editUserId ? 'Alterar' : 'Criar'}
                             </ButtonModal>
                             <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseCreateModal}>Fechar</ButtonModal>
