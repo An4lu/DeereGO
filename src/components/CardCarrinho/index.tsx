@@ -1,5 +1,5 @@
 import { CaretCircleDown, CaretCircleUp, ShoppingCart, MapTrifold} from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useEffect, useState} from 'react';
 import {
     BodyCard,
     BodyCardShow,
@@ -11,12 +11,17 @@ import {
     Right,
     Linha,
     StatusText,
-    TitleCard
+    TitleCard,
+    SwitchBtn,
+    CapacidadeDiv,
+    SwitchThumb,
 } from './styles';
 import { Button } from '../Button';
 import { CanvasHead } from '../Canvas/HeadCanvas';
 import { Canvas } from '../Canvas/Canvas';
 import { Modal } from '../Modal';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
 interface CardCarrinhoProps {
@@ -25,6 +30,7 @@ interface CardCarrinhoProps {
     Local: string;
     Peças: string;
     Bloco: string;
+    StatusCapacidade: string;
     PosX: number;
     PosY: number;
     onAdicionar: () => void;
@@ -32,7 +38,13 @@ interface CardCarrinhoProps {
     isSelecionado: boolean;
 }
 
-export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, PosX, PosY, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
+export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, StatusCapacidade,PosX, PosY, onAdicionar, onRemover, isSelecionado}: CardCarrinhoProps) {
+
+    const [checked, setChecked] = useState(StatusCapacidade === 'Vazio');
+    
+    useEffect(() => {
+        setChecked(StatusCapacidade === 'Vazio');
+    }, [StatusCapacidade]);
 
     const [isMapModalOpen, setIsMapModalOpen] = useState(false);
     // Funções para controle do modal
@@ -76,6 +88,33 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, PosX,
         D3: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533778/SDQ3_kouvmx.png',
         D4: 'https://res.cloudinary.com/dkircdiyj/image/upload/v1729533105/SDQ4_immuh9.png',
     };
+
+    const patchCapacidade = async () => {
+        StatusCapacidade = checked ? 'Cheio' : 'Vazio';
+        try {
+            // Valida os dados do formulário
+            const patchData = {
+                StatusCapacidade : StatusCapacidade,
+            }
+
+            const response = await fetch(`${apiBaseUrl}/rebocador/entrega/carrinho/${idCart}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(patchData),
+            });
+
+            if (response.ok) {
+                console.log('Capacidade atualizada');
+                setChecked(!checked);
+            } else {
+                console.error("Erro ao atualizar a capacidade");
+            }
+        } catch (error: any) {
+            console.error("Erro desconhecido", error);
+        }
+    };
     return (
         <><CardEntregaContainer>
             <HeadCard >
@@ -116,6 +155,16 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, PosX,
                         <Linha />
 
                     </Info>
+                    <Info>
+                        <StatusText>Capacidade</StatusText>
+                        <CapacidadeDiv>
+                            <InfoText>{checked ? 'Vazio' : 'Cheio'}</InfoText>
+                            <SwitchBtn checked={checked} onClick={patchCapacidade}>
+                                <SwitchThumb checked={checked}></SwitchThumb>
+                            </SwitchBtn>                                
+                        </CapacidadeDiv>
+                        <Linha />
+                    </Info>
                     {isSelecionado ? (
                         <Button type="submit" css={{ width: '100%' }} onClick={onRemover}>
                             Remover ao Carrinho
@@ -125,6 +174,7 @@ export function CardCarrinho({ idCart, NomeCarrinho, Local, Peças, Bloco, PosX,
                             Adicionar ao Carrinho
                         </Button>
                     )}
+                    
 
                 </BodyCardShow>
             ) : (

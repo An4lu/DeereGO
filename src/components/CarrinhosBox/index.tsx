@@ -10,6 +10,7 @@ interface Carro {
     Local: string;
     Peças: string;
     Bloco: string;
+    StatusCapacidade: string;
     PosX : number;
     PosY : number;
 }
@@ -50,6 +51,7 @@ export function CarrinhosBox({adicionarCarrinho, removerCarrinho, carrinhosSelec
                         Local={carrinho.Local}
                         Peças={carrinho.Peças}
                         Bloco={carrinho.Bloco}
+                        StatusCapacidade={carrinho.StatusCapacidade}
                         PosX={carrinho.PosX}
                         PosY={carrinho.PosY}
                         onAdicionar={() => adicionarCarrinho(carrinho.NomeCarrinho)}

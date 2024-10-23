@@ -78,3 +78,59 @@ export const InfoText = styled('p', {
     color: '$lightGreen',
     fontWeight: '500',
 });
+
+export const CapacidadeDiv = styled('div', {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: '0.5rem',
+    width: '100%',
+    marginBottom: '0.5rem',
+});
+
+export const SwitchBtn = styled('button', {
+    backgroundColor: '$placeholder',
+    border: '1px solid $green',
+    borderRadius: '2rem',
+    width: '20%',
+    height: '2rem',
+    transition: 'background-color 0.1s ease, border-color 0.2s ease',
+    cursor: 'pointer',
+    boxShadow: '0 0 0 0.1rem $green',
+    position: 'relative',
+
+    variants: {
+        checked: {
+            true: {
+                backgroundColor: '$maingreen',
+            },
+            false: {
+                backgroundColor: '$placeholder',
+            },
+        },
+    },
+});
+
+export const SwitchThumb = styled('div', {
+    position: 'absolute',
+    height: '1.5rem',
+    width: '1.5rem',
+    backgroundColor: '$green',
+    borderRadius: '50%',
+    transform: 'translateX(0) translateY(-5%)',
+    transition: 'left  0.15s ease',
+    left: '0.25rem',
+    top: '0.25rem',
+
+    variants: {
+        checked: {
+            true: {
+                left: 'calc(100% - 1.5rem - 0.25rem)',
+            },
+            false: {
+                left: '0.25rem',
+            },
+        },
+    },
+});
