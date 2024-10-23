@@ -5,7 +5,7 @@ import { styled } from "../../../styles";
 export const Background = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    margin: '60px',
+    margin: '60px 45px',
     justifyContent: 'center',
 })
 

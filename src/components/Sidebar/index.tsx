@@ -1,7 +1,7 @@
 import { HouseSimple, MapTrifold, Power, Toolbox, UserCircle } from '@phosphor-icons/react';
-import { ContentContainer, Div, LogoContainer, SidebarButton, SidebarContainer, SidebarItem, TextLink } from './styles';
-import logoimg from '/logofull.svg'
 import { useAuth } from '../../contexts/AuthContext';
+import { ContentContainer, Div, LogoContainer, SidebarButton, SidebarContainer, SidebarItem, TextLink } from './styles';
+import logoimg from '/logofull.svg';
 
 export function Sidebar() {
     const { logout } = useAuth();
@@ -14,23 +14,23 @@ export function Sidebar() {
             <Div>
                 <ContentContainer>
                     <SidebarItem to='/adm/home'>
-                        <HouseSimple size={30} weight='fill' />
+                        <HouseSimple size={28} weight='fill' />
                         <TextLink>VISÃO GERAL</TextLink>
                     </SidebarItem>
                     <SidebarItem to='/adm/mapa'>
-                        <MapTrifold size={30} weight='fill' />
+                        <MapTrifold size={28} weight='fill' />
                         <TextLink>MAPA</TextLink>
                     </SidebarItem>
                     <SidebarItem to='/adm/carrinhos'>
-                        <Toolbox size={30} weight='fill' />
+                        <Toolbox size={28} weight='fill' />
                         <TextLink>CARRO-KITS</TextLink>
                     </SidebarItem>
                     <SidebarItem to='/adm/ajustes'>
-                        <UserCircle size={30} weight='fill' />
+                        <UserCircle size={28} weight='fill' />
                         <TextLink>AJUSTES</TextLink>
                     </SidebarItem>
                     <SidebarButton onClick={logout}>
-                        <Power size={30} weight='fill' />
+                        <Power size={28} weight='fill' />
                         <TextLink>SAIR</TextLink>
                     </SidebarButton>
                 </ContentContainer>

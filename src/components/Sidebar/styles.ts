@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { styled } from "../../styles";
 
 export const SidebarContainer = styled('div', {
-    width: '250px',
+    width: '200px',
     height: '100vh',
     backgroundColor: '$white',
     position: 'fixed',
@@ -29,7 +29,7 @@ export const ContentContainer = styled('ul', {
 });
 
 export const SidebarItem = styled(NavLink, {
-    fontSize: '15px',
+    fontSize: '13px',
     display: 'flex',
     gap: '16px',
     alignItems: 'center',
@@ -66,7 +66,7 @@ export const SidebarButton = styled('button', {
 
 
 export const TextLink = styled('span', {
-
+    fontSize: '12px',
 })
 
 export const Div = styled('div', {

@@ -173,7 +173,7 @@ export const DashboardAdmin = () => {
                         </Space>
                     </Column01>
                     <Column02>
-                        <Title css={{ fontSize: '16px', marginBottom: '80px' }}>
+                        <Title css={{ fontSize: '16px', gap: '80px' }}>
                             Rebocador em Destaque
                         </Title>
                         <Title css={{ color: '$green', fontWeight: '800', fontSize: '32px', display: 'flex', justifyContent: 'flex-end' }}>
