@@ -116,18 +116,19 @@ export const Carrinhos = () => {
             StatusCapacidade: carrinho.StatusCapacidade,
             StatusManutenção: carrinho.StatusManutenção,
         });
-        setEditCarrinhoId(carrinho._id); // Define o ID do carrinho em edição
-        setIsEditMode(true); // Define o modo de edição
+        setEditCarrinhoId(carrinho._id); // Define o ID do carrinho para edição
+        setIsEditMode(true); // Ativa o modo de edição
         setIsModalOpen(true);
     };
 
     const onSubmitCreateOrUpdate = async () => {
         try {
             const parsedData = carSchema.parse(formData);
+
             if (isEditMode && editCarrinhoId) {
-                // Atualiza o carrinho existente
+                // Atualiza o carrinho existente (PATCH)
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho/${editCarrinhoId}`, {
-                    method: 'PUT',
+                    method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -135,13 +136,13 @@ export const Carrinhos = () => {
                 });
 
                 if (response.ok) {
-                    fetchCarrinhos();
-                    handleCloseModal();
+                    fetchCarrinhos(); // Recarrega a lista de carrinhos
+                    handleCloseModal(); // Fecha o modal após a edição
                 } else {
                     console.error("Erro ao atualizar carrinho");
                 }
             } else {
-                // Cria um novo carrinho
+                // Cria um novo carrinho (POST)
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`, {
                     method: 'POST',
                     headers: {
@@ -151,8 +152,8 @@ export const Carrinhos = () => {
                 });
 
                 if (response.ok) {
-                    fetchCarrinhos();
-                    handleCloseModal();
+                    fetchCarrinhos(); // Recarrega a lista de carrinhos
+                    handleCloseModal(); // Fecha o modal após a criação
                 } else {
                     console.error("Erro ao criar carrinho");
                 }
