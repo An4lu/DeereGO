@@ -38,6 +38,7 @@ export const DashboardAdmin = () => {
         fetchEntregas();
     }, []);
 
+    // Fetch de rebocadores ativos
     useEffect(() => {
         const fetchRebocadores = async () => {
             try {
@@ -54,6 +55,7 @@ export const DashboardAdmin = () => {
         fetchRebocadores();
     }, []);
 
+    // Fetch carrinhos e setores
     useEffect(() => {
         const fetchCarrinhos = async () => {
             try {
@@ -89,12 +91,18 @@ export const DashboardAdmin = () => {
         fetchCarrinhos();
     }, []);
 
-    // Função para buscar o nome do usuário
+    // Função para buscar o nome do usuário por ID
     const fetchUserName = async (userId: string) => {
         try {
-            const response = await fetch(`https://deerego-back.onrender.com/user/${userId}`);
+            const url = `${import.meta.env.VITE_API_BASE_URL}/user?id=${userId}`;
+            const response = await fetch(url);
             const userData = await response.json();
-            return userData.nome;
+
+            if (Array.isArray(userData) && userData.length > 0) {
+                return userData[0].Nome || "Usuário desconhecido";
+            }
+
+            return "Usuário desconhecido";
         } catch (error) {
             console.error("Erro ao buscar nome do usuário:", error);
             return "Usuário desconhecido";
