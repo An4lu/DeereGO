@@ -13,8 +13,8 @@ export const Div = styled('div', {
 })
 
 export const ContainerM = styled('div', {
-    width: '75%',
-    height: '540px',
+    width: '70%',
+    height: '600px',
     backgroundColor: '$white',
     borderRadius: '20px',
 })
