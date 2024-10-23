@@ -42,11 +42,11 @@ export const Ajustes = () => {
     const [formErrors, setFormErrors] = useState<any>({});
 
     const handleOpenCreateModal = () => {
-        setIsCreateModalOpen(true);  // Garante que o modal será aberto
+        setIsCreateModalOpen(true);
     };
 
     const handleCloseCreateModal = () => {
-        setIsCreateModalOpen(false);  // Fecha o modal
+        setIsCreateModalOpen(false);
         setFormData({
             Nome: '',
             Senha: '',
@@ -118,8 +118,6 @@ export const Ajustes = () => {
     const onSubmitCreate = async () => {
         try {
             const parsedData = userSchema.parse(formData);
-            console.log("Dados válidos:", parsedData);
-
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
                 method: 'POST',
                 headers: {
@@ -143,6 +141,20 @@ export const Ajustes = () => {
                 console.error("Erro desconhecido", error);
             }
         }
+    };
+
+    const handleOpenEditModal = (userData: any) => {
+        setFormData({
+            Nome: userData.Nome,
+            Senha: '',
+            Email: userData.Email,
+            Role: userData.Role,
+            Fabrica: userData.Fabrica,
+            BlocoKit: userData.BlocoKit,
+            Telefone: userData.Telefone,
+            Status: userData.Status,
+        });
+        setIsCreateModalOpen(true);
     };
 
     const roleOptions = [
@@ -183,7 +195,7 @@ export const Ajustes = () => {
 
                 <Linha isGrid>
                     {rebocadores.map((rebocador) => (
-                        <ContainerReb key={rebocador._id} onClick={handleOpenCreateModal}>
+                        <ContainerReb key={rebocador._id} onClick={() => handleOpenEditModal(rebocador)}>
                             <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <Img
                                     css={{ width: '80px', height: '80px', borderRadius: '50%' }}
@@ -220,7 +232,7 @@ export const Ajustes = () => {
 
                 <Linha isGrid>
                     {administradores.map((admin) => (
-                        <ContainerReb key={admin._id}>
+                        <ContainerReb key={admin._id} onClick={() => handleOpenEditModal(admin)}>
                             <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <Img
                                     css={{ width: '80px', height: '80px', borderRadius: '50%' }}
@@ -247,7 +259,7 @@ export const Ajustes = () => {
                 </Linha>
 
                 <Modal css={{ padding: '20px 40px', width: '450px' }} isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
-                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Usuário</Heading>
+                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{formData.Nome ? 'Alterar Usuário' : 'Criar Usuário'}</Heading>
                     <Div css={{ width: '100%' }}>
                         <InputForms
                             title="Nome"
@@ -306,7 +318,7 @@ export const Ajustes = () => {
                             onChange={handleFormChange}
                             css={{ marginBottom: '10px' }}
                         />
-                        {formErrors?.Bloco && <p>{formErrors.Bloco?._errors?.[0]}</p>}
+                        {formErrors?.BlocoKit && <p>{formErrors.BlocoKit?._errors?.[0]}</p>}
                         <Select
                             title="Cargo"
                             options={roleOptions}
@@ -316,7 +328,9 @@ export const Ajustes = () => {
                         {formErrors?.Role && <p>{formErrors.Role?._errors?.[0]}</p>}
 
                         <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
-                            <ButtonModal css={{ width: '75px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
+                            <ButtonModal css={{ width: '75px' }}>
+                                {formData.Nome ? 'Alterar' : 'Criar'}
+                            </ButtonModal>
                             <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseCreateModal}>Fechar</ButtonModal>
                         </Div>
                     </Div>
