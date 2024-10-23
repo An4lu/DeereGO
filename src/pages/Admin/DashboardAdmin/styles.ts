@@ -81,7 +81,6 @@ export const Row02 = styled(Link, {
 export const R = styled('div', {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: '12px',
     width: '100%',
     height: '100%',
     fontSize: '15px'

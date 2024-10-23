@@ -272,8 +272,8 @@ export const Ajustes = () => {
 
                 <Linha isGrid>
                     {rebocadores.map((rebocador) => (
-                        <ContainerReb key={rebocador._id} onClick={() => handleOpenEditModal(rebocador)}>
-                            <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <ContainerReb key={rebocador._id}>
+                            <Div css={{ gap: '15px', display: 'flex', flexDirection: 'row', alignItems: 'center' }} onClick={() => handleOpenEditModal(rebocador)}>
                                 <Img
                                     css={{ width: '80px', height: '80px', borderRadius: '50%' }}
                                     src={adminImage}
@@ -415,11 +415,11 @@ export const Ajustes = () => {
                     </Div>
                 </Modal>
 
-                <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                <Modal css={{}} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
                     <p>Tem certeza que deseja deletar este usuário?</p>
-                    <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
-                        <ButtonDelete onClick={onDelete}>Deletar</ButtonDelete>
+                    <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px', margin: '5px 0' }}>
                         <ButtonModal onClick={handleCloseDeleteModal}>Cancelar</ButtonModal>
+                        <ButtonDelete onClick={onDelete}>Deletar</ButtonDelete>
                     </Div>
                 </Modal>
             </Div>
