@@ -9,6 +9,7 @@ import { Container } from "./styles";
 export const Dashboard = () => {
     const [carrinhosSelecionados, setCarrinhosSelecionados] = useState<string[]>([]);
     
+    
 
     // Adicionar um carrinho à lista de selecionados
     const adicionarCarrinho = (nomeCarrinho: string) => {

@@ -49,6 +49,7 @@ export const Login = () => {
             if (userResponse.ok) {
               const userDetails = await userResponse.json();
               console.log('Resposta da API (detalhes do usuário):', userDetails[0]);
+              console.log('Data de criação:', userDetails[0].DataCriacao);
 
               // Mapeie os dados completos para o objeto User.
               const userData: User = {
@@ -61,8 +62,7 @@ export const Login = () => {
                 telefone: userDetails[0].Telefone || '',
                 status: userDetails[0].Status || false,
                 rebocadores: userDetails[0].rebocadores || [],
-                experiencia: userDetails[0].dataCriacao
-                  ? new Date(userDetails[0].dataCriacao) : new Date()
+                dataCriacao: userDetails[0].DataCriacao,
               };
 
               console.log('Dados do usuário mapeados:', userData);

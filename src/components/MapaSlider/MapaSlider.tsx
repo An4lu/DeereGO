@@ -12,33 +12,30 @@ import 'swiper/css/zoom';
 import 'swiper/css/scrollbar';
 import './slider.css';
 
-interface Rebocador {
-    carrinhos: {
-        _id: string;
-        PosX: number;
-        PosY: number;
-        Local: string;
-        NomeCarrinho: string;
 
-    };
-}
-
-interface Dado {
-    rebocadores: Rebocador[];
+interface Carro {
+    _id: string;
+    NomeCarrinho: string;
+    Local: string;
+    Peças: string;
+    Bloco: string;
+    StatusCapacidade: string;
+    PosX : number;
+    PosY : number;
 }
 
 
 export function MapaSlider() {
-    const [dados, setDados] = useState<Dado[]>([]);
+    const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
 
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/user?role=rebocador`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
                     console.log(data);
-                    setDados(data);
+                    setCarrinhos(data);
                 }
             })
             .catch(error => console.error("Erro ao buscar os dados:", error));
@@ -76,39 +73,26 @@ export function MapaSlider() {
             pagination={{ clickable: true }}
             className='mySwiper'
         >
-            {dados.flatMap((dado) => {
-                const rebocadores = dado.rebocadores || [];
-
-                return rebocadores.flatMap((rebocador, index) => {
-                    const carrinho = rebocador.carrinhos; // Acessa diretamente como objeto
-                    console.log('Carrinho:', carrinho);  // Verifique se os carrinhos estão corretamente atribuídos
-
-                    // Verifique se o carrinho existe
-                    if (!carrinho._id) {
-                        console.warn(`Rebocador ${index} não tem carrinhos com informações válidas`);
-                        return null;
-                    }
-                    console.log('Local: ', imageMap[carrinho.Local]); // Verifique se o local está correto
-
-                    return (
-                        <SwiperSlide key={`${index}-${carrinho._id}`}>
-                            <CanvasHead
-                                NomeCarrinho={carrinho.NomeCarrinho}
-                                Local={carrinho.Local} 
-                            />
-                            <Canvas
-                                posX={carrinho.PosX}
-                                posY={carrinho.PosY}
-                                width="400"
-                                height="400"
-                                style={{
-                                    backgroundImage: `url(${imageMap[carrinho.Local]})`,
-                                }}
-                            />
-                        </SwiperSlide>
-                    );
-                });
-            })}
+            {carrinhos.map(carrinho => (
+                <SwiperSlide key={`${carrinho._id}`}>
+                <CanvasHead
+                    NomeCarrinho={carrinho.NomeCarrinho}
+                    Local={carrinho.Local} 
+                />
+                <Canvas
+                    posXCarro={carrinho.PosX}
+                    posYCarro={carrinho.PosY}
+                    posXRebocador={0}
+                    posYRebocador={0}
+                    width="400"
+                    height="400"
+                    style={{
+                        backgroundImage: `url(${imageMap[carrinho.Local]})`,
+                    }}
+                />
+            </SwiperSlide>
+            ))}
+            
 
         </Swiper>
     );
