@@ -23,6 +23,15 @@ export const Carrinhos = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [deleteCarrinhoId, setDeleteCarrinhoId] = useState<string | null>(null);
+    const [formErrors, setFormErrors] = useState<any>({});
+    const [formData, setFormData] = useState({
+        NomeCarrinho: '',
+        Peças: '',
+        Local: 'A1',
+        Bloco: '',
+        StatusCapacidade: 'Cheio',
+        StatusManutenção: 'Operando',
+    });
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -64,8 +73,6 @@ export const Carrinhos = () => {
         }
     };
 
-    const [formErrors, setFormErrors] = useState<any>({});
-
     const fetchCarrinhos = async () => {
         setIsFetching(true);
         try {
@@ -78,44 +85,6 @@ export const Carrinhos = () => {
             setIsFetching(false);
         }
     };
-
-    const localOptions = [
-        { label: 'A1', value: 'A1' },
-        { label: 'A2', value: 'A2' },
-        { label: 'A3', value: 'A3' },
-        { label: 'A4', value: 'A4' },
-        { label: 'B1', value: 'B1' },
-        { label: 'B2', value: 'B2' },
-        { label: 'B3', value: 'B3' },
-        { label: 'B4', value: 'B4' },
-        { label: 'C1', value: 'C1' },
-        { label: 'C2', value: 'C2' },
-        { label: 'C3', value: 'C3' },
-        { label: 'C4', value: 'C4' },
-        { label: 'D1', value: 'D1' },
-        { label: 'D2', value: 'D2' },
-        { label: 'D3', value: 'D3' },
-        { label: 'D4', value: 'D4' },
-    ];
-
-    const capacityOptions = [
-        { label: 'Cheio', value: 'Cheio' },
-        { label: 'Vazio', value: 'Vazio' },
-    ];
-
-    const operationOptions = [
-        { label: 'Operando', value: 'Operando' },
-        { label: 'Parado', value: 'Parado' },
-    ];
-
-    const [formData, setFormData] = useState({
-        NomeCarrinho: '',
-        Peças: '',
-        Local: 'A1',
-        Bloco: '',
-        StatusCapacidade: 'Cheio',
-        StatusManutenção: 'Operando',
-    });
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -132,6 +101,18 @@ export const Carrinhos = () => {
 
     const handleOperationChange = (newOperation: string) => {
         setFormData((prev) => ({ ...prev, StatusManutenção: newOperation }));
+    };
+
+    const handleOpenEditModal = (carrinho: any) => {
+        setFormData({
+            NomeCarrinho: carrinho.NomeCarrinho,
+            Peças: carrinho.Peças,
+            Local: carrinho.Local,
+            Bloco: carrinho.Bloco,
+            StatusCapacidade: carrinho.StatusCapacidade,
+            StatusManutenção: carrinho.StatusManutenção,
+        });
+        setIsModalOpen(true);
     };
 
     const onSubmitCreate = async () => {
@@ -179,64 +160,8 @@ export const Carrinhos = () => {
                     <Plus size={20} weight="bold" />
                     Criar
                 </ButtonModal>
-                <Modal css={{ padding: '20px 25px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
-                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>Criar Carrinho</Heading>
-                    <Div>
-                        <InputForms
-                            title="Nome do Carrinho"
-                            type="text"
-                            name="NomeCarrinho"
-                            value={formData.NomeCarrinho}
-                            onChange={handleFormChange}
-                        />
-                        {formErrors?.NomeCarrinho && <p>{formErrors.NomeCarrinho?._errors?.[0]}</p>}
-
-                        <InputForms
-                            title="Peças"
-                            type="text"
-                            name="Peças"
-                            value={formData.Peças}
-                            onChange={handleFormChange}
-                        />
-                        {formErrors?.Peças && <p>{formErrors.Peças?._errors?.[0]}</p>}
-
-                        <Select
-                            title="Local"
-                            options={localOptions}
-                            value={formData.Local}
-                            onChange={handleLocalChange}
-                        />
-                        {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
-                        <InputForms
-                            title="Bloco"
-                            type="text"
-                            name="Bloco"
-                            value={formData.Bloco}
-                            onChange={handleFormChange}
-                        />
-                        {formErrors?.Bloco && <p>{formErrors.Bloco?._errors?.[0]}</p>}
-
-                        <Select
-                            title="Capacidade"
-                            options={capacityOptions}
-                            value={formData.StatusCapacidade}
-                            onChange={handleCapacityChange}
-                        />
-                        {formErrors?.StatusCapacidade && <p>{formErrors.StatusCapacidade?._errors?.[0]}</p>}
-
-                        <Select
-                            title="Manutenção"
-                            options={operationOptions}
-                            value={formData.StatusManutenção}
-                            onChange={handleOperationChange}
-                        />
-                    </Div>
-                    <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
-                        <ButtonModal css={{ width: '75px' }} onClick={onSubmitCreate}>Criar</ButtonModal>
-                        <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseModal}>Fechar</ButtonModal>
-                    </Div>
-                </Modal>
             </Heading>
+
             <Div>
                 <Linha css={{
                     display: 'grid',
@@ -245,7 +170,9 @@ export const Carrinhos = () => {
                     margin: '15px 0 50px 0'
                 }}>
                     {carrinhos.map((carrinho) => (
-                        <ContainerReb key={carrinho._id}
+                        <ContainerReb
+                            key={carrinho._id}
+                            onClick={() => handleOpenEditModal(carrinho)} // Abre o modal para edição
                             css={{
                                 display: 'flex', flexDirection: 'row', alignItems: 'flex-start', padding: '30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px', justifyContent: 'space-between'
                             }}>
@@ -272,12 +199,101 @@ export const Carrinhos = () => {
                             <DivInfos css={{
                                 position: 'relative',
                                 cursor: 'pointer'
-                            }} onClick={() => handleOpenDeleteModal(carrinho._id)}>
+                            }} onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpenDeleteModal(carrinho._id);
+                            }}>
                                 <X size={20} weight="bold" />
                             </DivInfos>
                         </ContainerReb>
                     ))}
                 </Linha>
+
+                <Modal css={{ padding: '20px 30px', width: '450px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
+                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{formData.NomeCarrinho ? 'Alterar Carrinho' : 'Criar Carrinho'}</Heading>
+                    <Div css={{ width: '100%' }}>
+                        <InputForms
+                            title="Nome do Carrinho"
+                            type="text"
+                            name="NomeCarrinho"
+                            value={formData.NomeCarrinho}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.NomeCarrinho && <p>{formErrors.NomeCarrinho?._errors?.[0]}</p>}
+
+                        <InputForms
+                            title="Peças"
+                            type="text"
+                            name="Peças"
+                            value={formData.Peças}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.Peças && <p>{formErrors.Peças?._errors?.[0]}</p>}
+
+                        <Select
+                            title="Local"
+                            options={[
+                                { label: 'A1', value: 'A1' },
+                                { label: 'A2', value: 'A2' },
+                                { label: 'A3', value: 'A3' },
+                                { label: 'A4', value: 'A4' },
+                                { label: 'B1', value: 'B1' },
+                                { label: 'B2', value: 'B2' },
+                                { label: 'B3', value: 'B3' },
+                                { label: 'B4', value: 'B4' },
+                                { label: 'C1', value: 'C1' },
+                                { label: 'C2', value: 'C2' },
+                                { label: 'C3', value: 'C3' },
+                                { label: 'C4', value: 'C4' },
+                                { label: 'D1', value: 'D1' },
+                                { label: 'D2', value: 'D2' },
+                                { label: 'D3', value: 'D3' },
+                                { label: 'D4', value: 'D4' },
+                            ]}
+                            value={formData.Local}
+                            onChange={handleLocalChange}
+                        />
+                        {formErrors?.Local && <p>{formErrors.Local?._errors?.[0]}</p>}
+
+                        <InputForms
+                            title="Bloco"
+                            type="text"
+                            name="Bloco"
+                            value={formData.Bloco}
+                            onChange={handleFormChange}
+                        />
+                        {formErrors?.Bloco && <p>{formErrors.Bloco?._errors?.[0]}</p>}
+
+                        <Select
+                            title="Status de Capacidade"
+                            options={[
+                                { label: 'Cheio', value: 'Cheio' },
+                                { label: 'Vazio', value: 'Vazio' },
+                            ]}
+                            value={formData.StatusCapacidade}
+                            onChange={handleCapacityChange}
+                        />
+                        {formErrors?.StatusCapacidade && <p>{formErrors.StatusCapacidade?._errors?.[0]}</p>}
+
+                        <Select
+                            title="Status de Manutenção"
+                            options={[
+                                { label: 'Operando', value: 'Operando' },
+                                { label: 'Parado', value: 'Parado' },
+                            ]}
+                            value={formData.StatusManutenção}
+                            onChange={handleOperationChange}
+                        />
+                    </Div>
+
+                    <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
+                        <ButtonModal css={{ width: '75px' }}>
+                            {formData.NomeCarrinho ? 'Alterar' : 'Criar'}
+                        </ButtonModal>
+                        <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseModal}>Fechar</ButtonModal>
+                    </Div>
+                </Modal>
+
                 <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
                     <p>Tem certeza que deseja deletar este carrinho?</p>
                     <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
