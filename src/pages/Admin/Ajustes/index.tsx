@@ -10,7 +10,8 @@ import { IconWrapper } from "../Carrinhos/styles";
 import { Background, ButtonDelete, ButtonModal, ContainerReb, Div, DivGestor, DivH, DivInfos, Img, Linha } from "./styles";
 import adminImage from "/admin.jpeg";
 
-const userSchema = z.object({
+// Validação para criação (todos os campos obrigatórios)
+const createUserSchema = z.object({
     Nome: z.string().min(2, { message: "Nome é obrigatório" }),
     Senha: z.string().min(6, { message: "A senha deve ter no mínimo 6 caracteres" }),
     Email: z.string().email({ message: "Email inválido" }),
@@ -21,6 +22,18 @@ const userSchema = z.object({
     Status: z.boolean(),
 });
 
+// Validação para edição (nenhum campo obrigatório)
+const editUserSchema = z.object({
+    Nome: z.string().optional(),
+    Senha: z.string().optional(),
+    Email: z.string().email({ message: "Email inválido" }).optional(),
+    Role: z.enum(["admin", "rebocador"]).optional(),
+    Fabrica: z.string().optional(),
+    BlocoKit: z.string().optional(),
+    Telefone: z.string().optional(),
+    Status: z.boolean().optional(),
+});
+
 export const Ajustes = () => {
     const { user } = useAuth();
     const [rebocadores, setRebocadores] = useState<any[]>([]);
@@ -29,6 +42,7 @@ export const Ajustes = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [deleteUserId, setDeleteUserId] = useState<string | null>(null);
+    const [editUserId, setEditUserId] = useState<string | null>(null); // ID do usuário que está sendo editado
     const [formData, setFormData] = useState({
         Nome: '',
         Senha: '',
@@ -58,6 +72,7 @@ export const Ajustes = () => {
             Status: true,
         });
         setFormErrors({});
+        setEditUserId(null); // Reseta o ID do usuário ao fechar
     };
 
     const handleOpenDeleteModal = (id: string) => {
@@ -112,38 +127,41 @@ export const Ajustes = () => {
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-
-        if (name === 'Nome') {
-            const nome = value.toLowerCase().replace(/\s+/g, '');
-            generateEmail(nome);
-        }
-
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const generateEmail = (nome: string) => {
-        const baseEmail = `${nome}@deerego.com`;
-        let email = baseEmail;
-        let counter = 1;
-        let existingUsers = [...rebocadores, ...administradores];
-
-        while (existingUsers.some((user) => user.Email === email)) {
-            email = `${nome}${counter}@deerego.com`;
-            counter++;
-        }
-
-        setFormData((prev) => ({ ...prev, Email: email }));
+    // Abrir modal para edição e preencher os dados do formulário
+    const handleOpenEditModal = (userData: any) => {
+        setFormData({
+            Nome: userData.Nome || '',
+            Senha: '', // Manter a senha vazia na edição para que o usuário possa redefini-la
+            Email: userData.Email || '',
+            Role: userData.Role || 'rebocador',
+            Fabrica: userData.Fabrica || '',
+            BlocoKit: userData.BlocoKit || '',
+            Telefone: userData.Telefone || '',
+            Status: userData.Status,
+        });
+        setEditUserId(userData._id); // Armazena o ID do usuário sendo editado
+        setIsCreateModalOpen(true); // Abre o modal para edição
     };
 
-    const onSubmitCreate = async () => {
+    // Enviar PATCH para atualizar o usuário
+    const onSubmitEdit = async () => {
+        if (!editUserId) return; // Verifica se há um usuário para editar
         try {
-            const parsedData = userSchema.parse(formData);
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
-                method: 'POST',
+            // Valida apenas os campos que foram preenchidos no formulário
+            const parsedData = editUserSchema.parse(formData);
+
+            // Remove campos vazios ou não preenchidos
+            const filteredData = Object.fromEntries(Object.entries(parsedData).filter(([_, v]) => v !== ''));
+
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${editUserId}`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(parsedData),
+                body: JSON.stringify(filteredData),
             });
 
             if (response.ok) {
@@ -151,7 +169,7 @@ export const Ajustes = () => {
                 fetchAdministradores();
                 handleCloseCreateModal();
             } else {
-                console.error("Erro ao criar usuário");
+                console.error("Erro ao alterar usuário");
             }
         } catch (error: any) {
             if (error instanceof z.ZodError) {
@@ -161,20 +179,6 @@ export const Ajustes = () => {
                 console.error("Erro desconhecido", error);
             }
         }
-    };
-
-    const handleOpenEditModal = (userData: any) => {
-        setFormData({
-            Nome: userData.Nome,
-            Senha: '',
-            Email: userData.Email,
-            Role: userData.Role,
-            Fabrica: userData.Fabrica,
-            BlocoKit: userData.BlocoKit,
-            Telefone: userData.Telefone,
-            Status: userData.Status,
-        });
-        setIsCreateModalOpen(true);
     };
 
     const roleOptions = [
@@ -279,7 +283,7 @@ export const Ajustes = () => {
                 </Linha>
 
                 <Modal css={{ padding: '20px 40px', width: '450px' }} isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
-                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{formData.Nome ? 'Alterar Usuário' : 'Criar Usuário'}</Heading>
+                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{editUserId ? 'Alterar Usuário' : 'Criar Usuário'}</Heading>
                     <Div css={{ width: '100%' }}>
                         <InputForms
                             title="Nome"
@@ -330,6 +334,7 @@ export const Ajustes = () => {
                             css={{ marginBottom: '10px' }}
                         />
                         {formErrors?.Fabrica && <p>{formErrors.Fabrica?._errors?.[0]}</p>}
+
                         <InputForms
                             title="BlocoKit"
                             type="text"
@@ -339,6 +344,7 @@ export const Ajustes = () => {
                             css={{ marginBottom: '10px' }}
                         />
                         {formErrors?.BlocoKit && <p>{formErrors.BlocoKit?._errors?.[0]}</p>}
+
                         <Select
                             title="Cargo"
                             options={roleOptions}
@@ -348,8 +354,8 @@ export const Ajustes = () => {
                         {formErrors?.Role && <p>{formErrors.Role?._errors?.[0]}</p>}
 
                         <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
-                            <ButtonModal css={{ width: '75px' }}>
-                                {formData.Nome ? 'Alterar' : 'Criar'}
+                            <ButtonModal css={{ width: '75px' }} onClick={editUserId ? onSubmitEdit : null}>
+                                {editUserId ? 'Alterar' : 'Criar'}
                             </ButtonModal>
                             <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseCreateModal}>Fechar</ButtonModal>
                         </Div>
