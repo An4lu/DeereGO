@@ -96,36 +96,34 @@ export function Status({ carrinhosSelecionados, onClose }: StatusProps) {
     const horaEntrega = new Date().toISOString();
 
     try {
-      for (const nomeCarrinho of selectedCarrinhos) {
-        const carrinho = carrinhos.find(carrinho => carrinho.NomeCarrinho === nomeCarrinho);
-        if (carrinho) {
-          const entregaData = {
-            IdCarrinho: carrinho._id,
-            IdUser: user?.id,
-            Partida: carrinho.Local,
-            Destino: destino,
-            HoraPartida: horaPartida,
-            HoraEntrega: horaEntrega,
-            Tempo : formatarTempo(tempoDecorrido),
-            Status: 'Concluído'
-          };
-          console.log('Entrega:', entregaData);
+      const carrinhosEnvolvidos = selectedCarrinhos.map(nomeCarrinho => {
+        return carrinhos.find(carrinho => carrinho.NomeCarrinho === nomeCarrinho);
+      }).filter(Boolean) as Carro[];
+      const entregaData = {
+        IdCarrinho: carrinhosEnvolvidos.map(carrinho => carrinho._id),
+        IdUser: user?.id,
+        Partida: carrinhosEnvolvidos.map(carrinho => carrinho.Local).join(', '),
+        Destino: destino,
+        HoraPartida: horaPartida,
+        HoraEntrega: horaEntrega,
+        Tempo : formatarTempo(tempoDecorrido),
+        Status: 'Concluído'
+      };
+      console.log('Entrega:', entregaData);
 
-          // Fazer o post
-          const response = await fetch(`${apiBaseUrl}/rebocador/entrega`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(entregaData)
-          });
+      // Fazer o post
+      const response = await fetch(`${apiBaseUrl}/rebocador/entrega`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(entregaData)
+      });
 
-          if (response.ok) {
-            console.log('Entrega realizada com sucesso!');
-          } else {
-            console.error('Erro ao realizar entrega:', response.statusText);
-          }
-        }
+      if (response.ok) {
+        console.log('Entrega realizada com sucesso!');
+      } else {
+        console.error('Erro ao realizar entrega:', response.statusText);
       }
     } catch (error) {
       console.error('Erro ao realizar entrega:', error);

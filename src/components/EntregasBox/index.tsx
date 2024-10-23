@@ -6,7 +6,7 @@ import { ContainerH3 } from '../CarrinhosBox/styles';
 
 interface Entregas {
     _id: string;
-    IdCarrinho: string;
+    IdCarrinho: string[];
     IdUser: string;
     Partida: string;
     Destino: string;
@@ -54,10 +54,17 @@ export function EntregasBox() {
                 }
             });
     }, []);
-    
-    const getNomeCarrinho = (idCarrinho: string) => {
-        const carrinho = carrinhos.find(carrinho => carrinho._id === idCarrinho);
-        return carrinho? carrinho.NomeCarrinho : 'Carrinho';
+    const getNomeCarrinho = (idCarrinho: string[]) => {
+        if (!idCarrinho || idCarrinho.length === 0) {
+            return 'Carrinho';
+        };
+
+        const nomesCarrinhos = idCarrinho.map(id => {
+            const carrinho = carrinhos.find(carrinho => carrinho._id === id);
+            return carrinho ? carrinho.NomeCarrinho : 'Carrinho';
+        });
+
+        return nomesCarrinhos.join(', ');
     };
 
 
@@ -69,7 +76,7 @@ export function EntregasBox() {
                 .map(entrega => (
                     <CardEntrega
                         key={entrega._id}
-                        idCart={entrega.IdCarrinho}
+                        idCart={entrega.IdCarrinho.join(', ')}
                         titleCart={getNomeCarrinho(entrega.IdCarrinho)}
                         Partida={entrega.Partida}
                         Destino={entrega.Destino}
