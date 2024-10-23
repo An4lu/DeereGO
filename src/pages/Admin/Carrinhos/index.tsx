@@ -32,8 +32,11 @@ export const Carrinhos = () => {
         StatusCapacidade: 'Cheio',
         StatusManutenção: 'Operando',
     });
+    const [isEditMode, setIsEditMode] = useState(false); // Define o modo de criação ou edição
+    const [editCarrinhoId, setEditCarrinhoId] = useState<string | null>(null); // Armazena o ID do carrinho em edição
 
     const handleOpenModal = () => {
+        setIsEditMode(false); // Define o modo de criação
         setIsModalOpen(true);
     };
 
@@ -48,6 +51,7 @@ export const Carrinhos = () => {
             StatusManutenção: 'Operando',
         });
         setFormErrors({});
+        setEditCarrinhoId(null); // Reseta o ID de edição
     };
 
     const handleOpenDeleteModal = (id: string) => {
@@ -112,26 +116,47 @@ export const Carrinhos = () => {
             StatusCapacidade: carrinho.StatusCapacidade,
             StatusManutenção: carrinho.StatusManutenção,
         });
+        setEditCarrinhoId(carrinho._id); // Define o ID do carrinho para edição
+        setIsEditMode(true); // Ativa o modo de edição
         setIsModalOpen(true);
     };
 
-    const onSubmitCreate = async () => {
+    const onSubmitCreateOrUpdate = async () => {
         try {
             const parsedData = carSchema.parse(formData);
 
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(parsedData),
-            });
+            if (isEditMode && editCarrinhoId) {
+                // Atualiza o carrinho existente (PATCH)
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho/${editCarrinhoId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(parsedData),
+                });
 
-            if (response.ok) {
-                fetchCarrinhos();
-                handleCloseModal();
+                if (response.ok) {
+                    fetchCarrinhos(); // Recarrega a lista de carrinhos
+                    handleCloseModal(); // Fecha o modal após a edição
+                } else {
+                    console.error("Erro ao atualizar carrinho");
+                }
             } else {
-                console.error("Erro ao criar carrinho");
+                // Cria um novo carrinho (POST)
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(parsedData),
+                });
+
+                if (response.ok) {
+                    fetchCarrinhos(); // Recarrega a lista de carrinhos
+                    handleCloseModal(); // Fecha o modal após a criação
+                } else {
+                    console.error("Erro ao criar carrinho");
+                }
             }
         } catch (error: any) {
             if (error instanceof z.ZodError) {
@@ -210,7 +235,7 @@ export const Carrinhos = () => {
                 </Linha>
 
                 <Modal css={{ padding: '20px 30px', width: '450px' }} isOpen={isModalOpen} onClose={handleCloseModal}>
-                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{formData.NomeCarrinho ? 'Alterar Carrinho' : 'Criar Carrinho'}</Heading>
+                    <Heading css={{ color: '$maingreen', padding: '10px 0px' }}>{isEditMode ? 'Alterar Carrinho' : 'Criar Carrinho'}</Heading>
                     <Div css={{ width: '100%' }}>
                         <InputForms
                             title="Nome do Carrinho"
@@ -287,18 +312,18 @@ export const Carrinhos = () => {
                     </Div>
 
                     <Div css={{ display: 'flex', flexDirection: 'row', margin: '25px 0px 5px 0px', gap: '20px' }}>
-                        <ButtonModal css={{ width: '75px' }}>
-                            {formData.NomeCarrinho ? 'Alterar' : 'Criar'}
+                        <ButtonModal onClick={onSubmitCreateOrUpdate} css={{ width: '75px' }}>
+                            {isEditMode ? 'Alterar' : 'Criar'}
                         </ButtonModal>
                         <ButtonModal css={{ width: '75px', color: '$maingreen', backgroundColor: 'white' }} onClick={handleCloseModal}>Fechar</ButtonModal>
                     </Div>
                 </Modal>
 
-                <Modal css={{ padding: '20px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                <Modal css={{ width: '450px', padding: '20px', display: 'flex', gap: '12px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
                     <p>Tem certeza que deseja deletar este carrinho?</p>
                     <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
-                        <ButtonDelete onClick={handleDeleteCarrinho}>Deletar</ButtonDelete>
                         <ButtonModal onClick={handleCloseDeleteModal} css={{ backgroundColor: 'white', color: '$maingreen' }}>Cancelar</ButtonModal>
+                        <ButtonDelete onClick={handleDeleteCarrinho}>Deletar</ButtonDelete>
                     </Div>
                 </Modal>
             </Div>

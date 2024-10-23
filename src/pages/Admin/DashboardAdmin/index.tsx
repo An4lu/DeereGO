@@ -225,13 +225,12 @@ export const DashboardAdmin = () => {
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>
-                            <Space css={{ display: 'inline-flex', gap: '20px' }}>
+                            <Space css={{ display: 'inline-flex', gap: '10px' }}>
                                 {ultimasEntregas.map((entrega) => (
                                     <R css={{
                                         flexDirection: 'column',
-                                        minWidth: '200px',  // Largura mínima para evitar que quebre
+                                        minWidth: '300px',
                                         border: '1px solid #ddd',
-                                        padding: '10px',
                                         borderRadius: '5px',
                                     }} key={entrega._id}>
                                         <Text>Rebocador: {entrega.nomeUsuario}</Text>
