@@ -55,7 +55,8 @@ export const Historico = () => {
     };
 
     // Função para abrir o modal de exclusão
-    const handleOpenDeleteModal = (id: string) => {
+    const handleOpenDeleteModal = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation(); // Previne que o click na exclusão abra o modal de detalhes
         setDeleteEntregaId(id); // Define o ID da entrega a ser deletada
         setIsDeleteModalOpen(true); // Abre o modal de exclusão
     };
@@ -111,6 +112,7 @@ export const Historico = () => {
                     {historico.map((entrega) => (
                         <ContainerReb
                             key={entrega._id}
+                            onClick={() => handleOpenModal(entrega)} // Abre o modal ao clicar na entrega
                             css={{
                                 display: 'flex', flexDirection: 'row', alignItems: 'flex-start', padding: '20px 30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px', justifyContent: 'space-between'
                             }}>
@@ -137,10 +139,7 @@ export const Historico = () => {
                             <DivInfos css={{
                                 position: 'relative',
                                 cursor: 'pointer'
-                            }} onClick={(e) => {
-                                e.stopPropagation();
-                                handleOpenDeleteModal(entrega._id); // Abre o modal de exclusão
-                            }}>
+                            }} onClick={(e) => handleOpenDeleteModal(entrega._id, e)}> {/* Modal de exclusão */}
                                 <X size={20} weight="bold" />
                             </DivInfos>
                         </ContainerReb>
@@ -148,9 +147,8 @@ export const Historico = () => {
                 </Linha>
             </Div>
 
-            {/* Modal de Detalhes */}
             {selectedEntrega && (
-                <Modal isOpen={isModalOpen} onClose={handleCloseModal} css={{ padding: '20px 30px', width: '500px' }}>
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal} css={{ padding: '20px 30px', width: '500px', height: '400px' }}>
                     <Heading css={{ margin: '20px 10px', color: '$graymain' }}>Detalhes da Entrega</Heading>
                     <Div>
                         <DivInfos css={{ fontWeight: '600' }}>
