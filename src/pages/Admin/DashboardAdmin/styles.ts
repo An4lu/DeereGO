@@ -83,7 +83,7 @@ export const R = styled('div', {
     justifyContent: 'space-between',
     width: '100%',
     height: '100%',
-    fontSize: '1px'
+    fontSize: '18px'
 })
 
 export const Space = styled('div', {
