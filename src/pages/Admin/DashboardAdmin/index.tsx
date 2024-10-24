@@ -85,13 +85,13 @@ export const DashboardAdmin = () => {
                 };
 
                 data.forEach((carrinho: any) => {
-                    if (carrinho.Local.toLowerCase().includes("a")) contadorSetores.A += 1;
-                    if (carrinho.Local.toLowerCase().includes("b")) contadorSetores.B += 1;
-                    if (carrinho.Local.toLowerCase().includes("c")) contadorSetores.C += 1;
-                    if (carrinho.Local.toLowerCase().includes("d")) contadorSetores.D += 1;
-                    if (carrinho.Local.toLowerCase().includes("e")) contadorSetores.E += 1;
-                    if (carrinho.Local.toLowerCase().includes("f")) contadorSetores.F += 1;
-                    if (carrinho.Local.toLowerCase().includes("g")) contadorSetores.G += 1;
+                    if (carrinho.Local.includes("A")) contadorSetores.A += 1;
+                    if (carrinho.Local.includes("B")) contadorSetores.B += 1;
+                    if (carrinho.Local.includes("C")) contadorSetores.C += 1;
+                    if (carrinho.Local.includes("D")) contadorSetores.D += 1;
+                    if (carrinho.Local.includes("E")) contadorSetores.E += 1;
+                    if (carrinho.Local.includes("F")) contadorSetores.F += 1;
+                    if (carrinho.Local.includes("G")) contadorSetores.G += 1;
                 });
 
                 setSetores(contadorSetores);
