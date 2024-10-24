@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { ArrowsClockwise, X } from "@phosphor-icons/react"; // Adicionando o ícone X para deletar
 import { Heading } from "../../../components/Heading";
-import { Background, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
-import { useAuth } from "../../../contexts/AuthContext";
-import { DivH } from "../Ajustes/styles";
+import { Background, ButtonModal, ContainerReb, Div, DivInfos, IconWrapper, Linha, Span } from "./styles";
+import { ButtonDelete, DivH } from "../Ajustes/styles"; // Importando o botão de exclusão
 import { Modal } from "../../../components/Modal"; // Importando o componente Modal
 
 // Função para buscar o nome do usuário
@@ -19,11 +18,12 @@ const fetchUserName = async (userId: string) => {
 };
 
 export const Historico = () => {
-    const { user } = useAuth();
     const [historico, setHistorico] = useState<any[]>([]);
     const [isFetching, setIsFetching] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal para confirmação de exclusão
     const [selectedEntrega, setSelectedEntrega] = useState<any>(null); // Estado para a entrega selecionada
+    const [deleteEntregaId, setDeleteEntregaId] = useState<string | null>(null); // Estado para armazenar o ID da entrega a ser deletada
 
     // Função para buscar o histórico de entregas
     const fetchHistorico = async () => {
@@ -54,10 +54,36 @@ export const Historico = () => {
         setIsModalOpen(true); // Abre o modal
     };
 
-    // Função para fechar o modal
+    // Função para abrir o modal de exclusão
+    const handleOpenDeleteModal = (id: string) => {
+        setDeleteEntregaId(id); // Define o ID da entrega a ser deletada
+        setIsDeleteModalOpen(true); // Abre o modal de exclusão
+    };
+
+    // Função para fechar o modal de exclusão
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    // Função para fechar o modal de detalhes
     const handleCloseModal = () => {
         setSelectedEntrega(null); // Limpa a entrega selecionada
         setIsModalOpen(false); // Fecha o modal
+    };
+
+    // Função para deletar a entrega
+    const handleDeleteEntrega = async () => {
+        if (!deleteEntregaId) return;
+        try {
+            await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/${deleteEntregaId}`, {
+                method: 'DELETE',
+            });
+
+            setHistorico((prev) => prev.filter((entrega) => entrega._id !== deleteEntregaId));
+            handleCloseDeleteModal(); // Fecha o modal de exclusão
+        } catch (error) {
+            console.error("Erro ao deletar entrega:", error);
+        }
     };
 
     useEffect(() => {
@@ -85,7 +111,6 @@ export const Historico = () => {
                     {historico.map((entrega) => (
                         <ContainerReb
                             key={entrega._id}
-                            onClick={() => handleOpenModal(entrega)} // Abre o modal ao clicar na entrega
                             css={{
                                 display: 'flex', flexDirection: 'row', alignItems: 'flex-start', padding: '20px 30px', gap: '25px', border: '1px solid #ccc', borderRadius: '8px', justifyContent: 'space-between'
                             }}>
@@ -109,11 +134,21 @@ export const Historico = () => {
                                     Carrinhos: <Span>{entrega.IdCarrinho.join(", ")}</Span>
                                 </DivInfos>
                             </Div>
+                            <DivInfos css={{
+                                position: 'relative',
+                                cursor: 'pointer'
+                            }} onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpenDeleteModal(entrega._id); // Abre o modal de exclusão
+                            }}>
+                                <X size={20} weight="bold" />
+                            </DivInfos>
                         </ContainerReb>
                     ))}
                 </Linha>
             </Div>
 
+            {/* Modal de Detalhes */}
             {selectedEntrega && (
                 <Modal isOpen={isModalOpen} onClose={handleCloseModal} css={{ padding: '20px 30px', width: '500px' }}>
                     <Heading css={{ margin: '20px 10px', color: '$graymain' }}>Detalhes da Entrega</Heading>
@@ -139,6 +174,14 @@ export const Historico = () => {
                     </Div>
                 </Modal>
             )}
+
+            <Modal css={{ width: '450px', padding: '20px', display: 'flex', gap: '12px' }} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+                <p>Tem certeza que deseja deletar esta entrega?</p>
+                <Div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: '10px' }}>
+                    <ButtonModal onClick={handleCloseDeleteModal} css={{ backgroundColor: 'white', color: '$maingreen' }}>Cancelar</ButtonModal>
+                    <ButtonDelete onClick={handleDeleteEntrega}>Deletar</ButtonDelete>
+                </Div>
+            </Modal>
         </Background>
     );
 };
