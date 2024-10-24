@@ -10,6 +10,7 @@ export const DashboardAdmin = () => {
     const { user } = useAuth();
     const [totalCarrinhos, setTotalCarrinhos] = useState<number>(0);
     const [rebocadoresAtivos, setRebocadoresAtivos] = useState<any[]>([]);
+    const [rebocadorDestaque, setRebocadorDestaque] = useState<string>("Nenhum rebocador");
     const [setores, setSetores] = useState({
         A: 0,
         B: 0,
@@ -38,15 +39,26 @@ export const DashboardAdmin = () => {
         fetchEntregas();
     }, []);
 
-    // Fetch de rebocadores ativos
+    // Fetch de rebocadores ativos e encontrar o rebocador em destaque
     useEffect(() => {
         const fetchRebocadores = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?Role=rebocador`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user?role=rebocador`);
                 const data = await response.json();
 
+                // Filtrar apenas rebocadores ativos
                 const ativos = data.filter((rebocador: any) => rebocador.Status === true);
                 setRebocadoresAtivos(ativos);
+
+                // Encontrar o rebocador com mais carrinhos entregues
+                let destaque = ativos.reduce((prev: any, current: any) => {
+                    const totalCarrinhosPrev = prev.rebocadores[0]?.TotalCarrinhos || 0;
+                    const totalCarrinhosCurrent = current.rebocadores[0]?.TotalCarrinhos || 0;
+                    return totalCarrinhosCurrent > totalCarrinhosPrev ? current : prev;
+                }, ativos[0]);
+
+                setRebocadorDestaque(destaque?.Nome || "Nenhum rebocador");
+
             } catch (error) {
                 console.error("Erro ao buscar rebocadores:", error);
             }
@@ -181,18 +193,18 @@ export const DashboardAdmin = () => {
                         </Space>
                     </Column01>
                     <Column02>
-                        <Title css={{ fontSize: '16px', gap: '80px' }}>
+                        <Title css={{ fontSize: '16px', padding: '10px 0' }}>
                             Rebocador em Destaque
                         </Title>
-                        <Title css={{ color: '$green', fontWeight: '800', fontSize: '32px', display: 'flex', justifyContent: 'flex-end' }}>
-                            José Silva
+                        <Title css={{ color: '$green', fontWeight: '800', fontSize: '38px', display: 'flex', justifyContent: 'flex-end' }}>
+                            {rebocadorDestaque}
                         </Title>
                     </Column02>
                 </Div>
                 <Div css={{ width: '80%' }}>
                     <Linha>
                         <Row01 to="/adm/carrinhos">
-                            <Title>
+                            <Title css={{ padding: '8px 0', fontSize: '16px' }}>
                                 Quantidade de Carros-Kit Entregues
                             </Title>
                             <Title css={{ color: '$green', fontWeight: '800', fontSize: '46px', display: 'flex', justifyContent: 'flex-end' }}>
