@@ -237,7 +237,7 @@ export const DashboardAdmin = () => {
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>
-                            <Espaço css={{ padding: '12px 0' }}>
+                            <Espaço css={{ padding: '12px 0', gap: '10px' }}>
                                 {ultimasEntregas.map((entrega) => (
                                     <R css={{
                                         flexDirection: 'column',
