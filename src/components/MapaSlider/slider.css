@@ -3,8 +3,8 @@
 }
 .swiper {
     width: 50%;
-    height: 50%;
-    padding: 2rem;
+    height: 80vh;
+    padding: 3rem;
     background-color: #ffffff;
     border-radius: 2rem;
 }
@@ -20,3 +20,4 @@
     background-size: cover;
     gap: 2rem;
 }
+

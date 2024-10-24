@@ -7,14 +7,14 @@ export const Background = styled('div', {
 
 export const Div = styled('div', {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     gap: '30px',
     alignItems: 'center',
 })
 
 export const ContainerM = styled('div', {
-    width: '70%',
-    height: '600px',
+    width: '100%',
+    height: '80vh',
     backgroundColor: '$white',
     borderRadius: '20px',
 })

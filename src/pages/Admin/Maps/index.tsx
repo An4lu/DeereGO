@@ -7,7 +7,7 @@ import mapa from "/mapa-2.png"
 export const Maps = () => {
     return (
         <Background>
-            <Heading css={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>Mapa</Heading>
+            <Heading css={{ marginBottom: '20px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', justifyContent: 'space-between' }}>Mapa</Heading>
             <Div>
                 <ContainerM>
                     <Img src={mapa} alt="" />
