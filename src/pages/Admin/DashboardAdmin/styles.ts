@@ -83,7 +83,7 @@ export const R = styled('div', {
     justifyContent: 'space-between',
     width: '100%',
     height: '100%',
-    fontSize: '15px'
+    fontSize: '16px'
 })
 
 export const Space = styled('div', {
@@ -93,8 +93,14 @@ export const Space = styled('div', {
     height: '100%',
 })
 
-export const Text = styled('span', {
+export const Espaço = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
 
+})
+
+export const Text = styled('span', {
+    fontSize: '14px'
 })
 
 export const Infos = styled('span', {

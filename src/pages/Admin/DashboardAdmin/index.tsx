@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Heading } from "../../../components/Heading";
 import { Title } from "../../../components/Title";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
+import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Espaço, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
 import mapa from '/mapa-2.png';
 
 export const DashboardAdmin = () => {
@@ -225,26 +225,26 @@ export const DashboardAdmin = () => {
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>
-                            <Space css={{ display: 'inline-flex', gap: '10px' }}>
+                            <Espaço css={{ padding: '12px 0' }}>
                                 {ultimasEntregas.map((entrega) => (
                                     <R css={{
                                         flexDirection: 'column',
-                                        minWidth: '300px',
+                                        minWidth: '50%',
                                         border: '1px solid #ddd',
-                                        borderRadius: '5px',
+                                        borderRadius: '5px', padding: '10px'
                                     }} key={entrega._id}>
-                                        <Text>Rebocador: {entrega.nomeUsuario}</Text>
+                                        <Text css={{ fontWeight: '600' }}>Rebocador: {entrega.nomeUsuario}</Text>
                                         <Text>Partida: {entrega.Partida}</Text>
                                         <Text>Destino: {entrega.Destino}</Text>
                                         <Text>Tempo: {entrega.Tempo}</Text>
                                         <Text>Status: {entrega.Status}</Text>
                                     </R>
                                 ))}
-                            </Space>
+                            </Espaço>
                         </ContainerEntregas>
                     </Linha>
                 </Div>
             </DivContainer>
-        </Background>
+        </Background >
     );
 };
