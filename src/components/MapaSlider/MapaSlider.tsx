@@ -20,8 +20,8 @@ interface Carro {
     Peças: string;
     Bloco: string;
     StatusCapacidade: string;
-    PosX : number;
-    PosY : number;
+    PosX: number;
+    PosY: number;
 }
 
 
@@ -76,24 +76,24 @@ export function MapaSlider() {
         >
             {carrinhos.map(carrinho => (
                 <SwiperSlide key={`${carrinho._id}`}>
-                <CanvasHead
-                    NomeCarrinho={carrinho.NomeCarrinho}
-                    Local={carrinho.Local} 
-                />
-                <Canvas
-                    posXCarro={carrinho.PosX}
-                    posYCarro={carrinho.PosY}
-                    posXRebocador={0}
-                    posYRebocador={0}
-                    width="400"
-                    height="400"
-                    style={{
-                        backgroundImage: `url(${imageMap[carrinho.Local]})`,
-                    }}
-                />
-            </SwiperSlide>
+                    <CanvasHead
+                        NomeCarrinho={carrinho.NomeCarrinho}
+                        Local={carrinho.Local}
+                    />
+                    <Canvas
+                        posXCarro={carrinho.PosX}
+                        posYCarro={carrinho.PosY}
+                        posXRebocador={0}
+                        posYRebocador={0}
+                        width="400"
+                        height="500"
+                        style={{
+                            backgroundImage: `url(${imageMap[carrinho.Local]})`,
+                        }}
+                    />
+                </SwiperSlide>
             ))}
-            
+
 
         </Swiper>
     );
