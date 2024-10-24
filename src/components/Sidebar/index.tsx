@@ -1,4 +1,4 @@
-import { HouseSimple, MapTrifold, Power, Toolbox, UserCircle } from '@phosphor-icons/react';
+import { HouseSimple, MapTrifold, Package, Power, Toolbox, UserCircle } from '@phosphor-icons/react';
 import { useAuth } from '../../contexts/AuthContext';
 import { ContentContainer, Div, LogoContainer, SidebarButton, SidebarContainer, SidebarItem, TextLink } from './styles';
 import logoimg from '/logofull.svg';
@@ -24,6 +24,10 @@ export function Sidebar() {
                     <SidebarItem to='/adm/carrinhos'>
                         <Toolbox size={28} weight='fill' />
                         <TextLink>CARRO-KITS</TextLink>
+                    </SidebarItem>
+                    <SidebarItem to='/adm/entregas'>
+                        <Package size={28} weight='fill' />
+                        <TextLink>Entregas</TextLink>
                     </SidebarItem>
                     <SidebarItem to='/adm/ajustes'>
                         <UserCircle size={28} weight='fill' />

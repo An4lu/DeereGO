@@ -12,6 +12,7 @@ import { Maps } from './pages/Admin/Maps'
 import { Carrinhos } from './pages/Admin/Carrinhos'
 import { Ajustes } from './pages/Admin/Ajustes'
 import { globalStyles } from './styles/global'
+import { Historico } from './pages/Admin/Historico'
 
 globalStyles()
 
@@ -27,6 +28,7 @@ export const AppRouter = () => {
               <Route path="adm/home" element={<DashboardAdmin />} />
               <Route path="adm/mapa" element={<Maps />} />
               <Route path="adm/carrinhos" element={<Carrinhos />} />
+              <Route path="adm/entregas" element={<Historico />} />
               <Route path="adm/ajustes" element={<Ajustes />} />
             </Route>
           </Route>
