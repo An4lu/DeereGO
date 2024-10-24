@@ -142,10 +142,12 @@ export const Img = styled('img', {
     borderRadius: '20px',
 })
 
-export const ContainerEntregas = styled('div', {
+export const ContainerEntregas = styled(Link, {
     width: '30%',
     height: '500px',
     backgroundColor: '$white',
     borderRadius: '20px',
-    padding: '20px'
+    padding: '20px',
+    textDecoration: 'none',
+    color: '$grayhigh'
 })
