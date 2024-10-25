@@ -129,16 +129,17 @@ export const Linha = styled('div', {
     width: '100%',
 })
 
-export const Map = styled('div', {
+export const Map = styled(Link, {
     height: '500px',
     borderRadius: '20px',
     backgroundColor: 'white',
+    cursor: 'pointer'
 })
 
 export const Img = styled('img', {
     width: '100%',
     height: '100%',
-    padding: '10px',
+    padding: '20px',
     borderRadius: '20px',
 })
 

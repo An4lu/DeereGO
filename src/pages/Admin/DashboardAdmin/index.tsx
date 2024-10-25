@@ -230,10 +230,10 @@ export const DashboardAdmin = () => {
                         </Row02>
                     </Linha>
                     <Linha>
-                        <Map css={{ width: "68%" }}>
+                        <Map css={{ width: "60%" }} to="/adm/mapa">
                             <Img src={mapa} alt="" />
                         </Map>
-                        <ContainerEntregas css={{ overflowX: 'auto', whiteSpace: 'nowrap', width: "32%" }} to="/adm/entregas">
+                        <ContainerEntregas css={{ overflowX: 'auto', whiteSpace: 'nowrap', width: "40%" }} to="/adm/entregas">
                             <Title css={{ fontSize: '16px' }}>
                                 Últimas Entregas
                             </Title>

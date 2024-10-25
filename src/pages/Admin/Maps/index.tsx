@@ -2,7 +2,7 @@ import { Heading } from "../../../components/Heading"
 import { Img } from "../DashboardAdmin/styles"
 import { Background, ContainerM, Div } from "./styles"
 import { MapaSlider } from "../../../components/MapaSlider/MapaSlider"
-import mapa from "/mapa-2.png"
+import mapa from "../../../assets/mapa/mapeado.png"
 
 export const Maps = () => {
     return (
