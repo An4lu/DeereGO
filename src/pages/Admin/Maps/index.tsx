@@ -9,10 +9,10 @@ export const Maps = () => {
         <Background>
             <Heading css={{ marginBottom: '20px', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', justifyContent: 'space-between' }}>Mapa</Heading>
             <Div>
+                <MapaSlider css={{ width: '850px', height: '80vh' }} />
                 <ContainerM>
                     <Img src={mapa} alt="" />
                 </ContainerM>
-                <MapaSlider />
             </Div>
         </Background>
     )

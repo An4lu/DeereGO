@@ -7,6 +7,7 @@ import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, D
 import mapa from '../../../assets/mapa/mapeado.png';
 import { ButtonModal } from "../Carrinhos/styles";
 import { Modal } from "../../../components/Modal";
+import { MapaSlider } from "../../../components/MapaSlider/MapaSlider";
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -260,7 +261,7 @@ export const DashboardAdmin = () => {
                     </Linha>
                     <Linha>
                         <Map css={{ width: "60%" }} to="/adm/mapa">
-                            <Img src={mapa} alt="" />
+                            <MapaSlider css={{ width: '100%', height: '500px' }} />
                         </Map>
                         <ContainerEntregas css={{ overflowX: 'auto', whiteSpace: 'nowrap', width: "40%" }} to="/adm/entregas">
                             <Title css={{ fontSize: '16px' }}>

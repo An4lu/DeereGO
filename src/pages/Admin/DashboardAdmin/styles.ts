@@ -134,7 +134,8 @@ export const Map = styled(Link, {
     height: '500px',
     borderRadius: '20px',
     backgroundColor: 'white',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    textDecoration: 'none',
 })
 
 export const Img = styled('img', {

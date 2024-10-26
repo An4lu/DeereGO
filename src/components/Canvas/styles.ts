@@ -22,11 +22,12 @@ export const HeadCanvas = styled('div', {
     borderBottom: '4px solid $yellow',
     padding: '1rem',
     width: '95%',
+    marginTop: '30px'
 
 });
 export const NomeH2 = styled('h2', {
     color: '$maingreen',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontFamily: '$poppins',
     fontWeight: 'semibold',
     textAlign: 'center',
@@ -34,7 +35,7 @@ export const NomeH2 = styled('h2', {
 });
 export const LocalH2 = styled('h2', {
     color: '$white',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontFamily: '$poppins',
     fontWeight: 'semibold',
     textAlign: 'center',
@@ -46,6 +47,6 @@ export const CircleLocal = styled('div', {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '$maingreen',
-    padding: '0.5rem 1rem',
+    padding: '0.5rem 0.9rem',
     borderRadius: '50%',
 });

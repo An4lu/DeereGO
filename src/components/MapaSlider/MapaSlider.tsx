@@ -3,7 +3,7 @@
 import { Canvas } from '../Canvas/Canvas';
 import { CanvasHead } from '../Canvas/HeadCanvas';
 import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperReact, SwiperSlide as SwiperSlideReact } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,6 +11,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/zoom';
 import 'swiper/css/scrollbar';
 import './slider.css';
+import { CSS } from '@stitches/react';
+import { styled } from '../../styles';
 
 
 interface Carro {
@@ -24,8 +26,33 @@ interface Carro {
     PosY: number;
 }
 
+interface Prop {
+    css?: CSS
+}
 
-export function MapaSlider() {
+const StyledSwiper = styled(SwiperReact, {
+    width: '50%',
+    height: '80vh',
+    padding: '3rem',
+    backgroundColor: '#ffffff',
+    borderRadius: '2rem',
+    '--swiper-theme-color': '#028001', // Definindo a cor do tema swiper
+});
+
+const StyledSwiperSlide = styled(SwiperSlideReact, {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    gap: '2rem',
+});
+
+
+export function MapaSlider({ css }: Prop) {
     const [carrinhos, setCarrinhos] = useState<Carro[]>([]);
 
 
@@ -65,7 +92,7 @@ export function MapaSlider() {
     };
 
     return (
-        <Swiper
+        <StyledSwiper
             modules={[Navigation, Pagination, A11y]}
             centeredSlides={true}
             slidesPerView={1}
@@ -73,9 +100,10 @@ export function MapaSlider() {
             pagination={{ clickable: true }}
             className='mySwiper'
             spaceBetween={50}
+            css={css}
         >
             {carrinhos.map(carrinho => (
-                <SwiperSlide key={`${carrinho._id}`}>
+                <StyledSwiperSlide key={`${carrinho._id}`}>
                     <CanvasHead
                         NomeCarrinho={carrinho.NomeCarrinho}
                         Local={carrinho.Local}
@@ -91,10 +119,10 @@ export function MapaSlider() {
                             backgroundImage: `url(${imageMap[carrinho.Local]})`,
                         }}
                     />
-                </SwiperSlide>
+                </StyledSwiperSlide>
             ))}
 
 
-        </Swiper>
+        </StyledSwiper>
     );
 }

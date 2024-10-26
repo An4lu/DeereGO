@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LogotipoDiv, CanvasComponent } from "./styles";
 import carrokit from "../../assets/shopping-cart-fill.svg";
 import rebocador from "../../assets/person-fill.svg";
@@ -14,7 +14,7 @@ interface CanvasProps {
     style: React.CSSProperties;
 }
 
-export const Canvas: React.FC<CanvasProps> = ({ posXCarro, posYCarro, posXRebocador, posYRebocador,width, height, style, ...rest }) => {
+export const Canvas: React.FC<CanvasProps> = ({ posXCarro, posYCarro, posXRebocador, posYRebocador, width, height, style, ...rest }) => {
     const carroImg = useRef<HTMLImageElement>(new Image());
     const rebocadorImg = useRef<HTMLImageElement>(new Image());
 
@@ -22,11 +22,11 @@ export const Canvas: React.FC<CanvasProps> = ({ posXCarro, posYCarro, posXReboca
     const [rebocadorLoaded, setRebocadorLoaded] = useState(false);
 
 
-     // Desenhar a imagem do logo em alta resolução
-     const scaleFactor = window.devicePixelRatio || 1;
-     const scalePx = parseInt(width) / 14;
-     const logoWidth = 38 * scaleFactor;
-     const logoHeight = 38 * scaleFactor;
+    // Desenhar a imagem do logo em alta resolução
+    const scaleFactor = window.devicePixelRatio || 1;
+    const scalePx = parseInt(width) / 14;
+    const logoWidth = 32 * scaleFactor;
+    const logoHeight = 40 * scaleFactor;
 
     useEffect(() => {
         const img1 = carroImg.current;
@@ -42,14 +42,14 @@ export const Canvas: React.FC<CanvasProps> = ({ posXCarro, posYCarro, posXReboca
             setRebocadorLoaded(true);
         };
     }, []);
-   
+
     const draw = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         if (carroLoaded) {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.beginPath();
-            context.drawImage(carroImg.current, posXCarro*scalePx, posYCarro*scalePx, logoWidth, logoHeight);
+            context.drawImage(carroImg.current, posXCarro * scalePx, posYCarro * scalePx, logoWidth, logoHeight);
             if (posXRebocador !== 0 && posYRebocador !== 0 && rebocadorLoaded) {
-                context.drawImage(rebocadorImg.current, posXRebocador*scalePx, posYRebocador*scalePx, logoWidth, logoHeight);
+                context.drawImage(rebocadorImg.current, posXRebocador * scalePx, posYRebocador * scalePx, logoWidth, logoHeight);
             }
             context.fill();
             context.closePath();
