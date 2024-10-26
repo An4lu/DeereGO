@@ -4,7 +4,7 @@ import { Heading } from "../../../components/Heading";
 import { Title } from "../../../components/Title";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Espaço, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
-import mapa from '/mapa-2.png';
+import mapa from '../../../assets/mapa/mapeado.png';
 import { ButtonModal } from "../Carrinhos/styles";
 import { Modal } from "../../../components/Modal";
 
@@ -25,6 +25,12 @@ export const DashboardAdmin = () => {
     const [ultimasEntregas, setUltimasEntregas] = useState<any[]>([]);
     const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
     const [rankingRebocadores, setRankingRebocadores] = useState<any[]>([]);
+    type RebocadorRanking = {
+        nome: string;
+        totalCarrinhos: number;
+        tempoTotal: number;
+    };
+
 
     // Fetch total de carrinhos
     useEffect(() => {
@@ -64,12 +70,12 @@ export const DashboardAdmin = () => {
                 setRebocadorDestaque(destaque?.Nome || "Nenhum rebocador");
 
                 const ranking = ativos
-                    .map((rebocador: any) => ({
+                    .map((rebocador: any): RebocadorRanking => ({
                         nome: rebocador.Nome,
                         totalCarrinhos: rebocador.rebocadores[0]?.TotalCarrinhos || 0,
                         tempoTotal: rebocador.rebocadores[0]?.TempoTotal || 0,
                     }))
-                    .sort((a, b) => b.totalCarrinhos - a.totalCarrinhos || b.tempoTotal - a.tempoTotal);
+                    .sort((a: RebocadorRanking, b: RebocadorRanking) => b.totalCarrinhos - a.totalCarrinhos || b.tempoTotal - a.tempoTotal);
 
                 setRankingRebocadores(ranking);
 
