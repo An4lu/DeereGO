@@ -48,6 +48,7 @@ export const Column02 = styled('div', {
     width: '100%',
     height: '30%',
     borderRadius: '20px',
+    cursor: 'pointer'
 })
 
 export const Row01 = styled(Link, {
