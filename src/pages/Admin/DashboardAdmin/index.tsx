@@ -4,9 +4,9 @@ import { Heading } from "../../../components/Heading";
 import { Title } from "../../../components/Title";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Background, Column01, Column02, ContainerEntregas, Div, DivContainer, DivRow, DivRow02, Espaço, Img, Infos, Linha, Map, R, Row01, Row02, Space, Text } from "./styles";
-import { Modal } from "../../../components/Modal"; // Importação do Modal para o ranking
 import mapa from '/mapa-2.png';
 import { ButtonModal } from "../Carrinhos/styles";
+import { Modal } from "../../../components/Modal";
 
 export const DashboardAdmin = () => {
     const { user } = useAuth();
@@ -23,8 +23,8 @@ export const DashboardAdmin = () => {
         G: 0,
     });
     const [ultimasEntregas, setUltimasEntregas] = useState<any[]>([]);
-    const [isRankingModalOpen, setIsRankingModalOpen] = useState(false); // Estado para controle do modal de ranking
-    const [rankingRebocadores, setRankingRebocadores] = useState<any[]>([]); // Estado para armazenar o ranking dos rebocadores
+    const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
+    const [rankingRebocadores, setRankingRebocadores] = useState<any[]>([]);
 
     // Fetch total de carrinhos
     useEffect(() => {
@@ -32,12 +32,14 @@ export const DashboardAdmin = () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador`);
                 const data = await response.json();
+
                 const total = data.reduce((acc: number, entrega: any) => acc + entrega.TotalCarrinhos, 0);
                 setTotalCarrinhos(total);
             } catch (error) {
                 console.error("Erro ao buscar entregas:", error);
             }
         };
+
         fetchEntregas();
     }, []);
 
@@ -53,7 +55,7 @@ export const DashboardAdmin = () => {
                 setRebocadoresAtivos(ativos);
 
                 // Encontrar o rebocador com mais carrinhos entregues
-                const destaque = ativos.reduce((prev: any, current: any) => {
+                let destaque = ativos.reduce((prev: any, current: any) => {
                     const totalCarrinhosPrev = prev.rebocadores[0]?.TotalCarrinhos || 0;
                     const totalCarrinhosCurrent = current.rebocadores[0]?.TotalCarrinhos || 0;
                     return totalCarrinhosCurrent > totalCarrinhosPrev ? current : prev;
@@ -61,7 +63,6 @@ export const DashboardAdmin = () => {
 
                 setRebocadorDestaque(destaque?.Nome || "Nenhum rebocador");
 
-                // Preparar o ranking para o modal
                 const ranking = ativos
                     .map((rebocador: any) => ({
                         nome: rebocador.Nome,
@@ -71,6 +72,7 @@ export const DashboardAdmin = () => {
                     .sort((a, b) => b.totalCarrinhos - a.totalCarrinhos || b.tempoTotal - a.tempoTotal);
 
                 setRankingRebocadores(ranking);
+
             } catch (error) {
                 console.error("Erro ao buscar rebocadores:", error);
             }
@@ -79,7 +81,60 @@ export const DashboardAdmin = () => {
         fetchRebocadores();
     }, []);
 
-    // Função para abrir o modal de ranking
+    // Fetch carrinhos e setores
+    useEffect(() => {
+        const fetchCarrinhos = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/carrinho`);
+                const data = await response.json();
+
+                const contadorSetores = {
+                    A: 0,
+                    B: 0,
+                    C: 0,
+                    D: 0,
+                    E: 0,
+                    F: 0,
+                    G: 0,
+                };
+
+                data.forEach((carrinho: any) => {
+                    if (carrinho.Local.includes("A")) contadorSetores.A += 1;
+                    if (carrinho.Local.includes("B")) contadorSetores.B += 1;
+                    if (carrinho.Local.includes("C")) contadorSetores.C += 1;
+                    if (carrinho.Local.includes("D")) contadorSetores.D += 1;
+                    if (carrinho.Local.includes("E")) contadorSetores.E += 1;
+                    if (carrinho.Local.includes("F")) contadorSetores.F += 1;
+                    if (carrinho.Local.includes("G")) contadorSetores.G += 1;
+                });
+
+                setSetores(contadorSetores);
+            } catch (error) {
+                console.error("Erro ao buscar carrinhos:", error);
+            }
+        };
+
+        fetchCarrinhos();
+    }, []);
+
+    // Função para buscar o nome do usuário por ID
+    const fetchUserName = async (userId: string) => {
+        try {
+            const url = `${import.meta.env.VITE_API_BASE_URL}/user?id=${userId}`;
+            const response = await fetch(url);
+            const userData = await response.json();
+
+            if (Array.isArray(userData) && userData.length > 0) {
+                return userData[0].Nome || "Usuário desconhecido";
+            }
+
+            return "Usuário desconhecido";
+        } catch (error) {
+            console.error("Erro ao buscar nome do usuário:", error);
+            return "Usuário desconhecido";
+        }
+    };
+
     const handleOpenRankingModal = () => {
         setIsRankingModalOpen(true);
     };
@@ -96,6 +151,7 @@ export const DashboardAdmin = () => {
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/rebocador/entrega/`);
                 const data = await response.json();
 
+                // Obter os nomes dos usuários responsáveis por cada entrega
                 const entregasComNomes = await Promise.all(
                     data.slice(0, 6).map(async (entrega: any) => {
                         const nomeUsuario = await fetchUserName(entrega.IdUser);
@@ -163,9 +219,7 @@ export const DashboardAdmin = () => {
                         <Title css={{ fontSize: '16px', padding: '10px 0' }}>
                             Rebocador em Destaque
                         </Title>
-                        <Title
-                            css={{ color: '$green', fontWeight: '800', fontSize: '38px', display: 'flex', justifyContent: 'flex-end', cursor: 'pointer' }}
-                        >
+                        <Title css={{ color: '$green', fontWeight: '800', fontSize: '38px', display: 'flex', justifyContent: 'flex-end' }}>
                             {rebocadorDestaque}
                         </Title>
                     </Column02>
@@ -227,7 +281,6 @@ export const DashboardAdmin = () => {
                 </Div>
             </DivContainer>
 
-            {/* Modal de Ranking dos Rebocadores */}
             <Modal isOpen={isRankingModalOpen} onClose={handleCloseRankingModal} css={{ width: '550px', padding: '30px 10px' }}>
                 <Title css={{ fontSize: '24px', fontWeight: '700', marginBottom: '20px' }}>Ranking dos Rebocadores</Title>
                 <Div css={{ overflowY: 'auto', maxHeight: '450px', width: '80%' }}>
@@ -241,6 +294,6 @@ export const DashboardAdmin = () => {
                 </Div>
                 <ButtonModal onClick={handleCloseRankingModal} css={{ marginTop: '20px' }}>Fechar</ButtonModal>
             </Modal>
-        </Background>
+        </Background >
     );
 };
