@@ -85,6 +85,49 @@ As principais tecnologias envolvidas no projeto são:
 - [FRONT-END - WEB APP](https://github.com/An4lu/DeereGO)
 - [ESP](https://github.com/lucvs07/deereGO-ESP)
 
+## Testes de Desempenho
+### Definição da Ferramenta de Teste
+#### Teste de Tempo de Resposta
+Este teste avalia o tempo necessário para que o ESP32 receba e processe um sinal WiFi e forneça a localização do dispositivo rastreado. O objetivo é medir a latência de resposta para verificar a rapidez do sistema ao identificar dispositivos e fornecer atualizações em tempo real.
+
+Ferramentas: Utilizamos um cronômetro digital para registrar o tempo entre o envio de um sinal e a resposta do ESP32.
+Método: O ESP32 foi configurado para iniciar a leitura dos RSSID próximos. O tempo de resposta foi medido entre o momento de início da leitura e o retorno do posicionamento estimado.
+#### Teste de Consumo de Energia
+Este teste visa medir o consumo de energia do ESP32 durante o processo de rastreamento, verificando a viabilidade energética do dispositivo para aplicações de rastreamento prolongado.
+
+Ferramentas: Utilizamos um multímetro digital para registrar o consumo de corrente do ESP32 em diferentes estados de operação.
+Método: Foram realizadas medições de corrente em três estados:
+Estado Ativo: Durante a leitura e triangulação de sinais WiFi.
+Estado Ocioso: Quando o ESP32 estava em repouso entre leituras.
+Estado de Baixo Consumo: Quando o ESP32 entrou em modo de economia de energia.
+
+### Evidências de Testes
+#### Teste de Tempo de Resposta
+Teste	          Tempo de Resposta (ms) <br>
+Teste 1	--------------- 120 <br>
+Teste 2	--------------- 110 <br>
+Teste 3	--------------- 130 <br>
+Média	  --------------- 120 <br>
+#### Teste de Consumo de Energia
+Estado do ESP32	           Consumo Médio (mAh)<br>
+Estado Ativo ------------------ 	 160<br>
+Estado Ocioso -----------------  	80<br>
+Estado de Baixo Consumo	-------- 20<br>
+### Discussão dos Resultados
+#### Teste de Tempo de Resposta
+O tempo médio de resposta de 120ms mostrou-se satisfatório para o propósito do sistema, com uma latência que permite uma localização em tempo quase real. No entanto, em alguns casos, observou-se uma ligeira variação nos tempos de resposta, que pode ser causada por interferências de sinal ou carga do processador.
+#### Teste de Consumo de Energia
+O consumo de energia medido variou significativamente entre os estados de operação. No estado ativo, o consumo de 160mAh demonstra a necessidade de otimizar o código para reduzir a demanda energética, especialmente se o dispositivo for alimentado por bateria. O modo de baixo consumo apresentou uma economia relevante, possibilitando a viabilidade para rastreamento prolongado.
+### Soluções Futuras
+Para melhorar os testes e otimizar o desempenho do sistema, sugerimos as seguintes ações futuras:
+
+- Otimização do Código: Implementar otimizações no código para reduzir o tempo de resposta e o consumo de energia, utilizando modos de economia de energia mais eficientes e aprimorando a gestão de threads de processamento.
+- Filtragem de Sinais WiFi: Incorporar um filtro de sinais para mitigar interferências, o que poderia melhorar a precisão do tempo de resposta.
+- Capacitor de Backup: Adicionar um capacitor de backup ao ESP32 para fornecer energia em caso de quedas, melhorando a consistência das medições de consumo.
+
+
+
+
 
 # React + TypeScript + Vite
 
@@ -136,3 +179,4 @@ export default tseslint.config({
   },
 })
 ```
+
